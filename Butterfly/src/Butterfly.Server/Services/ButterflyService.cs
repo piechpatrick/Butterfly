@@ -1,4 +1,5 @@
 ﻿using Butterfly.Server.Core;
+using Butterfly.Server.Core.Instances;
 using Butterfly.Server.Shell;
 using System;
 using System.Collections.Generic;

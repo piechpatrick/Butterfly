@@ -1,5 +1,6 @@
 ﻿using Butterfly.Server;
 using Butterfly.Server.Core;
+using Butterfly.Server.Core.Instances;
 using Butterfly.Server.Services;
 using Butterfly.Server.Shell;
 using System;

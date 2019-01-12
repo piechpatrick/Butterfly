@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Butterfly.Server.Core
+namespace Butterfly.Server.Core.Instances
 {
     public class ButterflyServer : IButterflyServer
     {
