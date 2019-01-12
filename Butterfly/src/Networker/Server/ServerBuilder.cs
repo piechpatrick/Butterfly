@@ -27,6 +27,7 @@ namespace Networker.Server
                 this.options.PacketSizeBuffer * this.options.TcpMaxConnections * 5,
                 this.options.PacketSizeBuffer));
 
+
             if(this.tcpSocketListenerFactory == null)
                 this.serviceCollection
                     .AddSingleton<ITcpSocketListenerFactory, DefaultTcpSocketListenerFactory>();

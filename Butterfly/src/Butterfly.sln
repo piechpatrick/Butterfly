@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Mod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Interfaces", "Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj", "{3708CF06-714B-40C4-BA4F-FD6A97C170FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Server.Core", "Butterfly.Server.Core\Butterfly.Server.Core.csproj", "{12A00DDF-C15A-4F3C-8DFF-194CC713C8C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Server.Core", "Butterfly.Server.Core\Butterfly.Windows.Server.Core.csproj", "{12A00DDF-C15A-4F3C-8DFF-194CC713C8C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Data", "Butterfly.Data\Butterfly.Windows.Data.csproj", "{100F24DE-7518-4D16-9398-48E44C540133}"
 EndProject
@@ -38,6 +38,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networker.Formatter.ZeroFormatter", "Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj", "{7870D078-AA4B-4941-B41C-81A643AA0DDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Networker.Formatter.ProtobufNet", "Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj", "{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Server.Handlers", "Butterfly.Windows.Server.Handlers\Butterfly.Windows.Server.Handlers.csproj", "{CDFE628E-F284-4874-811B-C469345766C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.MultiPlatform.Packets", "Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj", "{C848122E-BD0C-4991-BD5F-1A5F16303F8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Modules", "Butterfly.Windows.Modules\Butterfly.Windows.Modules.csproj", "{137CF6D2-745E-471A-B187-3FDCCA289251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +111,18 @@ Global
 		{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFE628E-F284-4874-811B-C469345766C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFE628E-F284-4874-811B-C469345766C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFE628E-F284-4874-811B-C469345766C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFE628E-F284-4874-811B-C469345766C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C848122E-BD0C-4991-BD5F-1A5F16303F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C848122E-BD0C-4991-BD5F-1A5F16303F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C848122E-BD0C-4991-BD5F-1A5F16303F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C848122E-BD0C-4991-BD5F-1A5F16303F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137CF6D2-745E-471A-B187-3FDCCA289251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137CF6D2-745E-471A-B187-3FDCCA289251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137CF6D2-745E-471A-B187-3FDCCA289251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137CF6D2-745E-471A-B187-3FDCCA289251}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +144,9 @@ Global
 		{1F5D97B1-1772-4BD7-BD83-0D7DDA13E0B5} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 		{7870D078-AA4B-4941-B41C-81A643AA0DDA} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 		{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
+		{CDFE628E-F284-4874-811B-C469345766C0} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
+		{C848122E-BD0C-4991-BD5F-1A5F16303F8D} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
+		{137CF6D2-745E-471A-B187-3FDCCA289251} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F235D99E-240F-49B6-9348-EA610E1883A9}

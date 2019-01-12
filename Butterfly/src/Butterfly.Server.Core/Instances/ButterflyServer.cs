@@ -1,4 +1,7 @@
 ﻿using Butterfly.Maps.Entities;
+using Butterfly.Windows.Modules.HandlersModules;
+using Microsoft.Extensions.Logging;
+using Networker.Formatter.ProtobufNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +14,31 @@ namespace Butterfly.Server.Core.Instances
     public class ButterflyServer : IButterflyServer
     {
         private bool run;
-        private readonly IUserMap userMap;
-        public ButterflyServer(IUserMap userMap)
+
+
+        public Networker.Server.Abstractions.IServer NetworkServer { get; private set; }
+
+        public ButterflyServer()
         {
-            this.userMap = userMap;
+
         }
         public void Start()
         {
+
+            this.NetworkServer = new Networker.Server.ServerBuilder().UseTcp(1000)
+                                            .SetMaximumConnections(6000)
+                                            .UseUdp(5000)
+                                            .ConfigureLogging(loggingBuilder =>
+                                            {
+                                                loggingBuilder.SetMinimumLevel(
+                                                    LogLevel.Debug);
+                                            })                                           
+                                            .RegisterPacketHandlerModule<PingPacketHandlerModule>()
+                                            .UseProtobufNet()
+                                            .Build();
+
             try
             {
-                this.userMap.Create(new ViewModels.Identities.UserViewModel() { Name = "admin", Password = "#hash#" });
-
                 int threadsCount, k;
                 ThreadPool.GetMaxThreads(out threadsCount, out k);
 

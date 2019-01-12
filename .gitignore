@@ -46,3 +46,10 @@
 /Butterfly/src/Networker.ZeroFormatter/obj/Debug/netstandard2.0
 /Butterfly/src/Networker.ZeroFormatter/obj
 /Butterfly/src/Butterfly.MultiPlatform.Communication/obj
+/Butterfly/src/Butterfly.MultiPlatform.Packets/bin/Debug/netstandard2.0
+/Butterfly/src/Butterfly.MultiPlatform.Packets/obj/Debug/netstandard2.0
+/Butterfly/src/Butterfly.MultiPlatform.Packets/obj
+/Butterfly/src/Butterfly.Windows.Modules/bin/Debug
+/Butterfly/src/Butterfly.Windows.Modules/obj/Debug
+/Butterfly/src/Butterfly.Windows.Server.Handlers/bin/Debug
+/Butterfly/src/Butterfly.Windows.Server.Handlers/obj/Debug
