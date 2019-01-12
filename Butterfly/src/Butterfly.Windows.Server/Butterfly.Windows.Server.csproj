@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D0E1D70F-0053-40A2-9662-D812A0C5F345}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Butterfly.Server</RootNamespace>
-    <AssemblyName>Butterfly.Server</AssemblyName>
+    <RootNamespace>Butterfly.Windows.Server</RootNamespace>
+    <AssemblyName>Butterfly.Windows.Server</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -98,15 +98,15 @@
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
       <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Maps\Butterfly.Windows.Maps.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Maps\Butterfly.Windows.Maps.csproj">
       <Project>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</Project>
       <Name>Butterfly.Windows.Maps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Server.Core\Butterfly.Windows.Server.Core.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Server.Core\Butterfly.Windows.Server.Core.csproj">
       <Project>{12a00ddf-c15a-4f3c-8dff-194cc713c8c8}</Project>
       <Name>Butterfly.Windows.Server.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Services\Butterfly.Windows.Services.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Services\Butterfly.Windows.Services.csproj">
       <Project>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</Project>
       <Name>Butterfly.Windows.Services</Name>
     </ProjectReference>
