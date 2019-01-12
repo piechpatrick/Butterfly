@@ -7,8 +7,8 @@
     <ProjectGuid>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Butterfly.Services</RootNamespace>
-    <AssemblyName>Butterfly.Services</AssemblyName>
+    <RootNamespace>Butterfly.Windows.Services</RootNamespace>
+    <AssemblyName>Butterfly.Windows.Services</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Data\Butterfly.Windows.Data.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Data\Butterfly.Windows.Data.csproj">
       <Project>{100F24DE-7518-4D16-9398-48E44C540133}</Project>
       <Name>Butterfly.Windows.Data</Name>
     </ProjectReference>
@@ -68,7 +68,7 @@
       <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
       <Name>Butterfly.MultiPlatform.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Repositories\Butterfly.Windows.Repositories.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Repositories\Butterfly.Windows.Repositories.csproj">
       <Project>{11F8E72A-957A-47F9-87F9-895559B9F250}</Project>
       <Name>Butterfly.Windows.Repositories</Name>
     </ProjectReference>

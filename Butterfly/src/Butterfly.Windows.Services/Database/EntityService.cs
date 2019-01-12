@@ -21,7 +21,7 @@ namespace Butterfly.Services.Database
             {
                 if(this.unitOfWork == null)
                 {
-                    this.unitOfWork = new UnitOfWork(new Data.DataContext());
+                    this.unitOfWork = new UnitOfWork(new Windows.Data.DataContext());
                 }
                 return unitOfWork;
             }

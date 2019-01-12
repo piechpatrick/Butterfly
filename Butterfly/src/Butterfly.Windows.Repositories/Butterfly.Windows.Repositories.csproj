@@ -7,8 +7,8 @@
     <ProjectGuid>{11F8E72A-957A-47F9-87F9-895559B9F250}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Butterfly.Repositories</RootNamespace>
-    <AssemblyName>Butterfly.Repositories</AssemblyName>
+    <RootNamespace>Butterfly.Windows.Repositories</RootNamespace>
+    <AssemblyName>Butterfly.Windows.Repositories</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -54,7 +54,7 @@
     <Compile Include="Users\UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Data\Butterfly.Windows.Data.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Data\Butterfly.Windows.Data.csproj">
       <Project>{100F24DE-7518-4D16-9398-48E44C540133}</Project>
       <Name>Butterfly.Windows.Data</Name>
     </ProjectReference>

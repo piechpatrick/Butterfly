@@ -36,6 +36,7 @@ namespace Butterfly.Server.Core.Instances
                                             .RegisterPacketHandlerModule<PingPacketHandlerModule>()
                                             .UseProtobufNet()
                                             .Build();
+            this.NetworkServer.Start();
 
             try
             {

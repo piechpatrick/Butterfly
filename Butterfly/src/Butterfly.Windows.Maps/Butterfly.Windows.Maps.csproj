@@ -7,8 +7,8 @@
     <ProjectGuid>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Butterfly.Maps</RootNamespace>
-    <AssemblyName>Butterfly.Maps</AssemblyName>
+    <RootNamespace>Butterfly.Windows.Maps</RootNamespace>
+    <AssemblyName>Butterfly.Windows.Maps</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -54,7 +54,7 @@
       <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
       <Name>Butterfly.MultiPlatform.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Services\Butterfly.Windows.Services.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Services\Butterfly.Windows.Services.csproj">
       <Project>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</Project>
       <Name>Butterfly.Windows.Services</Name>
     </ProjectReference>
