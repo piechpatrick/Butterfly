@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</ProjectGuid>
+    <ProjectGuid>{100F24DE-7518-4D16-9398-48E44C540133}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Butterfly.Services</RootNamespace>
-    <AssemblyName>Butterfly.Services</AssemblyName>
+    <RootNamespace>Butterfly.Data</RootNamespace>
+    <AssemblyName>Butterfly.Data</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -48,34 +48,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\EntityService.cs" />
-    <Compile Include="Database\IUnitOfWork.cs" />
-    <Compile Include="Database\UnitOfWork.cs" />
-    <Compile Include="Database\Users\IUserService.cs" />
-    <Compile Include="Database\Users\UserService.cs" />
+    <Compile Include="DataContext.cs" />
+    <Compile Include="Migrations\201901120638226_initial.cs" />
+    <Compile Include="Migrations\201901120638226_initial.Designer.cs">
+      <DependentUpon>201901120638226_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\CustomSqlServerMigrationGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Data\Butterfly.Data.csproj">
-      <Project>{100F24DE-7518-4D16-9398-48E44C540133}</Project>
-      <Name>Butterfly.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.Interfaces.csproj">
-      <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
-      <Name>Butterfly.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Models\Butterfly.Models.csproj">
-      <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
-      <Name>Butterfly.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Repositories\Butterfly.Repositories.csproj">
-      <Project>{11F8E72A-957A-47F9-87F9-895559B9F250}</Project>
-      <Name>Butterfly.Repositories</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Models\Butterfly.MultiPlatform.Models.csproj">
+      <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
+      <Name>Butterfly.MultiPlatform.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901120638226_initial.resx">
+      <DependentUpon>201901120638226_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

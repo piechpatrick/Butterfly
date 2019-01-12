@@ -94,21 +94,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.Interfaces.csproj">
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj">
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
-      <Name>Butterfly.Interfaces</Name>
+      <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Maps\Butterfly.Maps.csproj">
+    <ProjectReference Include="..\Butterfly.Maps\Butterfly.Windows.Maps.csproj">
       <Project>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</Project>
-      <Name>Butterfly.Maps</Name>
+      <Name>Butterfly.Windows.Maps</Name>
     </ProjectReference>
     <ProjectReference Include="..\Butterfly.Server.Core\Butterfly.Server.Core.csproj">
       <Project>{12a00ddf-c15a-4f3c-8dff-194cc713c8c8}</Project>
       <Name>Butterfly.Server.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Services\Butterfly.Services.csproj">
+    <ProjectReference Include="..\Butterfly.Services\Butterfly.Windows.Services.csproj">
       <Project>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</Project>
-      <Name>Butterfly.Services</Name>
+      <Name>Butterfly.Windows.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

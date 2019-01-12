@@ -53,21 +53,21 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.Interfaces.csproj">
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj">
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
-      <Name>Butterfly.Interfaces</Name>
+      <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Maps\Butterfly.Maps.csproj">
+    <ProjectReference Include="..\Butterfly.Maps\Butterfly.Windows.Maps.csproj">
       <Project>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</Project>
-      <Name>Butterfly.Maps</Name>
+      <Name>Butterfly.Windows.Maps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Models\Butterfly.Models.csproj">
+    <ProjectReference Include="..\Butterfly.Models\Butterfly.MultiPlatform.Models.csproj">
       <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
-      <Name>Butterfly.Models</Name>
+      <Name>Butterfly.MultiPlatform.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.ViewModels.csproj">
+    <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
       <Project>{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}</Project>
-      <Name>Butterfly.ViewModels</Name>
+      <Name>Butterfly.MultiPlatform.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,3 +28,6 @@
 /Butterfly/src/Butterfly.ViewModels/obj
 /Butterfly/src/Butterfly.ViewModels/bin/Debug/netstandard2.0
 /Butterfly/src/packages
+/Butterfly/src/.vs/Butterfly/DesignTimeBuild
+/Butterfly/src/Butterfly.MultiPlatform.Common/obj
+/Butterfly/src/Butterfly.MultiPlatform.Common/bin/Debug/netstandard2.0

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{100F24DE-7518-4D16-9398-48E44C540133}</ProjectGuid>
+    <ProjectGuid>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Butterfly.Data</RootNamespace>
-    <AssemblyName>Butterfly.Data</AssemblyName>
+    <RootNamespace>Butterfly.Maps</RootNamespace>
+    <AssemblyName>Butterfly.Maps</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,14 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,29 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
-    <Compile Include="Migrations\201901120638226_initial.cs" />
-    <Compile Include="Migrations\201901120638226_initial.Designer.cs">
-      <DependentUpon>201901120638226_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\CustomSqlServerMigrationGenerator.cs" />
+    <Compile Include="Entities\IUserMap.cs" />
+    <Compile Include="Entities\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Butterfly.Models\Butterfly.Models.csproj">
-      <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
-      <Name>Butterfly.Models</Name>
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj">
+      <Project>{3708cf06-714b-40c4-ba4f-fd6a97c170fc}</Project>
+      <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201901120638226_initial.resx">
-      <DependentUpon>201901120638226_initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Butterfly.Models\Butterfly.MultiPlatform.Models.csproj">
+      <Project>{5A4B66DF-7310-46C3-B755-D41A41F08A7E}</Project>
+      <Name>Butterfly.MultiPlatform.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Services\Butterfly.Windows.Services.csproj">
+      <Project>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</Project>
+      <Name>Butterfly.Windows.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
+      <Project>{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}</Project>
+      <Name>Butterfly.MultiPlatform.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

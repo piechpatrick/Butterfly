@@ -3,31 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28407.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Server", "Butterfly.Server\Butterfly.Server.csproj", "{D0E1D70F-0053-40A2-9662-D812A0C5F345}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Server", "Butterfly.Server\Butterfly.Windows.Server.csproj", "{D0E1D70F-0053-40A2-9662-D812A0C5F345}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Models", "Butterfly.Models\Butterfly.Models.csproj", "{5A4B66DF-7310-46C3-B755-D41A41F08A7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Models", "Butterfly.Models\Butterfly.MultiPlatform.Models.csproj", "{5A4B66DF-7310-46C3-B755-D41A41F08A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Interfaces", "Butterfly.Interfaces\Butterfly.Interfaces.csproj", "{3708CF06-714B-40C4-BA4F-FD6A97C170FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Interfaces", "Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj", "{3708CF06-714B-40C4-BA4F-FD6A97C170FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Server.Core", "Butterfly.Server.Core\Butterfly.Server.Core.csproj", "{12A00DDF-C15A-4F3C-8DFF-194CC713C8C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Data", "Butterfly.Data\Butterfly.Data.csproj", "{100F24DE-7518-4D16-9398-48E44C540133}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Data", "Butterfly.Data\Butterfly.Windows.Data.csproj", "{100F24DE-7518-4D16-9398-48E44C540133}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Common", "Butterfly.Common\Butterfly.Common.csproj", "{BD4F99BD-7F4F-482D-81CC-77729A3DD46B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Common", "Butterfly.Common\Butterfly.Windows.Common.csproj", "{BD4F99BD-7F4F-482D-81CC-77729A3DD46B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Services", "Butterfly.Services\Butterfly.Services.csproj", "{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Services", "Butterfly.Services\Butterfly.Windows.Services.csproj", "{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Repositories", "Butterfly.Repositories\Butterfly.Repositories.csproj", "{11F8E72A-957A-47F9-87F9-895559B9F250}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Repositories", "Butterfly.Repositories\Butterfly.Windows.Repositories.csproj", "{11F8E72A-957A-47F9-87F9-895559B9F250}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Maps", "Butterfly.Maps\Butterfly.Maps.csproj", "{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Maps", "Butterfly.Maps\Butterfly.Windows.Maps.csproj", "{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesProccess", "ServicesProccess", "{275B961A-B771-4C72-82A8-139EA1987CAE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{44FD1D2C-2B33-4770-B48D-921BA3B9166B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Multplatform", "Multplatform", "{44FD1D2C-2B33-4770-B48D-921BA3B9166B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.ViewModels", "Butterfly.ViewModels\Butterfly.ViewModels.csproj", "{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.ViewModels", "Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj", "{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Common", "Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj", "{10380352-D23E-4969-B731-DFFADD577B2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10380352-D23E-4969-B731-DFFADD577B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10380352-D23E-4969-B731-DFFADD577B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10380352-D23E-4969-B731-DFFADD577B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10380352-D23E-4969-B731-DFFADD577B2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
 		{275B961A-B771-4C72-82A8-139EA1987CAE} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
 		{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
+		{10380352-D23E-4969-B731-DFFADD577B2B} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F235D99E-240F-49B6-9348-EA610E1883A9}
