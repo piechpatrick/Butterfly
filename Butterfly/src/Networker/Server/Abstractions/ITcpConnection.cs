@@ -5,6 +5,6 @@ namespace Networker.Server.Abstractions
 {
     public interface ITcpConnection
     {
-        Socket Socket { get; set; }
+        Socket Socket { get; set; }        
     }
 }

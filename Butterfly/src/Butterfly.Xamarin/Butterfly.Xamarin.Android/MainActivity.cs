@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V4.Content;
+using Android;
+using Android.Support.V4.App;
 
 namespace Butterfly.Xamarin.Droid
 {
@@ -20,6 +23,17 @@ namespace Butterfly.Xamarin.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == (int)Permission.Granted)
+            {
+                // We have permission, go ahead and use the camera.
+            }
+            else
+            {
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 1);
+            }
+
         }
     }
 }

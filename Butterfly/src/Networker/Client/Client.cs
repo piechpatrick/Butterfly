@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Networker.Client.Abstractions;
@@ -11,6 +12,9 @@ namespace Networker.Client
 {
     public class Client : IClient
     {
+        private readonly static object tcpLock = new object();
+
+
         private readonly ClientBuilderOptions options;
         private readonly IClientPacketProcessor packetProcessor;
         private readonly ILogger<Client> logger;
@@ -83,11 +87,12 @@ namespace Networker.Client
                                           {
                                               try
                                               {
-                                                  var data = this.udpClient.ReceiveAsync()
-                                                                 .GetAwaiter()
-                                                                 .GetResult();
+                                                  //var data = this.udpClient.ReceiveAsync()
+                                                  //               .GetAwaiter()
+                                                  //               .GetResult();
 
-                                                  this.packetProcessor.Process(data);
+                                                  //this.packetProcessor.Process(data);
+                                                  var res = this.ReadBySize(5000);
                                               }
                                               catch(Exception ex)
                                               {
@@ -97,6 +102,38 @@ namespace Networker.Client
                                           this.udpClient = null;
                                       });
             }
+        }
+
+        private byte[] ReadBySize(int size = 4)
+        {
+            var readEvent = new AutoResetEvent(false);
+            var buffer = new byte[size]; //Receive buffer
+            var totalRecieved = 0;
+            do
+            {
+                var recieveArgs = new SocketAsyncEventArgs()
+                {
+                    UserToken = readEvent
+                };
+                recieveArgs.SetBuffer(buffer, totalRecieved, size - totalRecieved);//Receive bytes from x to total - x, x is the number of bytes already recieved
+                recieveArgs.Completed += TcpEventArgs_Completed;
+                this.tcpSocket.ReceiveAsync(recieveArgs);
+                readEvent.WaitOne();//Wait for recieve
+
+                if (recieveArgs.BytesTransferred == 0)//If now bytes are recieved then there is an error
+                {
+                    continue;
+                }
+                totalRecieved += recieveArgs.BytesTransferred;
+
+            } while (totalRecieved != size);//Check if all bytes has been received
+            return buffer;
+        }
+
+        private void TcpEventArgs_Completed(object sender, SocketAsyncEventArgs e)
+        {
+            var are = (AutoResetEvent)e.UserToken;
+            are.Set();
         }
 
         public int Ping()

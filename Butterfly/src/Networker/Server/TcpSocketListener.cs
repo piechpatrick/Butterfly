@@ -54,7 +54,7 @@ namespace Networker.Server
         public void Listen()
         {
             this.listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            this.listenSocket.Bind(new IPEndPoint(IPAddress.Any, this.serverBuilderOptions.TcpPort));
+            this.listenSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.101"), this.serverBuilderOptions.TcpPort));
 
             for(int i = 0; i < this.serverBuilderOptions.TcpMaxConnections; i++)
             {

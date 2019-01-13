@@ -97,6 +97,21 @@ namespace Networker.Server
             return this.tcpConnections;
         }
 
+        public void SendToAllTCP<T>(T packet)
+        {
+            foreach (var connection in this.GetConnections()?.GetConnections())
+            {
+                if (connection.Socket == null)
+                {
+                    throw new Exception("TCP client has not been initialised");
+                }
+
+                var serialisedPacket = this.packetSerialiser.Serialise(packet);
+
+                var result = connection.Socket.Send(serialisedPacket);
+            }
+        }
+
         public void Start()
         {
             this.TcpListener?.Listen();

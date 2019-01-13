@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Models\Butterfly.MultiPlatform.Models.csproj" />
     <ProjectReference Include="..\Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj" />
+    <ProjectReference Include="..\Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj" />
   </ItemGroup>
 
 </Project>

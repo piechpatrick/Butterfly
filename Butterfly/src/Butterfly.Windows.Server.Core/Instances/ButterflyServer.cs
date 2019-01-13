@@ -1,7 +1,10 @@
 ﻿using Butterfly.Maps.Entities;
+using Butterfly.MultiPlatform.Packets.Configuration;
+using Butterfly.MultiPlatform.Packets.Pings;
 using Butterfly.Windows.Modules.HandlersModules;
 using Microsoft.Extensions.Logging;
 using Networker.Formatter.ProtobufNet;
+using Networker.Formatter.ZeroFormatter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,24 +27,72 @@ namespace Butterfly.Server.Core.Instances
         }
         public void Start()
         {
-
-            this.NetworkServer = new Networker.Server.ServerBuilder().UseTcp(1000)
-                                            .SetMaximumConnections(6000)
-                                            .UseUdp(5000)
-                                            .ConfigureLogging(loggingBuilder =>
-                                            {
-                                                loggingBuilder.SetMinimumLevel(
-                                                    LogLevel.Debug);
-                                            })                                           
-                                            .RegisterPacketHandlerModule<PingPacketHandlerModule>()
-                                            .UseProtobufNet()
-                                            .Build();
-            this.NetworkServer.Start();
-
             try
             {
                 int threadsCount, k;
                 ThreadPool.GetMaxThreads(out threadsCount, out k);
+
+                this.NetworkServer = new Networker.Server.ServerBuilder()
+                    .UseTcp(7894)
+                     .UseUdp(7895)                                                   
+                                .SetMaximumConnections(10)
+                                .ConfigureLogging(loggingBuilder =>
+                                {
+                                    loggingBuilder.SetMinimumLevel(
+                                        LogLevel.Debug);                                                                     
+                                })
+                                .RegisterPacketHandlerModule<PingPacketHandlerModule>()
+                                .RegisterPacketHandlerModule<AudioPacketHandlerModule>()
+                                .UseZeroFormatter()
+                                .Build();
+                this.NetworkServer.Start();
+
+                this.NetworkServer.ServerInformationUpdated += (sender, eventArgs) =>
+                {
+                    var dateTime = DateTime.UtcNow;
+
+                    Console.WriteLine(
+                        $"{dateTime} {eventArgs.ProcessedTcpPackets} TCP Packets Processed");
+                    Console.WriteLine(
+                        $"{dateTime} {eventArgs.InvalidTcpPackets} Invalid or Lost TCP Packets");
+                    Console.WriteLine(
+                        $"{dateTime} {eventArgs.ProcessedUdpPackets} UDP Packets Processed");
+                    Console.WriteLine(
+                        $"{dateTime} {eventArgs.InvalidUdpPackets} Invalid or Lost UDP Packets");
+                    Console.WriteLine(
+                        $"{dateTime} {eventArgs.TcpConnections} TCP connections active");
+                };
+                this.NetworkServer.ClientConnected += (sender, eventArgs) =>
+                {
+                    Console.WriteLine(
+                        $"Client Connected - {eventArgs.Connection.Socket.RemoteEndPoint}");
+                };
+                this.NetworkServer.ClientDisconnected += (sender, eventArgs) =>
+                {
+                    Console.WriteLine(
+                        $"Client Disconnected - {eventArgs.Connection.Socket.RemoteEndPoint}");
+                };
+
+                Task.Factory.StartNew(() =>
+                {
+                    while (true)
+                    {
+                        var cfg = new ClientConfigurationPacket()
+                        {
+                            AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = true }
+                        };
+                        this.NetworkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
+
+
+                        //this.NetworkServer.Broadcast(new PingPacket
+                        //{
+                        //    Time = DateTime.UtcNow
+                        //});
+
+                        Thread.Sleep(10000);
+                    }
+                });
+
 
 
                 run = true;

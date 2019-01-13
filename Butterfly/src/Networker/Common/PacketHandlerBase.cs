@@ -21,14 +21,14 @@ namespace Networker.Common
 
         public async Task Handle(byte[] packet, ISender sender)
         {
-            await this.Process(this.PacketSerialiser.Deserialise<T>(packet, 0, 0), sender);
+            await this.Process(this.PacketSerialiser.Deserialise<T>(packet, 0, 0), sender, packet);
         }
 
         public async Task Handle(byte[] packet, int offset, int length, ISender sender)
         {
-            await this.Process(this.PacketSerialiser.Deserialise<T>(packet, offset, length), sender);
+            await this.Process(this.PacketSerialiser.Deserialise<T>(packet, offset, length), sender, packet);
         }
 
-        public abstract Task Process(T packet, ISender sender);
+        public abstract Task Process(T packet, ISender sender, byte[] packetBytes);
     }
 }

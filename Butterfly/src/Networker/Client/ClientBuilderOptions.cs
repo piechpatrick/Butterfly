@@ -9,7 +9,7 @@ namespace Networker.Client
         public ClientBuilderOptions()
         {
             this.LogLevel = LogLevel.Error;
-            this.PacketSizeBuffer = 3500;
+            this.PacketSizeBuffer = 5000;
             this.ObjectPoolSize = 200;
         }
 

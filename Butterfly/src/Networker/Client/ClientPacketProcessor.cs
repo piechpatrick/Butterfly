@@ -125,7 +125,7 @@ namespace Networker.Client
 
                 string packetTypeName = "Default";
 
-                if(!this.packetSerialiser.CanReadName)
+                if(this.packetSerialiser.CanReadName)
                 {
                     packetTypeName = Encoding.ASCII.GetString(buffer, currentPosition, packetTypeNameLength);
                     currentPosition += packetTypeNameLength;

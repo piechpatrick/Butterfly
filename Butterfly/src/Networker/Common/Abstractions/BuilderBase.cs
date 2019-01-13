@@ -110,12 +110,14 @@ namespace Networker.Common.Abstractions
             {
                 this.loggingBuilder = (loggingBuilder) =>
                                       {
+                                          
                                       };
+                
             }
             
             this.serviceCollection.AddSingleton<TBuilderOptions>(this.options);
             this.serviceCollection.AddSingleton<IPacketHandlers, PacketHandlers>();
-            this.serviceCollection.AddLogging(this.loggingBuilder);
+            this.serviceCollection.AddLogging(loggingBuilder => loggingBuilder.AddConsole());
         }
 
         protected IServiceProvider GetServiceProvider()

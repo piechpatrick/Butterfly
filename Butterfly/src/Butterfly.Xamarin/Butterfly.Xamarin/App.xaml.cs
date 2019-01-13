@@ -15,6 +15,8 @@ namespace Butterfly.Xamarin
 
 
             MainPage = new MainPage();
+
+            var client = new Core.ButterflyClient();
         }
 
         protected override void OnStart()

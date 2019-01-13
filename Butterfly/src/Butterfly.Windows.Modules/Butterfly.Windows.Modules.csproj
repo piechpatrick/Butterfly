@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HandlersModules\AudioPacketHandlerModule.cs" />
     <Compile Include="HandlersModules\PingPacketHandlerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
