@@ -94,6 +94,10 @@
       <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
       <Name>Butterfly.MultiPlatform.Packets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.Services\Butterfly.Windows.Services.csproj">
+      <Project>{f6b8bb3c-81f8-4920-a3e2-1787a25e3336}</Project>
+      <Name>Butterfly.Windows.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Networker\Networker.csproj">
       <Project>{dbaefb66-9fab-491b-a65a-6586a509a6c4}</Project>
       <Name>Networker</Name>

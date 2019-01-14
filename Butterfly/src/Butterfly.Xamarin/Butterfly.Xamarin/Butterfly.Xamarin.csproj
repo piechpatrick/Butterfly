@@ -15,10 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Butterfly.MultiPlatform.Handlers\Butterfly.MultiPlatform.Handlers.csproj" />
+    <ProjectReference Include="..\..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj" />
     <ProjectReference Include="..\..\Butterfly.MultiPlatform.Modules\Butterfly.MultiPlatform.Modules.csproj" />
     <ProjectReference Include="..\..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj" />
+    <ProjectReference Include="..\..\Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj" />
     <ProjectReference Include="..\..\Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj" />
     <ProjectReference Include="..\..\Networker\Networker.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.1\Mono.Android.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

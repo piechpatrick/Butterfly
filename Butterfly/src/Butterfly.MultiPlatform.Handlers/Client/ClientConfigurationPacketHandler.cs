@@ -1,25 +1,42 @@
-﻿using Butterfly.MultiPlatform.Packets.Configuration;
+﻿using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.MultiPlatform.Packets.Audio;
+using Butterfly.MultiPlatform.Packets.Configuration;
+using Butterfly.MultiPlatform.Senders;
+using Butterfly.MultiPlatform.Services.Audio;
+using Networker.Client.Abstractions;
 using Networker.Common;
 using Networker.Common.Abstractions;
-using Networker.Formatter.ZeroFormatter;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using ZeroFormatter;
 
 namespace Butterfly.MultiPlatform.Handlers.Client
 {
     public class ClientConfigurationPacketHandler : PacketHandlerBase<ClientConfigurationPacket>
     {
-        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser)
-            : base(packetSerialiser) { }
-
-        public override async Task Process(ClientConfigurationPacket packet, ISender sender, byte[] data)
+        private readonly IClient client;
+        private readonly IRecorderService recorderService;
+        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, IClient client)
+            : base(packetSerialiser)
         {
-            ClientConfigurationPacket config = ZeroFormatterSerializer.NonGeneric.Deserialize(
-                typeof(ClientConfigurationPacket), data) as ClientConfigurationPacket;
+            this.client = client;
+            this.recorderService = new RecorderService(this.client);
+        }
 
+        public override async Task Process(ClientConfigurationPacket packet, ISender sender)
+        {           
+            if(packet != null)
+            {
+
+                var pcmSender = new GenericPacketSender<PCMPacket>(this.client);
+
+
+                if (!this.recorderService.IsRunning)
+                {
+                    this.recorderService.Start();                  
+                }
+            }
 
         }
     }

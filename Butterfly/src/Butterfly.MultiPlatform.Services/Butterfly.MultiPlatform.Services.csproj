@@ -6,8 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj" />
-    <ProjectReference Include="..\Butterfly.MultiPlatform.Handlers\Butterfly.MultiPlatform.Handlers.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj" />
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Senders\Butterfly.MultiPlatform.Senders.csproj" />
     <ProjectReference Include="..\Networker\Networker.csproj" />
   </ItemGroup>
 

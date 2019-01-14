@@ -11,7 +11,7 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
     /// </summary>
     public abstract class BackgroundWorkingThreadBase : IBackgroundThreadWorker
     {
-        private bool isRunning = true;
+        private bool isRunning;
         private Thread workingThread;
         private int interval = 60000;
         private ThreadPriority threadPriority = ThreadPriority.BelowNormal;
@@ -36,6 +36,7 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
         /// </summary>
         public void Start()
         {
+            this.OnStart(this.workingThread);
             try
             {
                 this.workingThread = new Thread(this.Run);
@@ -43,7 +44,6 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
                 this.workingThread.IsBackground = true;
                 this.workingThread.Priority = this.threadPriority;
                 this.workingThread.Start();
-                this.OnStart(this.workingThread);
             }
             catch (ThreadStartException tsex)
             {
@@ -68,6 +68,7 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
         /// </summary>
         private void Run()
         {
+            this.isRunning = true;
             try
             {
                 while (this.IsRunning)

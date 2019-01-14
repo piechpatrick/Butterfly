@@ -11,10 +11,10 @@ namespace Butterfly.MultiPlatform.Handlers.Client
         public ClientPingPacketHandler(IPacketSerialiser packetSerialiser)
             : base(packetSerialiser) { }
 
-        public override async Task Process(PingPacket packet, ISender sender, byte[] data)
+        public override async Task Process(PingPacket packet, ISender sender)
         {
-            var diff = DateTime.UtcNow.Subtract(packet.Time);
-            Console.WriteLine($"Ping is {diff.Milliseconds}ms");
+            //var diff = DateTime.UtcNow.Subtract(packet.Time);
+            //Console.WriteLine($"Ping is {diff.Milliseconds}ms");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Butterfly.Windows.Server.Handlers.Network
             this.logger = logger;
         }
 
-        public override async Task Process(PingPacket packet, ISender sender, byte[] data)
+        public override async Task Process(PingPacket packet, ISender sender)
         {
             this.logger.LogDebug("Received a ping packet from " + sender.EndPoint);
         }

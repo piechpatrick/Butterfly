@@ -1,6 +1,4 @@
-﻿using Networker.Formatter.ProtobufNet;
-using Networker.Formatter.ZeroFormatter;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +7,9 @@ using ZeroFormatter;
 namespace Butterfly.MultiPlatform.Packets.Configuration
 {
     [ZeroFormattable]
-    public class AudioSniffConfigurationPacket : ZeroFormatterPacketBase
+    public class AudioSniffConfigurationPacket 
     {
-        [Index(0)]
+        [Index(1)]
         public virtual bool CanRecive { get; set; }
     }
 }

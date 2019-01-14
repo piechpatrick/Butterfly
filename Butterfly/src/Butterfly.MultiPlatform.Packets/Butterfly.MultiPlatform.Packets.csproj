@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.4.0" />
+    <PackageReference Include="ZeroFormatter" Version="1.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Butterfly.Models\Butterfly.MultiPlatform.Models.csproj" />
-    <ProjectReference Include="..\Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj" />
     <ProjectReference Include="..\Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj" />
   </ItemGroup>
 

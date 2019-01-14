@@ -40,6 +40,8 @@ namespace Networker.Server
                 udpSenderObjectPool.Push(new UdpSender(packetSerialiser));
         }
 
+        private static object syncRoot = new object();
+
         public void ProcessFromBuffer(ISender sender,
             byte[] buffer,
             int offset = 0,
@@ -52,66 +54,79 @@ namespace Networker.Server
             if (length == 0)
                 length = buffer.Length;
 
-            while (bytesRead < length)
+            lock (syncRoot)
             {
-                var packetNameSize = packetSerialiser.CanReadName ? BitConverter.ToInt32(buffer, currentPosition) : 0;
-
-                if (packetSerialiser.CanReadName) currentPosition += 4;
-
-                var packetSize = packetSerialiser.CanReadLength ? BitConverter.ToInt32(buffer, currentPosition) : 0;
-
-                if (packetSerialiser.CanReadLength) currentPosition += 4;
-
-                try
+                while (bytesRead < length)
                 {
-                    var packetTypeName = "Default";
-
-                    if (packetSerialiser.CanReadName)
-                        packetTypeName = Encoding.ASCII.GetString(buffer, currentPosition, packetNameSize);
-
-                    var packetHandler = packetHandlers.GetPacketHandlers()[packetTypeName];
-
-                    if (string.IsNullOrEmpty(packetTypeName))
-                    {
-                        if (isTcp)
-                            serverInformation.InvalidTcpPackets++;
-                        else
-                            serverInformation.InvalidUdpPackets++;
-
-                        logger.Error(new Exception("Packet was lost - Invalid"));
+                    var packetNameSize = packetSerialiser.CanReadName ? BitConverter.ToInt32(buffer, currentPosition) : 0;
+                    if (packetNameSize < 0)
                         return;
-                    }
 
-                    if (packetSerialiser.CanReadName) currentPosition += packetNameSize;
+                    if (packetSerialiser.CanReadName) currentPosition += 4;
 
-                    if (packetSerialiser.CanReadOffset)
+                    var packetSize = packetSerialiser.CanReadLength ? BitConverter.ToInt32(buffer, currentPosition) : 0;
+
+                    if (packetSerialiser.CanReadLength) currentPosition += 4;
+
+                    try
                     {
-                        packetHandler.Handle(buffer, currentPosition, packetSize, sender);
+                        var packetTypeName = "Default";
+
+                        if (packetSerialiser.CanReadName && (currentPosition + packetNameSize) < buffer.Length)
+                            packetTypeName = Encoding.ASCII.GetString(buffer, currentPosition, packetNameSize);
+                        else
+                        {
+                            if (isTcp)
+                                serverInformation.InvalidTcpPackets++;
+                            else
+                                serverInformation.InvalidUdpPackets++;
+                            return;
+                        }
+
+                        var packetHandler = packetHandlers.GetPacketHandlers()[packetTypeName];
+
+                        if (string.IsNullOrEmpty(packetTypeName) || packetTypeName == "Default")
+                        {
+                            if (isTcp)
+                                serverInformation.InvalidTcpPackets++;
+                            else
+                                serverInformation.InvalidUdpPackets++;
+
+                            logger.Error(new Exception("Packet was lost - Invalid"));
+                            return;
+                        }
+
+                        if (packetSerialiser.CanReadName) currentPosition += packetNameSize;
+
+                        if (packetSerialiser.CanReadOffset)
+                        {
+                            packetHandler.Handle(buffer, currentPosition, packetSize, sender);
+                        }
+                        else
+                        {
+                            var packetBytes = new byte[packetSize];
+                            Buffer.BlockCopy(buffer, currentPosition, packetBytes, 0, packetSize);
+                            packetHandler.Handle(packetBytes, sender);
+                        }
                     }
+                    catch (Exception e)
+                    {
+                        logger.Error(e);
+                    }
+
+                    if (packetSerialiser.CanReadLength) currentPosition += packetSize;
+
+                    bytesRead += packetSize + packetNameSize;
+
+                    if (packetSerialiser.CanReadName) bytesRead += 4;
+
+                    if (packetSerialiser.CanReadLength) bytesRead += 4;
+
+                    if (isTcp)
+                        serverInformation.ProcessedTcpPackets++;
                     else
-                    {
-                        var packetBytes = new byte[packetSize];
-                        Buffer.BlockCopy(buffer, currentPosition, packetBytes, 0, packetSize);
-                        packetHandler.Handle(packetBytes, sender);
-                    }
+                        serverInformation.ProcessedUdpPackets++;
                 }
-                catch (Exception e)
-                {
-                    logger.Error(e);
-                }
-
-                if (packetSerialiser.CanReadLength) currentPosition += packetSize;
-
-                bytesRead += packetSize + packetNameSize;
-
-                if (packetSerialiser.CanReadName) bytesRead += 4;
-
-                if (packetSerialiser.CanReadLength) bytesRead += 4;
-
-                if (isTcp)
-                    serverInformation.ProcessedTcpPackets++;
-                else
-                    serverInformation.ProcessedUdpPackets++;
             }
         }
 

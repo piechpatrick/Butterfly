@@ -1,15 +1,15 @@
-﻿using Networker.Formatter.ProtobufNet;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ZeroFormatter;
 
 namespace Butterfly.MultiPlatform.Packets.Pings
 {
-    [ProtoContract]
-    public class PingPacket : ProtoBufPacketBase
+    [ZeroFormattable]
+    public class PingPacket 
     {
-        [ProtoMember(2)]
-        public virtual DateTime Time { get; set; }
+        [Index(1)]
+        public virtual string Text { get; set; }
     }
 }

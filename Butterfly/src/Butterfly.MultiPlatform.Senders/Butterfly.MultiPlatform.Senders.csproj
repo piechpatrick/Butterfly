@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="protobuf-net" Version="2.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj" />
     <ProjectReference Include="..\Networker\Networker.csproj" />
   </ItemGroup>

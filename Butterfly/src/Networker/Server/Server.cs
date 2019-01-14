@@ -75,6 +75,7 @@ namespace Networker.Server
         }
 
         public ITcpSocketListener TcpListener { get; }
+        public ITcpSocketListener TcpListenerAudio { get; }
         public IUdpSocketListener UdpListener { get; }
         public EventHandler<TcpConnectionConnectedEventArgs> ClientConnected { get; set; }
         public EventHandler<TcpConnectionDisconnectedEventArgs> ClientDisconnected { get; set; }

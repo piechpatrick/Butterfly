@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio\AudioService.cs" />
     <Compile Include="Database\EntityService.cs" />
     <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\UnitOfWork.cs" />
@@ -56,6 +57,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Windows.Audio\Butterfly.Windows.Audio.csproj">
+      <Project>{87e8fa28-ef4d-4d13-b178-c696e9f14d28}</Project>
+      <Name>Butterfly.Windows.Audio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.Data\Butterfly.Windows.Data.csproj">
       <Project>{100F24DE-7518-4D16-9398-48E44C540133}</Project>
       <Name>Butterfly.Windows.Data</Name>
@@ -77,5 +82,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

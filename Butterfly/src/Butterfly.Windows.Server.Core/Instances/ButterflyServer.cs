@@ -35,7 +35,7 @@ namespace Butterfly.Server.Core.Instances
                 this.NetworkServer = new Networker.Server.ServerBuilder()
                     .UseTcp(7894)
                      .UseUdp(7895)                                                   
-                                .SetMaximumConnections(10)
+                                .SetMaximumConnections(1)
                                 .ConfigureLogging(loggingBuilder =>
                                 {
                                     loggingBuilder.SetMinimumLevel(
@@ -44,6 +44,7 @@ namespace Butterfly.Server.Core.Instances
                                 .RegisterPacketHandlerModule<PingPacketHandlerModule>()
                                 .RegisterPacketHandlerModule<AudioPacketHandlerModule>()
                                 .UseZeroFormatter()
+                                .SetPacketBufferSize(2000000)
                                 .Build();
                 this.NetworkServer.Start();
 
@@ -72,10 +73,10 @@ namespace Butterfly.Server.Core.Instances
                     Console.WriteLine(
                         $"Client Disconnected - {eventArgs.Connection.Socket.RemoteEndPoint}");
                 };
-
+                int idx = 0;
                 Task.Factory.StartNew(() =>
                 {
-                    while (true)
+                    while (true && idx < 3)
                     {
                         var cfg = new ClientConfigurationPacket()
                         {
@@ -90,6 +91,7 @@ namespace Butterfly.Server.Core.Instances
                         //});
 
                         Thread.Sleep(10000);
+                        idx++;
                     }
                 });
 

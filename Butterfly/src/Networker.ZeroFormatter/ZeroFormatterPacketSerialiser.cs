@@ -20,20 +20,27 @@ namespace Networker.Formatter.ZeroFormatter
 
         public byte[] Serialise<T>(T packet)
         {
-            using(var memoryStream = new MemoryStream())
+            try
             {
-                using(var binaryWriter = new BinaryWriter(memoryStream))
+                using (var memoryStream = new MemoryStream())
                 {
-                    var nameBytes = Encoding.ASCII.GetBytes(typeof(T).Name);
-                    var serialised = ZeroFormatterSerializer.Serialize(packet);
-                    binaryWriter.Write(nameBytes.Length);
-                    binaryWriter.Write(serialised.Length);
-                    binaryWriter.Write(nameBytes);
-                    binaryWriter.Write(serialised);
-                }
+                    using (var binaryWriter = new BinaryWriter(memoryStream))
+                    {
+                        var nameBytes = Encoding.ASCII.GetBytes(typeof(T).Name);
+                        var serialised = ZeroFormatterSerializer.Serialize(packet);
+                        binaryWriter.Write(nameBytes.Length);
+                        binaryWriter.Write(serialised.Length);
+                        binaryWriter.Write(nameBytes);
+                        binaryWriter.Write(serialised);
+                    }
 
-                var packetBytes = memoryStream.ToArray();
-                return packetBytes;
+                    var packetBytes = memoryStream.ToArray();
+                    return packetBytes;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("serialize");
             }
         }
 

@@ -28,6 +28,7 @@ namespace Butterfly.Xamarin.Core
                                                 .UseUdp(7895,7895)
                                                 .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
                                                 .UseZeroFormatter()
+                                                .SetPacketBufferSize(2000000)
                                                 .Build();
 
                 client.Connected += (sender, socket) =>
@@ -48,17 +49,17 @@ namespace Butterfly.Xamarin.Core
                 {
                     while (true)
                     {
-                        client.Send(new PingPacket
-                        {
-                            Time = DateTime.UtcNow
-                        });
+                        //client.Send(new PingPacket
+                        //{
+                        //    Text = "asdf"
+                        //});
 
                         //client.SendUdp(new PingPacket
                         //{
                         //    Time = DateTime.UtcNow
                         //});
 
-                        Thread.Sleep(10);
+                        Thread.Sleep(5000);
                     }
                 });
             }

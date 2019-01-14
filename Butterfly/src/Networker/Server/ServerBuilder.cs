@@ -1,4 +1,5 @@
 ﻿using System;
+using Butterfly.MultiPlatform.Intefaces.Audio;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Common.Abstractions;
 using Networker.Server.Abstractions;
@@ -24,7 +25,7 @@ namespace Networker.Server
             this.serviceCollection.AddSingleton<IServerInformation, ServerInformation>();
             this.serviceCollection.AddSingleton<IServerPacketProcessor, ServerPacketProcessor>();
             this.serviceCollection.AddSingleton<IBufferManager>(new BufferManager(
-                this.options.PacketSizeBuffer * this.options.TcpMaxConnections * 5,
+                this.options.PacketSizeBuffer * this.options.TcpMaxConnections * 1,
                 this.options.PacketSizeBuffer));
 
 
