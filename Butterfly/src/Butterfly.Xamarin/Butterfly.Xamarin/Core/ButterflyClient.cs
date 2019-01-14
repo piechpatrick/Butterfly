@@ -17,10 +17,18 @@ namespace Butterfly.Xamarin.Core
         public ButterflyClient()
         {
             this.TryConnect();
+
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += HandleExceptions;
+        }
+
+        private void HandleExceptions(object sender, UnhandledExceptionEventArgs e)
+        {
+            //Handle Exceptions 
         }
 
         private void TryConnect()
-        {
+        {          
             try
             {
                 var client = new ClientBuilder().UseIp("87.206.204.123")

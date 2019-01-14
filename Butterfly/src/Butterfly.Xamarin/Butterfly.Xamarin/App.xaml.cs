@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Butterfly.Xamarin.Views;
+using System.Threading.Tasks;
+using System.Threading;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Butterfly.Xamarin
@@ -12,6 +14,8 @@ namespace Butterfly.Xamarin
         public App()
         {
             InitializeComponent();
+
+            
 
 
             MainPage = new MainPage();

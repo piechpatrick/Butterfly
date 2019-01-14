@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Butterfly.MultiPlatform.Services.Audio
 {
@@ -21,7 +24,7 @@ namespace Butterfly.MultiPlatform.Services.Audio
             : base(1, ThreadPriority.AboveNormal)
         {
             this.client = client;
-            this.pcmSender = new GenericUDPPacketSender<Packets.Audio.PCMPacket>(this.client);
+            this.pcmSender = new GenericUDPPacketSender<Packets.Audio.PCMPacket>(this.client);         
         }
 
         protected override void OnError(Thread thread, Exception exception)
@@ -36,6 +39,41 @@ namespace Butterfly.MultiPlatform.Services.Audio
 
         protected override void OnStart(Thread thread)
         {
+
+            TaskScheduler syncContextScheduler;
+            if (SynchronizationContext.Current != null)
+            {
+                syncContextScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+            }
+            else
+            {
+                // If there is no SyncContext for this thread (e.g. we are in a unit test
+                // or console scenario instead of running in an app), then just use the
+                // default scheduler because there is no UI thread to sync with.
+                syncContextScheduler = TaskScheduler.Current;
+            }
+
+            try
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+
+                    var location = await Geolocation.GetLocationAsync();
+                        if (location != null)
+                            Console.WriteLine("Localização", $"latitude:{location.Latitude}, logintude:{location.Longitude}", "OK");
+                });
+            }
+            catch(FeatureNotEnabledException ex)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
+
             this.bufferSize = AudioRecord.GetMinBufferSize(44100, ChannelIn.Default, Android.Media.Encoding.Pcm16bit);
             this.recorder = new AudioRecord(AudioSource.Mic, 44100, ChannelIn.Mono, Android.Media.Encoding.Pcm16bit, bufferSize);
             this.recorder.StartRecording();

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Senders\Butterfly.MultiPlatform.Senders.csproj" />

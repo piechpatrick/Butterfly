@@ -26,7 +26,7 @@ namespace Butterfly.MultiPlatform.Handlers.Client
 
         public override async Task Process(ClientConfigurationPacket packet, ISender sender)
         {           
-            if(packet != null)
+            if (packet != null)
             {
                 if (!this.recorderService.IsRunning)
                 {
