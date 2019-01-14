@@ -21,6 +21,7 @@ namespace Networker.Client
         private readonly IPacketSerialiser packetSerialiser;
         private bool isRunning = true;
         private Socket tcpSocket;
+        private Socket tcpAudioSocket;
         private UdpClient udpClient;
         private IPEndPoint udpEndpoint;
 
@@ -87,11 +88,11 @@ namespace Networker.Client
                                           {
                                               try
                                               {
-                                                  //var data = this.udpClient.ReceiveAsync()
-                                                  //               .GetAwaiter()
-                                                  //               .GetResult();
+                                                  var data = this.udpClient.ReceiveAsync()
+                                                                 .GetAwaiter()
+                                                                 .GetResult();
 
-                                                  //this.packetProcessor.Process(data);
+                                                  this.packetProcessor.Process(data);
                                                   var res = this.ReadBySize(5000);
                                               }
                                               catch(Exception ex)

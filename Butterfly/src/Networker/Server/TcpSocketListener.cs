@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Butterfly.MultiPlatform.Common.ObjectPool;
 using Microsoft.Extensions.Logging;
 using Networker.Common;
 using Networker.Common.Abstractions;
@@ -20,13 +21,16 @@ namespace Networker.Server
         private readonly IServerPacketProcessor serverPacketProcessor;
         private readonly ObjectPool<SocketAsyncEventArgs> socketEventArgsPool;
         private Socket listenSocket;
+        private int port;
 
         public TcpSocketListener(ServerBuilderOptions serverBuilderOptions,
             IServerPacketProcessor serverPacketProcessor,
             IBufferManager bufferManager,
             ILogger<TcpSocketListener> logger,
-            ITcpConnections tcpConnections)
+            ITcpConnections tcpConnections,
+            int port)
         {
+            this.port = port;
             this.serverBuilderOptions = serverBuilderOptions;
             this.serverPacketProcessor = serverPacketProcessor;
             this.bufferManager = bufferManager;
@@ -53,8 +57,10 @@ namespace Networker.Server
 
         public void Listen()
         {
+            var port = this.port < 0 ? this.serverBuilderOptions.TcpPort : this.port;
+
             this.listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            this.listenSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.101"), this.serverBuilderOptions.TcpPort));
+            this.listenSocket.Bind(new IPEndPoint(IPAddress.Parse("192.168.0.101"), port ));
 
             for(int i = 0; i < this.serverBuilderOptions.TcpMaxConnections; i++)
             {
@@ -70,7 +76,7 @@ namespace Networker.Server
             this.listenSocket.Listen(this.serverBuilderOptions.TcpMaxConnections);
             this.StartAccept(null);
 
-            this.logger.LogInformation($"Started TCP listener on port {this.serverBuilderOptions.TcpPort}.");
+            this.logger.LogInformation($"Started TCP listener on port {port}.");
         }
 
         private void CloseClientSocket(SocketAsyncEventArgs e)
@@ -186,7 +192,7 @@ namespace Networker.Server
                 {
                     acceptEventArg = new SocketAsyncEventArgs();
                     acceptEventArg.Completed +=
-                        new EventHandler<SocketAsyncEventArgs>(this.EventArgCompleted);
+                        new EventHandler<SocketAsyncEventArgs>(this.EventArgCompleted);                    
                 }
                 else
                 {
@@ -194,7 +200,7 @@ namespace Networker.Server
                 }
 
                 bool willRaiseEvent = this.listenSocket.AcceptAsync(acceptEventArg);
-                if(!willRaiseEvent)
+                if (!willRaiseEvent)
                 {
                     this.ProcessAccept(acceptEventArg);
                 }

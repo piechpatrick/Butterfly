@@ -14,6 +14,7 @@ namespace Networker.Client
         }
 
         public int TcpPort { get; set; }
+        public int TcpPortAudio { get; set; }
         public int UdpPort { get; set; }
         public string Ip { get; set; }
         public int UdpPortLocal { get; set; }

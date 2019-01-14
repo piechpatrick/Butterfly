@@ -5,6 +5,7 @@ using Butterfly.Windows.Modules.HandlersModules;
 using Microsoft.Extensions.Logging;
 using Networker.Formatter.ProtobufNet;
 using Networker.Formatter.ZeroFormatter;
+using Networker.Server;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +35,9 @@ namespace Butterfly.Server.Core.Instances
 
                 this.NetworkServer = new Networker.Server.ServerBuilder()
                     .UseTcp(7894)
-                     .UseUdp(7895)                                                   
-                                .SetMaximumConnections(1)
+                    .UseUdp(7895)
+                    .UseUdpSocketListener<DefaultUdpSocketListenerFactory>()                                               
+                                .SetMaximumConnections(100)
                                 .ConfigureLogging(loggingBuilder =>
                                 {
                                     loggingBuilder.SetMinimumLevel(
@@ -73,25 +75,25 @@ namespace Butterfly.Server.Core.Instances
                     Console.WriteLine(
                         $"Client Disconnected - {eventArgs.Connection.Socket.RemoteEndPoint}");
                 };
-                int idx = 0;
+                var can = true;
                 Task.Factory.StartNew(() =>
                 {
-                    while (true && idx < 3)
+                    while (true)
                     {
+                        
                         var cfg = new ClientConfigurationPacket()
                         {
-                            AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = true }
+                            AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = can }
                         };
                         this.NetworkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
-
+                        can = !cfg.AudioSniffConfig.CanRecive;
 
                         //this.NetworkServer.Broadcast(new PingPacket
                         //{
-                        //    Time = DateTime.UtcNow
+                        //    Text = "test"
                         //});
 
                         Thread.Sleep(10000);
-                        idx++;
                     }
                 });
 

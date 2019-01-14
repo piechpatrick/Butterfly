@@ -36,6 +36,8 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
         /// </summary>
         public void Start()
         {
+            if (this.IsRunning)
+                return;
             this.OnStart(this.workingThread);
             try
             {

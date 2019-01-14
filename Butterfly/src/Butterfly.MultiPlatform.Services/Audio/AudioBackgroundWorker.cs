@@ -1,6 +1,7 @@
 ﻿using Android.Media;
 using Butterfly.MultiPlatform.Common.Background.Workers;
 using Butterfly.MultiPlatform.Senders;
+using Butterfly.MultiPlatform.Senders.UDP;
 using Networker.Client.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,13 @@ namespace Butterfly.MultiPlatform.Services.Audio
         private int bufferSize;
         private AudioRecord recorder;
         private readonly IClient client;
-        private GenericPacketSender<Packets.Audio.PCMPacket> pcmSender;
+        private GenericUDPPacketSender<Packets.Audio.PCMPacket> pcmSender;
 
         public AudioRecorderBackroundWorker(IClient client)
             : base(1, ThreadPriority.AboveNormal)
         {
             this.client = client;
-            this.pcmSender = new GenericPacketSender<Packets.Audio.PCMPacket>(this.client);
+            this.pcmSender = new GenericUDPPacketSender<Packets.Audio.PCMPacket>(this.client);
         }
 
         protected override void OnError(Thread thread, Exception exception)
@@ -52,7 +53,7 @@ namespace Butterfly.MultiPlatform.Services.Audio
             if (audioSize > 0)
             {
                 pcmSender.Send(new Packets.Audio.PCMPacket() { Data = buffor });
-                Thread.Sleep(200);
+                Thread.Sleep(1);
             }
         }
     }

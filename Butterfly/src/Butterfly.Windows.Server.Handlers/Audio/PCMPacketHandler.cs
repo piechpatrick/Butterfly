@@ -29,18 +29,8 @@ namespace Butterfly.Windows.Server.Handlers.Audio
 
         public override async Task Process(PCMPacket packet, ISender sender)
         {
-            var pos = ms.Position;
-            ms.Position = ms.Length;
-            ms.Write(packet.Data, 0, packet.Data.Length);
-            ms.Position = pos;
-
-            if (idx > 0)
-                return;
-            new Thread(delegate (object o)
-            {
-                this.audioService?.Play(ms);
-            }).Start();
-            idx++;
+            this.audioService?.Start();
+            this.audioService?.Fill(packet);           
         }
     }
 }

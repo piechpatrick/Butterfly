@@ -21,37 +21,27 @@ namespace Butterfly.Windows.Audio.Players
         }
 
 
-        public void StartPlay(MemoryStream ms, long position = 0)
+        public void StartPlay(MemoryStream ms)
         {
             try
             {
-                long lastPosition = position;
-                // Pre-buffering some data to allow NAudio to start playing
-                while (ms.Length < 65536 * 5)
-                    Thread.Sleep(1000);
-
                 using (WaveStream blockAlignedStream = new BlockAlignReductionStream(
                     WaveFormatConversionStream.CreatePcmStream(
-                    new RawSourceWaveStream(ms,new WaveFormat()))))
+                    new RawSourceWaveStream(ms,new WaveFormat(44100,16,1)))))
                 {
-                    blockAlignedStream.Position = position;
                     using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                     {
-                        blockAlignedStream.Position = lastPosition;
+                        blockAlignedStream.Position = 0;
                         waveOut.Init(blockAlignedStream);
                         waveOut.Play();
+                        Thread.Sleep(50);
                         while (waveOut.PlaybackState == PlaybackState.Playing)
                         {
-                            System.Threading.Thread.Sleep(100);
+                            System.Threading.Thread.Sleep(50);
                         }
-                        lastPosition = blockAlignedStream.Position;
                     }
                 }
-
-                this.StartPlay(ms,lastPosition);
-
-
-
+                ms.Dispose();
             }
             catch (FileNotFoundException e)
             {

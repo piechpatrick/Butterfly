@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Butterfly.MultiPlatform.Senders
 {
-    public class GenericPacketSender<TPacket> : IGenericPacketSender<TPacket>
+    public class GenericTCPPacketSender<TPacket> : IGenericPacketSender<TPacket>
     {
         private readonly IClient client;
-        public GenericPacketSender(IClient client)
+        public GenericTCPPacketSender(IClient client)
         {
             this.client = client;
         }

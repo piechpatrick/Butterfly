@@ -26,13 +26,14 @@ namespace Networker.Server
             this.options = options;
         }
 
-        public ITcpSocketListener Create()
+        public ITcpSocketListener Create(int port)
         {
             return new TcpSocketListener(this.options,
                 this.serverPacketProcessor,
                 this.bufferManager,
                 this.logger,
-                this.connections);
+                this.connections,
+                port);
         }
     }
 }

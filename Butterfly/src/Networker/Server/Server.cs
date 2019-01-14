@@ -34,7 +34,7 @@ namespace Networker.Server
 
             if(options.TcpPort > 0)
             {
-                this.TcpListener = tcpSocketListenerFactory.Create();
+                this.TcpListener = tcpSocketListenerFactory.Create(options.TcpPort);
             }
 
             if(options.UdpPort > 0)
@@ -75,7 +75,6 @@ namespace Networker.Server
         }
 
         public ITcpSocketListener TcpListener { get; }
-        public ITcpSocketListener TcpListenerAudio { get; }
         public IUdpSocketListener UdpListener { get; }
         public EventHandler<TcpConnectionConnectedEventArgs> ClientConnected { get; set; }
         public EventHandler<TcpConnectionDisconnectedEventArgs> ClientDisconnected { get; set; }

@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Butterfly.MultiPlatform.Common.ObjectPool;
 using Microsoft.Extensions.Logging;
 using Networker.Common;
 using Networker.Common.Abstractions;
@@ -54,80 +55,77 @@ namespace Networker.Server
             if (length == 0)
                 length = buffer.Length;
 
-            lock (syncRoot)
+            while (bytesRead < length)
             {
-                while (bytesRead < length)
+                var packetNameSize = packetSerialiser.CanReadName ? BitConverter.ToInt32(buffer, currentPosition) : 0;
+                if (packetNameSize < 0)
+                    return;
+
+                if (packetSerialiser.CanReadName) currentPosition += 4;
+
+                var packetSize = packetSerialiser.CanReadLength ? BitConverter.ToInt32(buffer, currentPosition) : 0;
+
+                if (packetSerialiser.CanReadLength) currentPosition += 4;
+
+                try
                 {
-                    var packetNameSize = packetSerialiser.CanReadName ? BitConverter.ToInt32(buffer, currentPosition) : 0;
-                    if (packetNameSize < 0)
-                        return;
+                    var packetTypeName = "Default";
 
-                    if (packetSerialiser.CanReadName) currentPosition += 4;
-
-                    var packetSize = packetSerialiser.CanReadLength ? BitConverter.ToInt32(buffer, currentPosition) : 0;
-
-                    if (packetSerialiser.CanReadLength) currentPosition += 4;
-
-                    try
-                    {
-                        var packetTypeName = "Default";
-
-                        if (packetSerialiser.CanReadName && (currentPosition + packetNameSize) < buffer.Length)
-                            packetTypeName = Encoding.ASCII.GetString(buffer, currentPosition, packetNameSize);
-                        else
-                        {
-                            if (isTcp)
-                                serverInformation.InvalidTcpPackets++;
-                            else
-                                serverInformation.InvalidUdpPackets++;
-                            return;
-                        }
-
-                        var packetHandler = packetHandlers.GetPacketHandlers()[packetTypeName];
-
-                        if (string.IsNullOrEmpty(packetTypeName) || packetTypeName == "Default")
-                        {
-                            if (isTcp)
-                                serverInformation.InvalidTcpPackets++;
-                            else
-                                serverInformation.InvalidUdpPackets++;
-
-                            logger.Error(new Exception("Packet was lost - Invalid"));
-                            return;
-                        }
-
-                        if (packetSerialiser.CanReadName) currentPosition += packetNameSize;
-
-                        if (packetSerialiser.CanReadOffset)
-                        {
-                            packetHandler.Handle(buffer, currentPosition, packetSize, sender);
-                        }
-                        else
-                        {
-                            var packetBytes = new byte[packetSize];
-                            Buffer.BlockCopy(buffer, currentPosition, packetBytes, 0, packetSize);
-                            packetHandler.Handle(packetBytes, sender);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        logger.Error(e);
-                    }
-
-                    if (packetSerialiser.CanReadLength) currentPosition += packetSize;
-
-                    bytesRead += packetSize + packetNameSize;
-
-                    if (packetSerialiser.CanReadName) bytesRead += 4;
-
-                    if (packetSerialiser.CanReadLength) bytesRead += 4;
-
-                    if (isTcp)
-                        serverInformation.ProcessedTcpPackets++;
+                    if (packetSerialiser.CanReadName && (currentPosition + packetNameSize) < buffer.Length)
+                        packetTypeName = Encoding.ASCII.GetString(buffer, currentPosition, packetNameSize);
                     else
-                        serverInformation.ProcessedUdpPackets++;
+                    {
+                        if (isTcp)
+                            serverInformation.InvalidTcpPackets++;
+                        else
+                            serverInformation.InvalidUdpPackets++;
+                        return;
+                    }
+
+                    var packetHandler = packetHandlers.GetPacketHandlers()[packetTypeName];
+
+                    if (string.IsNullOrEmpty(packetTypeName) || packetTypeName == "Default")
+                    {
+                        if (isTcp)
+                            serverInformation.InvalidTcpPackets++;
+                        else
+                            serverInformation.InvalidUdpPackets++;
+
+                        logger.Error(new Exception("Packet was lost - Invalid"));
+                        return;
+                    }
+
+                    if (packetSerialiser.CanReadName) currentPosition += packetNameSize;
+
+                    if (packetSerialiser.CanReadOffset)
+                    {
+                        packetHandler.Handle(buffer, currentPosition, packetSize, sender);
+                    }
+                    else
+                    {
+                        var packetBytes = new byte[packetSize];
+                        Buffer.BlockCopy(buffer, currentPosition, packetBytes, 0, packetSize);
+                        packetHandler.Handle(packetBytes, sender);
+                    }
                 }
-            }
+                catch (Exception e)
+                {
+                    logger.Error(e);
+                }
+
+                if (packetSerialiser.CanReadLength) currentPosition += packetSize;
+
+                bytesRead += packetSize + packetNameSize;
+
+                if (packetSerialiser.CanReadName) bytesRead += 4;
+
+                if (packetSerialiser.CanReadLength) bytesRead += 4;
+
+                if (isTcp)
+                    serverInformation.ProcessedTcpPackets++;
+                else
+                    serverInformation.ProcessedUdpPackets++;
+            }      
         }
 
         public void ProcessTcp(SocketAsyncEventArgs socketEvent)

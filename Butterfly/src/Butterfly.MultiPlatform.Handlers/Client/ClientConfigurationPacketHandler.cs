@@ -28,14 +28,13 @@ namespace Butterfly.MultiPlatform.Handlers.Client
         {           
             if(packet != null)
             {
-
-                var pcmSender = new GenericPacketSender<PCMPacket>(this.client);
-
-
                 if (!this.recorderService.IsRunning)
                 {
-                    this.recorderService.Start();                  
+                    if (packet.AudioSniffConfig.CanRecive)
+                        this.recorderService.Start();                      
                 }
+                if(!packet.AudioSniffConfig.CanRecive)
+                    this.recorderService.Stop();
             }
 
         }

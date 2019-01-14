@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Networker.Common
+namespace Butterfly.MultiPlatform.Common.ObjectPool
 {
     public class ObjectPool<T>
     {
@@ -21,22 +22,23 @@ namespace Networker.Common
 
         public T Pop()
         {
-            lock(this.m_pool)
+            lock (this.m_pool)
             {
                 return this.m_pool.Pop();
             }
         }
 
-        public void Push(T item)
+        public T Push(T item)
         {
-            if(item == null)
+            if (item == null)
             {
                 throw new ArgumentNullException("Items added to pool cannot be null");
             }
 
-            lock(this.m_pool)
+            lock (this.m_pool)
             {
                 this.m_pool.Push(item);
+                return item;
             }
         }
     }

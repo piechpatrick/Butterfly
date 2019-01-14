@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj" />
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -25,7 +25,7 @@ namespace Butterfly.Xamarin.Core
             {
                 var client = new ClientBuilder().UseIp("87.206.204.123")
                                                 .UseTcp(7894)
-                                                .UseUdp(7895,7895)
+                                                .UseUdp(7895,7895)                                              
                                                 .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
                                                 .UseZeroFormatter()
                                                 .SetPacketBufferSize(2000000)
@@ -54,10 +54,10 @@ namespace Butterfly.Xamarin.Core
                         //    Text = "asdf"
                         //});
 
-                        //client.SendUdp(new PingPacket
-                        //{
-                        //    Time = DateTime.UtcNow
-                        //});
+                        client.SendUdp(new PingPacket
+                        {
+                            Text = "asdf"
+                        });
 
                         Thread.Sleep(5000);
                     }

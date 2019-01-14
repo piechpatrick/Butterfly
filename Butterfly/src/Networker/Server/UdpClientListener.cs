@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Butterfly.MultiPlatform.Common.ObjectPool;
 using Microsoft.Extensions.Logging;
 using Networker.Common;
 using Networker.Common.Abstractions;
@@ -51,7 +52,7 @@ namespace Networker.Server
         public void Listen()
         {
             this.client = new UdpClient(this.options.UdpPort);
-            this.endPoint = new IPEndPoint(IPAddress.Loopback, this.options.UdpPort);
+            this.endPoint = new IPEndPoint(IPAddress.Parse("192.168.0.101"), this.options.UdpPort);
 
             this.logger.LogInformation($"Starting UDP listener on port {this.options.UdpPort}.");
 
