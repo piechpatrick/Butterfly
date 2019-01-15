@@ -12,4 +12,13 @@
     <ProjectReference Include="..\Networker\Networker.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Java.Interop">
+      <HintPath>C:\Program Files (x86)\Xamarin\Workbooks\WorkbookApps\Android\Framework\Java.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Xamarin\Workbooks\WorkbookApps\Android\Framework\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

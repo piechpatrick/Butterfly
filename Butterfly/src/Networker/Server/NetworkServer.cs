@@ -8,15 +8,15 @@ using Networker.Server.Abstractions;
 
 namespace Networker.Server
 {
-    public class Server : IServer
+    public class NetworkServer : INetworkServer
     {
         private readonly IPacketSerialiser packetSerialiser;
         private readonly IServerInformation serverInformation;
         private readonly ITcpConnections tcpConnections;
         private ServerInformationEventArgs eventArgs;
 
-        public Server(ServerBuilderOptions options,
-            ILogger<Server> logger,
+        public NetworkServer(ServerBuilderOptions options,
+            ILogger<NetworkServer> logger,
             IServiceProvider serviceProvider,
             IPacketHandlers packetHandlers,
             ITcpConnections tcpConnections,

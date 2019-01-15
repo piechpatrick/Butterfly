@@ -4,37 +4,37 @@ using Networker.Common.Abstractions;
 
 namespace Networker.Client
 {
-    public class ClientBuilder : BuilderBase<IClientBuilder, IClient, ClientBuilderOptions>, IClientBuilder
+    public class NetworkClientBuilder : BuilderBase<INetworkClientBuilder, INetworkClient, ClientBuilderOptions>, INetworkClientBuilder
     {
-        public ClientBuilder() : base()
+        public NetworkClientBuilder() : base()
         {
 
         }
 
-        public override IClient Build()
+        public override INetworkClient Build()
         {
             this.SetupSharedDependencies();
-            this.serviceCollection.AddSingleton<IClient, Client>();
+            this.serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
             this.serviceCollection.AddSingleton<IClientPacketProcessor, ClientPacketProcessor>();
 
             var serviceProvider = this.GetServiceProvider();
 
-            return serviceProvider.GetService<IClient>();
+            return serviceProvider.GetService<INetworkClient>();
         }
 
-        public IClientBuilder SetPacketBufferPoolSize(int size)
+        public INetworkClientBuilder SetPacketBufferPoolSize(int size)
         {
             this.options.ObjectPoolSize = size;
             return this;
         }
 
-        public IClientBuilder UseIp(string ip)
+        public INetworkClientBuilder UseIp(string ip)
         {
             this.options.Ip = ip;
             return this;
         }
 
-        public IClientBuilder UseUdp(int port, int localPort)
+        public INetworkClientBuilder UseUdp(int port, int localPort)
         {
             this.options.UdpPort = port;
             this.options.UdpPortLocal = localPort;

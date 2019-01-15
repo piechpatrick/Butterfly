@@ -17,10 +17,10 @@ namespace Butterfly.MultiPlatform.Services.Audio
     {
         private int bufferSize;
         private AudioRecord recorder;
-        private readonly IClient client;
+        private readonly INetworkClient client;
         private GenericUDPPacketSender<Packets.Audio.PCMPacket> pcmSender;
 
-        public AudioRecorderBackroundWorker(IClient client)
+        public AudioRecorderBackroundWorker(INetworkClient client)
             : base(1, ThreadPriority.AboveNormal)
         {
             this.client = client;

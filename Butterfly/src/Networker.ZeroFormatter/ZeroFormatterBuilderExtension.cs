@@ -8,7 +8,7 @@ namespace Networker.Formatter.ZeroFormatter
 {
     public static class ZeroFormatterBuilderExtension
     {
-        public static IServerBuilder UseZeroFormatter(this IServerBuilder serverBuilder)
+        public static INetworkServerBuilder UseZeroFormatter(this INetworkServerBuilder serverBuilder)
         {
             var serviceCollection = serverBuilder.GetServiceCollection();
             serviceCollection.AddSingleton<IPacketSerialiser, ZeroFormatterPacketSerialiser>();
@@ -16,7 +16,7 @@ namespace Networker.Formatter.ZeroFormatter
             return serverBuilder;
         }
 
-        public static IClientBuilder UseZeroFormatter(this IClientBuilder clientBuilder)
+        public static INetworkClientBuilder UseZeroFormatter(this INetworkClientBuilder clientBuilder)
         {
             var serviceCollection = clientBuilder.GetServiceCollection();
             serviceCollection.AddSingleton<IPacketSerialiser, ZeroFormatterPacketSerialiser>();

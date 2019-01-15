@@ -1,8 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.Butterfly.Xamarin" android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="26" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" 
+          android:versionCode="1" 
+          android:versionName="1.0" 
+          package="com.companyname.Butterfly.Xamarin" 
+          android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<application android:label="Butterfly.Xamarin.Android"></application>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  
+
+
+  <service android:exported="true" 
+           android:name="com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService" 
+           android:enabled="true"  />
+  
+	<application android:label="Butterfly.Xamarin.Android">
+    <receiver android:name="com.companyname.Butterfly.Xamarin.BootCompletedIntentReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED" />
+      </intent-filter>
+    </receiver>
+    <receiver
+    android:name="com.companyname.Butterfly.Xamarin.BroadcastReceiverTest"
+    android:enabled="true"
+    android:exported="true"
+    android:label="BroadcastReceiverTest">
+      <intent-filter>
+        <action android:name="com.companyname.Actions.ServiceStop" />
+      </intent-filter>
+    </receiver>
+
+  </application>
 </manifest>

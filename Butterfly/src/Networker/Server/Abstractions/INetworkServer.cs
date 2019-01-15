@@ -3,7 +3,7 @@ using Networker.Common;
 
 namespace Networker.Server.Abstractions
 {
-    public interface IServer
+    public interface INetworkServer
     {
         void Start();
         void Stop();

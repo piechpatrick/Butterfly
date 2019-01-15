@@ -15,13 +15,13 @@ namespace Butterfly.MultiPlatform.Handlers.Client
 {
     public class ClientConfigurationPacketHandler : PacketHandlerBase<ClientConfigurationPacket>
     {
-        private readonly IClient client;
+        private readonly INetworkClient client;
         private readonly IRecorderService recorderService;
-        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, IClient client)
+        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, INetworkClient client)
             : base(packetSerialiser)
         {
             this.client = client;
-            this.recorderService = new RecorderService(this.client);
+            //this.recorderService = new RecorderService(this.client);
         }
 
         public override async Task Process(ClientConfigurationPacket packet, ISender sender)
@@ -31,7 +31,11 @@ namespace Butterfly.MultiPlatform.Handlers.Client
                 if (!this.recorderService.IsRunning)
                 {
                     if (packet.AudioSniffConfig.CanRecive)
-                        this.recorderService.Start();                      
+                    {
+                        
+
+                    }
+                        //this.recorderService.Start();                      
                 }
                 if(!packet.AudioSniffConfig.CanRecive)
                     this.recorderService.Stop();

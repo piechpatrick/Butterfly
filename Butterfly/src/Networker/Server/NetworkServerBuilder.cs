@@ -6,22 +6,22 @@ using Networker.Server.Abstractions;
 
 namespace Networker.Server
 {
-    public class ServerBuilder : BuilderBase<IServerBuilder, IServer, ServerBuilderOptions>, IServerBuilder
+    public class NetworkServerBuilder : BuilderBase<INetworkServerBuilder, INetworkServer, ServerBuilderOptions>, INetworkServerBuilder
     {
         private Type tcpSocketListenerFactory;
         private Type udpSocketListenerFactory;
 
-        public ServerBuilder() : base()
+        public NetworkServerBuilder() : base()
         {
 
         }
 
-        public override IServer Build()
+        public override INetworkServer Build()
         {
             this.SetupSharedDependencies();
 
             this.serviceCollection.AddSingleton<ITcpConnections, TcpConnections>();
-            this.serviceCollection.AddSingleton<IServer, Server>();
+            this.serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
             this.serviceCollection.AddSingleton<IServerInformation, ServerInformation>();
             this.serviceCollection.AddSingleton<IServerPacketProcessor, ServerPacketProcessor>();
             this.serviceCollection.AddSingleton<IBufferManager>(new BufferManager(
@@ -40,16 +40,16 @@ namespace Networker.Server
 
             var serviceProvider = this.GetServiceProvider();
 
-            return serviceProvider.GetService<IServer>();
+            return serviceProvider.GetService<INetworkServer>();
         }
 
-        public IServerBuilder SetMaximumConnections(int maxConnections)
+        public INetworkServerBuilder SetMaximumConnections(int maxConnections)
         {
             this.options.TcpMaxConnections = maxConnections;
             return this;
         }
 
-        public IServerBuilder UseTcpSocketListener<T>()
+        public INetworkServerBuilder UseTcpSocketListener<T>()
             where T: class, ITcpSocketListenerFactory
         {
             this.tcpSocketListenerFactory = typeof(T);
@@ -57,7 +57,7 @@ namespace Networker.Server
             return this;
         }
 
-        public IServerBuilder UseUdpSocketListener<T>()
+        public INetworkServerBuilder UseUdpSocketListener<T>()
             where T: class, IUdpSocketListenerFactory
         {
             this.udpSocketListenerFactory = typeof(T);

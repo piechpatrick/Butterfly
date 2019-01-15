@@ -20,7 +20,7 @@ namespace Butterfly.Server.Core.Instances
         private bool run;
 
 
-        public Networker.Server.Abstractions.IServer NetworkServer { get; private set; }
+        public Networker.Server.Abstractions.INetworkServer NetworkServer { get; private set; }
 
         public ButterflyServer()
         {
@@ -33,7 +33,7 @@ namespace Butterfly.Server.Core.Instances
                 int threadsCount, k;
                 ThreadPool.GetMaxThreads(out threadsCount, out k);
 
-                this.NetworkServer = new Networker.Server.ServerBuilder()
+                this.NetworkServer = new Networker.Server.NetworkServerBuilder()
                     .UseTcp(7894)
                     .UseUdp(7895)
                     .UseUdpSocketListener<DefaultUdpSocketListenerFactory>()                                               

@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace Networker.Client.Abstractions
 {
-    public interface IClient
+    public interface INetworkClient
     {
         EventHandler<Socket> Connected { get; set; }
         EventHandler<Socket> Disconnected { get; set; }

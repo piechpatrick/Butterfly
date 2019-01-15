@@ -8,8 +8,8 @@ namespace Butterfly.MultiPlatform.Senders
 {
     public class GenericTCPPacketSender<TPacket> : IGenericPacketSender<TPacket>
     {
-        private readonly IClient client;
-        public GenericTCPPacketSender(IClient client)
+        private readonly INetworkClient client;
+        public GenericTCPPacketSender(INetworkClient client)
         {
             this.client = client;
         }

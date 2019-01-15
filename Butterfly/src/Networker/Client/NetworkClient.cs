@@ -10,14 +10,14 @@ using Networker.Common.Abstractions;
 
 namespace Networker.Client
 {
-    public class Client : IClient
+    public class NetworkClient : INetworkClient
     {
         private readonly static object tcpLock = new object();
 
 
         private readonly ClientBuilderOptions options;
         private readonly IClientPacketProcessor packetProcessor;
-        private readonly ILogger<Client> logger;
+        private readonly ILogger<NetworkClient> logger;
         private readonly IPacketSerialiser packetSerialiser;
         private bool isRunning = true;
         private Socket tcpSocket;
@@ -25,10 +25,10 @@ namespace Networker.Client
         private UdpClient udpClient;
         private IPEndPoint udpEndpoint;
 
-        public Client(ClientBuilderOptions options,
+        public NetworkClient(ClientBuilderOptions options,
             IPacketSerialiser packetSerialiser,
             IClientPacketProcessor packetProcessor,
-            ILogger<Client> logger)
+            ILogger<NetworkClient> logger)
         {
             this.options = options;
             this.packetSerialiser = packetSerialiser;

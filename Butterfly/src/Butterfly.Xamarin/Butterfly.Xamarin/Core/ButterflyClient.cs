@@ -1,7 +1,9 @@
 ﻿using Butterfly.MultiPlatform.Handlers.Client;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
 using Butterfly.MultiPlatform.Packets.Pings;
+using Butterfly.MultiPlatform.Services.Audio;
 using Networker.Client;
+using Networker.Client.Abstractions;
 using Networker.Formatter.ProtobufNet;
 using Networker.Formatter.ZeroFormatter;
 using System;
@@ -14,12 +16,40 @@ namespace Butterfly.Xamarin.Core
 {
     public class ButterflyClient
     {
+        private static ButterflyClient instance;
+        public static ButterflyClient Instance
+        {
+            get
+            {
+                lock (instance)
+                {
+                    if (instance == null)
+                        instance = new ButterflyClient();
+                    return instance;
+                }
+            }
+        }
+
+        public INetworkClient NetworkClient { get; private set; }
         public ButterflyClient()
         {
+            this.NetworkClient = new NetworkClientBuilder().UseIp("87.206.204.123")
+                                                .UseTcp(7894)
+                                                .UseUdp(7895, 7895)
+                                                .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
+                                                .UseZeroFormatter()
+                                                .SetPacketBufferSize(2000000)
+                                                .Build();
             this.TryConnect();
 
-            AppDomain currentDomain = AppDomain.CurrentDomain;
-            currentDomain.UnhandledException += HandleExceptions;
+            //AppDomain currentDomain = AppDomain.CurrentDomain;
+            //currentDomain.UnhandledException += HandleExceptions;
+        }
+
+        public void StartRecorderService()
+        {
+            //var service = new RecorderService(this.Client);
+            //service.Start();
         }
 
         private void HandleExceptions(object sender, UnhandledExceptionEventArgs e)
@@ -31,27 +61,19 @@ namespace Butterfly.Xamarin.Core
         {          
             try
             {
-                var client = new ClientBuilder().UseIp("87.206.204.123")
-                                                .UseTcp(7894)
-                                                .UseUdp(7895,7895)                                              
-                                                .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
-                                                .UseZeroFormatter()
-                                                .SetPacketBufferSize(2000000)
-                                                .Build();
-
-                client.Connected += (sender, socket) =>
+                this.NetworkClient.Connected += (sender, socket) =>
                 {
                     Console.WriteLine(
                         $"Client has connected to {socket.RemoteEndPoint}");
                 };
 
-                client.Disconnected += (sender, socket) =>
+                this.NetworkClient.Disconnected += (sender, socket) =>
                 {
                     Console.WriteLine(
                         $"Client has disconnected from {socket.RemoteEndPoint}");
                 };
 
-                client.Connect();
+                this.NetworkClient.Connect();
 
                 Task.Factory.StartNew(() =>
                 {
@@ -62,7 +84,7 @@ namespace Butterfly.Xamarin.Core
                         //    Text = "asdf"
                         //});
 
-                        client.SendUdp(new PingPacket
+                        this.NetworkClient.SendUdp(new PingPacket
                         {
                             Text = "asdf"
                         });

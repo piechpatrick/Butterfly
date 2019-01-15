@@ -8,7 +8,7 @@ namespace Networker.Formatter.ProtobufNet
 {
     public static class ProtoBufNetBuilderExtension
     {
-        public static IServerBuilder UseProtobufNet(this IServerBuilder serverBuilder)
+        public static INetworkServerBuilder UseProtobufNet(this INetworkServerBuilder serverBuilder)
         {
             var serviceCollection = serverBuilder.GetServiceCollection();
             serviceCollection.AddSingleton<IPacketSerialiser, ProtoBufNetSerialiser>();
@@ -16,7 +16,7 @@ namespace Networker.Formatter.ProtobufNet
             return serverBuilder;
         }
 
-        public static IClientBuilder UseProtobufNet(this IClientBuilder clientBuilder)
+        public static INetworkClientBuilder UseProtobufNet(this INetworkClientBuilder clientBuilder)
         {
             var serviceCollection = clientBuilder.GetServiceCollection();
             serviceCollection.AddSingleton<IPacketSerialiser, ProtoBufNetSerialiser>();

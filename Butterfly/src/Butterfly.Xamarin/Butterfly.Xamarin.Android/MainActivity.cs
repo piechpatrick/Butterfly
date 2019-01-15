@@ -10,10 +10,15 @@ using Android.Support.V4.Content;
 using Android;
 using Android.Support.V4.App;
 using Xamarin.Essentials;
+using Butterfly.MultiPlatform.Services.Audio;
 
 namespace Butterfly.Xamarin.Droid
 {
-    [Activity(Label = "Butterfly.Xamarin", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Butterfly.Xamarin", 
+        Icon = "@mipmap/icon", 
+        Theme = "@style/MainTheme", 
+        MainLauncher = true, 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -26,8 +31,15 @@ namespace Butterfly.Xamarin.Droid
             base.OnCreate(savedInstanceState);
             Platform.Init(this, savedInstanceState); // add this line to your code
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
 
+            var app = new App();
+            LoadApplication(app);
+            app.InitializeContext(this.ApplicationContext);
+
+            
+
+            Toast.MakeText(this, "BeforeCreate", ToastLength.Long).Show();
+            Application.Context.StartService(new Android.Content.Intent(this, typeof(RecorderService)));         
 
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == (int)Permission.Granted)
             {
@@ -48,6 +60,15 @@ namespace Butterfly.Xamarin.Droid
             }
 
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
+            {
+                // We have permission, go ahead and use the camera.
+            }
+            else
+            {
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 1);
+            }
+
+            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReceiveBootCompleted) == (int)Permission.Granted)
             {
                 // We have permission, go ahead and use the camera.
             }

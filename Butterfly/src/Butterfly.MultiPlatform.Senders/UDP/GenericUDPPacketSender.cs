@@ -8,8 +8,8 @@ namespace Butterfly.MultiPlatform.Senders.UDP
 {
     public class GenericUDPPacketSender<TPacket> : IGenericPacketSender<TPacket>
     {
-        private readonly IClient client;
-        public GenericUDPPacketSender(IClient client)
+        private readonly INetworkClient client;
+        public GenericUDPPacketSender(INetworkClient client)
         {
             this.client = client;
         }
