@@ -1,5 +1,5 @@
-﻿using Butterfly.Interfaces.Repositories;
-using Butterfly.Models.Cores;
+﻿using Butterfly.Models.Cores;
+using Butterfly.MultiPlatform.Interfaces.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;

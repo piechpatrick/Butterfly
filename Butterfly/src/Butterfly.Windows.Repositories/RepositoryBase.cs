@@ -1,6 +1,6 @@
 ﻿using Butterfly.Data;
-using Butterfly.Interfaces.Repositories;
 using Butterfly.Models.Cores;
+using Butterfly.MultiPlatform.Interfaces.Repositories;
 using Butterfly.Windows.Data;
 using System;
 using System.Collections.Generic;
@@ -52,6 +52,11 @@ namespace Butterfly.Repositories
         public IEnumerable<TEntity> RemoveRange(IEnumerable<TEntity> entities)
         {
             return this.DataContext.Set<TEntity>().RemoveRange(entities);
+        }
+
+        public IRepository<TEntity> SetSource(IRepository<TEntity> repository)
+        {
+            throw new NotImplementedException();
         }
     }
 }
