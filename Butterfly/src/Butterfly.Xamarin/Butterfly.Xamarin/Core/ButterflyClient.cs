@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Butterfly.Xamarin.Core
 {
-    public class ButterflyClient
+    public class ButterflyClient : IButterflyClient
     {
         private static ButterflyClient instance;
         public static ButterflyClient Instance

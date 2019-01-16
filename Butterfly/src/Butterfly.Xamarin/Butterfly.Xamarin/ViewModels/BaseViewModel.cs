@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Butterfly.Xamarin.Models;
+using Butterfly.Xamarin.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 using Xamarin.Forms;
 
-using Butterfly.Xamarin.Models;
-using Butterfly.Xamarin.Services;
+
 
 namespace Butterfly.Xamarin.ViewModels
 {

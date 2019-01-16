@@ -1,14 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using Microsoft.Extensions.Logging;
+using Butterfly.MultiPlatform.Interfaces.Builders;
 
 namespace Networker.Common.Abstractions
 {
-    public interface IBuilder<TBuilder, TResult>
+    public interface INetworkerBuilder<TBuilder, TResult> : IBuilder<TBuilder,TResult>
     {
-        //Build
-        TResult Build();
-
         //Service Collection
         IServiceCollection GetServiceCollection();
         TBuilder SetServiceCollection(IServiceCollection serviceCollection, Func<IServiceProvider> serviceProviderFactory = null);

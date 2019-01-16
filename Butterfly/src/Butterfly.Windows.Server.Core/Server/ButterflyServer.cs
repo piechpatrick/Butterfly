@@ -2,10 +2,12 @@
 using Butterfly.MultiPlatform.Packets.Configuration;
 using Butterfly.MultiPlatform.Packets.Pings;
 using Butterfly.Windows.Modules.HandlersModules;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Networker.Formatter.ProtobufNet;
 using Networker.Formatter.ZeroFormatter;
 using Networker.Server;
+using Networker.Server.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +15,19 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Butterfly.Server.Core.Instances
+namespace Butterfly.Server.Core.Server
 {
     public class ButterflyServer : IButterflyServer
     {
         private bool run;
+        private readonly IServiceCollection serviceCollection;
+        private readonly INetworkServer networkServer;
 
-
-        public Networker.Server.Abstractions.INetworkServer NetworkServer { get; private set; }
-
-        public ButterflyServer()
+        public ButterflyServer(IServiceCollection serviceCollection,
+            INetworkServer networkServer)
         {
-
+            this.serviceCollection = serviceCollection;
+            this.networkServer = networkServer;
         }
         public void Start()
         {
@@ -33,24 +36,10 @@ namespace Butterfly.Server.Core.Instances
                 int threadsCount, k;
                 ThreadPool.GetMaxThreads(out threadsCount, out k);
 
-                this.NetworkServer = new Networker.Server.NetworkServerBuilder()
-                    .UseTcp(7894)
-                    .UseUdp(7895)
-                    .UseUdpSocketListener<DefaultUdpSocketListenerFactory>()                                               
-                                .SetMaximumConnections(100)
-                                .ConfigureLogging(loggingBuilder =>
-                                {
-                                    loggingBuilder.SetMinimumLevel(
-                                        LogLevel.Debug);                                                                     
-                                })
-                                .RegisterPacketHandlerModule<PingPacketHandlerModule>()
-                                .RegisterPacketHandlerModule<AudioPacketHandlerModule>()
-                                .UseZeroFormatter()
-                                .SetPacketBufferSize(2000000)
-                                .Build();
-                this.NetworkServer.Start();
+                
+                this.networkServer.Start();
 
-                this.NetworkServer.ServerInformationUpdated += (sender, eventArgs) =>
+                this.networkServer.ServerInformationUpdated += (sender, eventArgs) =>
                 {
                     var dateTime = DateTime.UtcNow;
 
@@ -65,12 +54,12 @@ namespace Butterfly.Server.Core.Instances
                     Console.WriteLine(
                         $"{dateTime} {eventArgs.TcpConnections} TCP connections active");
                 };
-                this.NetworkServer.ClientConnected += (sender, eventArgs) =>
+                this.networkServer.ClientConnected += (sender, eventArgs) =>
                 {
                     Console.WriteLine(
                         $"Client Connected - {eventArgs.Connection.Socket.RemoteEndPoint}");
                 };
-                this.NetworkServer.ClientDisconnected += (sender, eventArgs) =>
+                this.networkServer.ClientDisconnected += (sender, eventArgs) =>
                 {
                     Console.WriteLine(
                         $"Client Disconnected - {eventArgs.Connection.Socket.RemoteEndPoint}");
@@ -85,7 +74,7 @@ namespace Butterfly.Server.Core.Instances
                         {
                             AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = can }
                         };
-                        this.NetworkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
+                        this.networkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
                         can = !cfg.AudioSniffConfig.CanRecive;
 
                         //this.NetworkServer.Broadcast(new PingPacket

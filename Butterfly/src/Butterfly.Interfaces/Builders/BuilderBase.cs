@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Butterfly.MultiPlatform.Interfaces.Builders
 {
@@ -14,11 +15,14 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
         where TBuilder : class, IBuilder<TBuilder, TResult>
         where TBuilderOptions : class, IBuilderOptions
     {
+        //Service Collection
+        protected IServiceCollection serviceCollection;
+        protected Func<IServiceProvider> serviceProviderFactory;
 
-        /// <summary>
-        /// optioons
-        /// </summary>
+        //Builder Options
         protected TBuilderOptions options;
+
+        protected Action<ILoggingBuilder> loggingBuilder;
 
         /// <summary>
         /// BuilderBase
@@ -26,6 +30,19 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
         public BuilderBase()
         {
             this.options = Activator.CreateInstance<TBuilderOptions>();
+            serviceCollection = this.GetServiceCollection() ?? new ServiceCollection();
+        }
+
+        public IServiceCollection GetServiceCollection()
+        {
+            return serviceCollection;
+        }
+
+        public TBuilder SetServiceCollection(IServiceCollection serviceCollectionn, Func<IServiceProvider> serviceProviderFactory = null)
+        {
+            serviceCollection = serviceCollectionn;
+            this.serviceProviderFactory = serviceProviderFactory;
+            return this as TBuilder;
         }
 
         public TBuilder SetOptions(TBuilderOptions builderOptions)
@@ -33,6 +50,14 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
             this.options = builderOptions;
             return this as TBuilder;
         }
+
+        public TBuilder ConfigureLogging(Action<ILoggingBuilder> loggingBuilder)
+        {
+            this.loggingBuilder = loggingBuilder;
+            return this as TBuilder;
+        }
+
+        protected abstract IServiceProvider GetServiceProvider();
 
 
         /// <summary>

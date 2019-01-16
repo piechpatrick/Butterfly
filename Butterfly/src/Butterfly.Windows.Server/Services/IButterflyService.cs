@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Butterfly.Server.Core.Instances
+namespace Butterfly.Windows.Server.Services
 {
-    public interface IButterflyServer
+    public interface IButterflyService
     {
-        void Start();
-        void Stop();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Networker.Server.Abstractions
 {
-    public interface INetworkServerBuilder : IBuilder<INetworkServerBuilder, INetworkServer>
+    public interface INetworkServerBuilder : INetworkerBuilder<INetworkServerBuilder, INetworkServer>
     {
         //Tcp
         INetworkServerBuilder UseTcpSocketListener<T>()

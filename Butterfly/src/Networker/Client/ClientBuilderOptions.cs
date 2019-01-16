@@ -4,7 +4,7 @@ using Networker.Common.Abstractions;
 
 namespace Networker.Client
 {
-    public class ClientBuilderOptions : IBuilderOptions
+    public class ClientBuilderOptions : INetworkerBuilderOptions
     {
         public ClientBuilderOptions()
         {
@@ -21,5 +21,6 @@ namespace Networker.Client
         public LogLevel LogLevel { get; set; }
         public int PacketSizeBuffer { get; set; }
         public int ObjectPoolSize { get; set; }
+        public bool Active { get; set; }
     }
 }

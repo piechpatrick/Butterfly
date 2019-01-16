@@ -1,8 +1,8 @@
 ﻿using Butterfly.Server;
 using Butterfly.Server.Core;
-using Butterfly.Server.Core.Instances;
+using Butterfly.Server.Core.Server;
 using Butterfly.Server.Services;
-using Butterfly.Server.Shell;
+using Butterfly.Windows.Server.Builders.Server;
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -29,21 +29,23 @@ public class Program
     {
         try
         {
+            var builderServer = new ButterflyServerBuilder();
+
+            var server = builderServer.Build();
+
+            var service = builderServer.GetButterflyService();        
+
             if (!Environment.UserInteractive)
             {
                 var services = new ServiceBase[]
                 {
-                        new ButterflyService()
+                        service as ButterflyService
                 };
                 ServiceBase.Run(services);
             }
             else
             {
-                var bootstrapper = new Bootstrapper();
-                bootstrapper.Build();
-
-                var butterflyServer = bootstrapper.Reslove<IButterflyServer>();
-                butterflyServer.Start();
+                server.Start();
             }
         }
         catch (Exception e)

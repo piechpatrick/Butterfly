@@ -1,50 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using Butterfly.MultiPlatform.Interfaces.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Networker.Common.Abstractions
 {
-    public abstract class BuilderBase<TBuilder, TResult, TBuilderOptions> : IBuilder<TBuilder, TResult> 
-        where TBuilder : class, IBuilder<TBuilder, TResult>
-        where TBuilderOptions : class, IBuilderOptions
+    public abstract class NetworkerBuilderBase<TBuilder, TResult, TBuilderOptions> 
+        : BuilderBase<TBuilder,TResult,TBuilderOptions>, INetworkerBuilder<TBuilder, TResult> 
+        where TBuilder : class, INetworkerBuilder<TBuilder, TResult>
+        where TBuilderOptions : class, INetworkerBuilderOptions
     {
         //Modules
         protected PacketHandlerModule module;
         protected List<IPacketHandlerModule> modules;
 
-        //Service Collection
-        protected IServiceCollection serviceCollection;
-        protected Func<IServiceProvider> serviceProviderFactory;
-
-        //Builder Options
-        protected TBuilderOptions options;
-
-        private Action<ILoggingBuilder> loggingBuilder;
-
-        public BuilderBase()
+        public NetworkerBuilderBase()
         {
-            this.options = Activator.CreateInstance<TBuilderOptions>();
-            this.serviceCollection = new ServiceCollection();
             this.modules = new List<IPacketHandlerModule>();
             this.module = new PacketHandlerModule();
             this.modules.Add(this.module);
         }
 
-        public abstract TResult Build();
-
-        public IServiceCollection GetServiceCollection()
-        {
-            return this.serviceCollection;
-        }
-
-        public TBuilder SetServiceCollection(IServiceCollection serviceCollection, Func<IServiceProvider> serviceProviderFactory = null)
-        {
-            this.serviceCollection = serviceCollection;
-            this.serviceProviderFactory = serviceProviderFactory;
-            return this as TBuilder;
-        }
+        public override abstract TResult Build();
 
         public TBuilder RegisterPacketHandler<TPacket, TPacketHandler>()
             where TPacket : class
@@ -72,12 +51,6 @@ namespace Networker.Common.Abstractions
             return this as TBuilder;
         }
 
-        public TBuilder ConfigureLogging(Action<ILoggingBuilder> loggingBuilder)
-        {
-            this.loggingBuilder = loggingBuilder;
-            return this as TBuilder;
-        }
-
         public TBuilder SetPacketBufferSize(int size)
         {
             this.options.PacketSizeBuffer = size;
@@ -102,7 +75,7 @@ namespace Networker.Common.Abstractions
             {
                 foreach (var packetHandler in packetHandlerModule.GetPacketHandlers())
                 {
-                    this.serviceCollection.AddSingleton(packetHandler.Value);
+                    serviceCollection.AddSingleton(packetHandler.Value);
                 }
             }
 
@@ -115,14 +88,14 @@ namespace Networker.Common.Abstractions
                 
             }
             
-            this.serviceCollection.AddSingleton<TBuilderOptions>(this.options);
-            this.serviceCollection.AddSingleton<IPacketHandlers, PacketHandlers>();
-            this.serviceCollection.AddLogging(loggingBuilder => loggingBuilder.AddConsole());
+            serviceCollection.AddSingleton<TBuilderOptions>(this.options);
+            serviceCollection.AddSingleton<IPacketHandlers, PacketHandlers>();
+            serviceCollection.AddLogging(loggingBuilder => loggingBuilder.AddConsole());
         }
 
-        protected IServiceProvider GetServiceProvider()
+        protected override IServiceProvider GetServiceProvider()
         {
-            var serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : this.serviceCollection.BuildServiceProvider();
+            var serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
 
             PacketSerialiserProvider.PacketSerialiser = serviceProvider.GetService<IPacketSerialiser>();
 

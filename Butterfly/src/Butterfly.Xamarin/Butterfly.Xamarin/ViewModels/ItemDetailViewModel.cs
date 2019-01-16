@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Butterfly.Xamarin.Models;
+using System;
 
-using Butterfly.Xamarin.Models;
 
 namespace Butterfly.Xamarin.ViewModels
 {

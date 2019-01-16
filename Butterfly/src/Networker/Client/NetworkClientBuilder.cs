@@ -4,7 +4,7 @@ using Networker.Common.Abstractions;
 
 namespace Networker.Client
 {
-    public class NetworkClientBuilder : BuilderBase<INetworkClientBuilder, INetworkClient, ClientBuilderOptions>, INetworkClientBuilder
+    public class NetworkClientBuilder : NetworkerBuilderBase<INetworkClientBuilder, INetworkClient, ClientBuilderOptions>, INetworkClientBuilder
     {
         public NetworkClientBuilder() : base()
         {
@@ -14,8 +14,8 @@ namespace Networker.Client
         public override INetworkClient Build()
         {
             this.SetupSharedDependencies();
-            this.serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
-            this.serviceCollection.AddSingleton<IClientPacketProcessor, ClientPacketProcessor>();
+            serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
+            serviceCollection.AddSingleton<IClientPacketProcessor, ClientPacketProcessor>();
 
             var serviceProvider = this.GetServiceProvider();
 

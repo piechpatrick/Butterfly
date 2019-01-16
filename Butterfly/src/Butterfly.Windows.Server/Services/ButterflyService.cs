@@ -1,6 +1,7 @@
-﻿using Butterfly.Server.Core;
-using Butterfly.Server.Core.Instances;
-using Butterfly.Server.Shell;
+﻿using Butterfly.MultiPlatform.Interfaces.Bulk;
+using Butterfly.Server.Core;
+using Butterfly.Server.Core.Server;
+using Butterfly.Windows.Server.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,29 +12,25 @@ using System.Threading.Tasks;
 
 namespace Butterfly.Server.Services
 {
-    public class ButterflyService : ServiceBase
+    public class ButterflyService : ServiceBase , IButterflyService
     {
-        private IButterflyServer _butterflyServer;
-        private Thread _worker;
-        public ButterflyService()
+        private Thread worker;
+        private readonly IButterflyServer butterflyServer;
+        public ButterflyService(IButterflyServer butterflyServer)
         {
-            
+            this.butterflyServer = butterflyServer;
         }
 
         protected override void OnStart(string[] args)
         {
-            var bootstrapper = new Bootstrapper();
-            bootstrapper.Build();
-
-            _butterflyServer = bootstrapper.Reslove<IButterflyServer>();
-            _worker = new Thread(new ThreadStart(_butterflyServer.Start));
-            _worker.Start();
+            worker = new Thread(new ThreadStart(butterflyServer.Start));
+            worker.Start();
         }
 
         protected override void OnStop()
         {
-            _butterflyServer.Stop();
-            _worker.Join();
+            butterflyServer.Stop();
+            worker.Join();
         }
     }
 }

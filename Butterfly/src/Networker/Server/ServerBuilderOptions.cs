@@ -4,7 +4,7 @@ using Networker.Common.Abstractions;
 
 namespace Networker.Server
 {
-    public class ServerBuilderOptions : IBuilderOptions
+    public class ServerBuilderOptions : INetworkerBuilderOptions
     {
         public ServerBuilderOptions()
         {
@@ -20,5 +20,6 @@ namespace Networker.Server
         public int TcpMaxConnections { get; set; }
         public int PacketSizeBuffer { get; set; }
         public LogLevel LogLevel { get; set; }
+        public bool Active { get; set; }
     }
 }

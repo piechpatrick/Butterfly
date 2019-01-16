@@ -6,7 +6,7 @@ using Networker.Server.Abstractions;
 
 namespace Networker.Server
 {
-    public class NetworkServerBuilder : BuilderBase<INetworkServerBuilder, INetworkServer, ServerBuilderOptions>, INetworkServerBuilder
+    public class NetworkServerBuilder : NetworkerBuilderBase<INetworkServerBuilder, INetworkServer, ServerBuilderOptions>, INetworkServerBuilder
     {
         private Type tcpSocketListenerFactory;
         private Type udpSocketListenerFactory;
@@ -20,21 +20,21 @@ namespace Networker.Server
         {
             this.SetupSharedDependencies();
 
-            this.serviceCollection.AddSingleton<ITcpConnections, TcpConnections>();
-            this.serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
-            this.serviceCollection.AddSingleton<IServerInformation, ServerInformation>();
-            this.serviceCollection.AddSingleton<IServerPacketProcessor, ServerPacketProcessor>();
-            this.serviceCollection.AddSingleton<IBufferManager>(new BufferManager(
+            serviceCollection.AddSingleton<ITcpConnections, TcpConnections>();
+            serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
+            serviceCollection.AddSingleton<IServerInformation, ServerInformation>();
+            serviceCollection.AddSingleton<IServerPacketProcessor, ServerPacketProcessor>();
+            serviceCollection.AddSingleton<IBufferManager>(new BufferManager(
                 this.options.PacketSizeBuffer * this.options.TcpMaxConnections * 1,
                 this.options.PacketSizeBuffer));
 
 
             if(this.tcpSocketListenerFactory == null)
-                this.serviceCollection
+                serviceCollection
                     .AddSingleton<ITcpSocketListenerFactory, DefaultTcpSocketListenerFactory>();
 
             if(this.udpSocketListenerFactory == null)
-                this.serviceCollection
+                serviceCollection
                     .AddSingleton<IUdpSocketListenerFactory, DefaultUdpSocketListenerFactory>();
 
 
@@ -53,7 +53,7 @@ namespace Networker.Server
             where T: class, ITcpSocketListenerFactory
         {
             this.tcpSocketListenerFactory = typeof(T);
-            this.serviceCollection.AddSingleton<ITcpSocketListenerFactory, T>();
+            serviceCollection.AddSingleton<ITcpSocketListenerFactory, T>();
             return this;
         }
 
@@ -61,7 +61,7 @@ namespace Networker.Server
             where T: class, IUdpSocketListenerFactory
         {
             this.udpSocketListenerFactory = typeof(T);
-            this.serviceCollection.AddSingleton<IUdpSocketListenerFactory, T>();
+            serviceCollection.AddSingleton<IUdpSocketListenerFactory, T>();
             return this;
         }
     }

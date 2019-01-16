@@ -94,8 +94,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Instances\ButterflyServer.cs" />
-    <Compile Include="Instances\IButterflyServer.cs" />
+    <Compile Include="Server\ButterflyServer.cs" />
+    <Compile Include="Server\IButterflyServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
