@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Maps", "B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicesProccess", "ServicesProccess", "{275B961A-B771-4C72-82A8-139EA1987CAE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{275B961A-B771-4C72-82A8-139EA1987CAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Multplatform", "Multplatform", "{44FD1D2C-2B33-4770-B48D-921BA3B9166B}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networker.Formatter.ZeroFor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Networker.Formatter.ProtobufNet", "Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj", "{F8DB73F0-93F0-4C79-A5C5-EFC4F16DDDBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Server.Handlers", "Butterfly.Windows.Server.Handlers\Butterfly.Windows.Server.Handlers.csproj", "{CDFE628E-F284-4874-811B-C469345766C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Handlers", "Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj", "{CDFE628E-F284-4874-811B-C469345766C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Packets", "Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj", "{C848122E-BD0C-4991-BD5F-1A5F16303F8D}"
 EndProject
@@ -61,9 +61,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Que
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Senders", "Butterfly.MultiPlatform.Senders\Butterfly.MultiPlatform.Senders.csproj", "{3CBDE1C8-66AE-4CDE-BE9F-56B46332B079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.MultiPlatform.Services", "Butterfly.MultiPlatform.Services\Butterfly.MultiPlatform.Services.csproj", "{BE9E5FAF-A1FD-4809-A4E4-B1809CB3BD8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Butterfly.MultiPlatform.Services", "Butterfly.MultiPlatform.Services\Butterfly.MultiPlatform.Services.csproj", "{BE9E5FAF-A1FD-4809-A4E4-B1809CB3BD8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Audio", "Butterfly.Windows.Audio\Butterfly.Windows.Audio.csproj", "{87E8FA28-EF4D-4D13-B178-C696E9F14D28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{998A5BA9-197A-4759-B0F8-B8FF0338B05F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.WPF.Client", "Butterfly.Windows.WPF.Client\Butterfly.Windows.WPF.Client.csproj", "{B3020FAF-6A0C-489D-9382-5A607E6BA742}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{3F0B1C04-AD6C-4862-B740-E2A33C9455EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.WPF.Client.UserControls", "Butterfly.Windows.WPF.Client.UserControls\Butterfly.Windows.WPF.Client.UserControls.csproj", "{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butterfly.Windows.Client.CustomControls", "Butterfly.Windows.Client.CustomControls\Butterfly.Windows.Client.CustomControls.csproj", "{A3D5B239-64BA-466D-BD8D-A99710012ADB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,6 +397,42 @@ Global
 		{87E8FA28-EF4D-4D13-B178-C696E9F14D28}.Release|iPhone.Build.0 = Release|Any CPU
 		{87E8FA28-EF4D-4D13-B178-C696E9F14D28}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{87E8FA28-EF4D-4D13-B178-C696E9F14D28}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|iPhone.Build.0 = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|iPhone.Build.0 = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|iPhone.Build.0 = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -395,7 +441,7 @@ Global
 		{D0E1D70F-0053-40A2-9662-D812A0C5F345} = {275B961A-B771-4C72-82A8-139EA1987CAE}
 		{5A4B66DF-7310-46C3-B755-D41A41F08A7E} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 		{3708CF06-714B-40C4-BA4F-FD6A97C170FC} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
-		{12A00DDF-C15A-4F3C-8DFF-194CC713C8C8} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
+		{12A00DDF-C15A-4F3C-8DFF-194CC713C8C8} = {3F0B1C04-AD6C-4862-B740-E2A33C9455EC}
 		{100F24DE-7518-4D16-9398-48E44C540133} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
 		{F6B8BB3C-81F8-4920-A3E2-1787A25E3336} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
 		{11F8E72A-957A-47F9-87F9-895559B9F250} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
@@ -420,6 +466,11 @@ Global
 		{3CBDE1C8-66AE-4CDE-BE9F-56B46332B079} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 		{BE9E5FAF-A1FD-4809-A4E4-B1809CB3BD8A} = {44FD1D2C-2B33-4770-B48D-921BA3B9166B}
 		{87E8FA28-EF4D-4D13-B178-C696E9F14D28} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
+		{998A5BA9-197A-4759-B0F8-B8FF0338B05F} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
+		{B3020FAF-6A0C-489D-9382-5A607E6BA742} = {998A5BA9-197A-4759-B0F8-B8FF0338B05F}
+		{3F0B1C04-AD6C-4862-B740-E2A33C9455EC} = {E05E813A-4A10-4C6B-B76A-CBD5AF47CD1E}
+		{8DCAA0F3-27FC-4E28-8572-2FC24D7B6A53} = {998A5BA9-197A-4759-B0F8-B8FF0338B05F}
+		{A3D5B239-64BA-466D-BD8D-A99710012ADB} = {998A5BA9-197A-4759-B0F8-B8FF0338B05F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F235D99E-240F-49B6-9348-EA610E1883A9}

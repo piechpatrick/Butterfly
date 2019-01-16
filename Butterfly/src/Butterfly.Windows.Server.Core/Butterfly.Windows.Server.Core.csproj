@@ -126,9 +126,9 @@
       <Project>{137CF6D2-745E-471A-B187-3FDCCA289251}</Project>
       <Name>Butterfly.Windows.Modules</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Server.Handlers.csproj">
+    <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
       <Project>{cdfe628e-f284-4874-811b-c469345766c0}</Project>
-      <Name>Butterfly.Windows.Server.Handlers</Name>
+      <Name>Butterfly.Windows.Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Networker.Formatter.ProtobufNet\Networker.Formatter.ProtobufNet.csproj">
       <Project>{f8db73f0-93f0-4c79-a5c5-efc4f16dddbe}</Project>

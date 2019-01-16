@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Butterfly.Windows.Server.Handlers.Network
+namespace Butterfly.Windows.Handlers.Network
 {
     public class PingPacketHandler : PacketHandlerBase<PingPacket>
     {

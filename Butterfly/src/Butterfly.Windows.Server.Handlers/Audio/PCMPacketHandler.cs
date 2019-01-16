@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Butterfly.Windows.Server.Handlers.Audio
+namespace Butterfly.Windows.Handlers.Audio
 {
     public class PCMPacketHandler : PacketHandlerBase<PCMPacket>
     {

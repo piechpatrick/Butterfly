@@ -1,17 +1,7 @@
-﻿using Butterfly.Maps.Entities;
-using Butterfly.MultiPlatform.Packets.Configuration;
-using Butterfly.MultiPlatform.Packets.Pings;
-using Butterfly.Windows.Modules.HandlersModules;
+﻿using Butterfly.MultiPlatform.Packets.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Networker.Formatter.ProtobufNet;
-using Networker.Formatter.ZeroFormatter;
-using Networker.Server;
 using Networker.Server.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,13 +1,25 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Butterfly.ViewModels.Identities
 {
-    public class UserViewModel
+    public class UserViewModel : BindableBase
     {
-        public string Name { get; set; }
+        private string name;
+        private string password;
 
-        public string Password { get; set; }
+        public string Name
+        {
+            get { return this.password; }
+            set { this.SetProperty(ref this.password, value); }
+        }
+
+        public string Password
+        {
+            get { return this.password; }
+            set { this.SetProperty(ref this.password, value); }
+        }
     }
 }
