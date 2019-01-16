@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Butterfly.ViewModels.Identities
+namespace Butterfly.MultiPlatform.ViewModels.Identities
 {
     public class UserViewModel : BindableBase
     {

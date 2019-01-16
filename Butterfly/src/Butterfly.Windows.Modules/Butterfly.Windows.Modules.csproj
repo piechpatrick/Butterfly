@@ -47,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HandlersModules\AudioPacketHandlerModule.cs" />
-    <Compile Include="HandlersModules\PingPacketHandlerModule.cs" />
+    <Compile Include="Client\WPFClientHandlerModule.cs" />
+    <Compile Include="Common\AudioPacketHandlerModule.cs" />
+    <Compile Include="Common\PingPacketHandlerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +68,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

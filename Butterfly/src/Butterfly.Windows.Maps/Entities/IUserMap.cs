@@ -1,6 +1,6 @@
 ﻿using Butterfly.Interfaces.Maps.Entities;
 using Butterfly.Models.Cores;
-using Butterfly.ViewModels.Identities;
+using Butterfly.MultiPlatform.ViewModels.Identities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

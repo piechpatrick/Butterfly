@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Butterfly.Models.Cores;
+using Butterfly.MultiPlatform.ViewModels.Identities;
 using Butterfly.Services.Database.Users;
-using Butterfly.ViewModels.Identities;
 
 namespace Butterfly.Maps.Entities
 {

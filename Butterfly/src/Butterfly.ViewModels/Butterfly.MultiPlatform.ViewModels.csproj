@@ -8,4 +8,8 @@
     <PackageReference Include="Prism.Core" Version="7.1.0.431" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj" />
+  </ItemGroup>
+
 </Project>

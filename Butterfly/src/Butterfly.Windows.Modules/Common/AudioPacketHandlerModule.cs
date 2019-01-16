@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Butterfly.Windows.Modules.HandlersModules
+namespace Butterfly.Windows.Modules.Common
 {
     public class AudioPacketHandlerModule : PacketHandlerModuleBase
     {

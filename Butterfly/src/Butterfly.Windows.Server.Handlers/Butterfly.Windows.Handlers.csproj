@@ -88,6 +88,7 @@
     <Compile Include="Audio\PCMPacketHandler.cs" />
     <Compile Include="Network\PingPacketHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WPFClient\WPFPingPacketHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj">
@@ -109,6 +110,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
