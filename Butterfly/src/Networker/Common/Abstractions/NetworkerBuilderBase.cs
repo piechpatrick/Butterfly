@@ -4,6 +4,7 @@ using Butterfly.MultiPlatform.Interfaces.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Networker.Client.Abstractions;
 
 namespace Networker.Common.Abstractions
 {
@@ -17,6 +18,7 @@ namespace Networker.Common.Abstractions
         protected List<IPacketHandlerModule> modules;
 
         public NetworkerBuilderBase()
+            :base()
         {
             this.modules = new List<IPacketHandlerModule>();
             this.module = new PacketHandlerModule();
@@ -89,7 +91,7 @@ namespace Networker.Common.Abstractions
             }
             
             serviceCollection.AddSingleton<TBuilderOptions>(this.options);
-            serviceCollection.AddSingleton<IPacketHandlers, PacketHandlers>();
+            serviceCollection.AddSingleton<IPacketHandlers>(new PacketHandlers());
             serviceCollection.AddLogging(loggingBuilder => loggingBuilder.AddConsole());
         }
 

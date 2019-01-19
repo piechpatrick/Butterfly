@@ -10,21 +10,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Encoding = Android.Media.Encoding;
 
-namespace Butterfly.MultiPlatform.Services.Audio
+namespace Butterfly.Android.Services.IO.Audio.Workers
 {
     internal class AudioRecorderBackroundWorker : BackgroundWorkingThreadBase
     {
         private int bufferSize;
         private AudioRecord recorder;
         private readonly INetworkClient client;
-        private GenericUDPPacketSender<Packets.Audio.PCMPacket> pcmSender;
+        private GenericUDPPacketSender<MultiPlatform.Packets.Audio.PCMPacket> pcmSender;
 
         public AudioRecorderBackroundWorker(INetworkClient client)
             : base(1, ThreadPriority.AboveNormal)
         {
             this.client = client;
-            this.pcmSender = new GenericUDPPacketSender<Packets.Audio.PCMPacket>(this.client);         
+            this.pcmSender = new GenericUDPPacketSender<MultiPlatform.Packets.Audio.PCMPacket>(this.client);         
         }
 
         protected override void OnError(Thread thread, Exception exception)
@@ -74,8 +75,8 @@ namespace Butterfly.MultiPlatform.Services.Audio
 
 
 
-            this.bufferSize = AudioRecord.GetMinBufferSize(44100, ChannelIn.Default, Android.Media.Encoding.Pcm16bit);
-            this.recorder = new AudioRecord(AudioSource.Mic, 44100, ChannelIn.Mono, Android.Media.Encoding.Pcm16bit, bufferSize);
+            this.bufferSize = AudioRecord.GetMinBufferSize(44100, ChannelIn.Default, Encoding.Pcm16bit);
+            this.recorder = new AudioRecord(AudioSource.Mic, 44100, ChannelIn.Mono, Encoding.Pcm16bit, bufferSize);
             this.recorder.StartRecording();
 
         }
@@ -90,7 +91,7 @@ namespace Butterfly.MultiPlatform.Services.Audio
             var audioSize = recorder.Read(buffor, 0, bufferSize);
             if (audioSize > 0)
             {
-                pcmSender.Send(new Packets.Audio.PCMPacket() { Data = buffor });
+                pcmSender.Send(new MultiPlatform.Packets.Audio.PCMPacket() { Data = buffor });
                 Thread.Sleep(1);
             }
         }

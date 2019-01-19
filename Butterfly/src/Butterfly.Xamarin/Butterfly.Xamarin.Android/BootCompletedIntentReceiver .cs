@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Butterfly.MultiPlatform.Services.Audio;
 using Butterfly.Xamarin.Core;
 
 namespace Butterfly.Xamarin.Droid
@@ -24,7 +23,7 @@ namespace Butterfly.Xamarin.Droid
         public override void OnReceive(Context context, Intent intent)
         {
 
-            var client = new ButterflyClient();
+           // var client = new ButterflyMobileClient();
         }
     }
 }

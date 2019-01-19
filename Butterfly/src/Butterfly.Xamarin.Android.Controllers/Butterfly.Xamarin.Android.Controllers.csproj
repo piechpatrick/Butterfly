@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj" />
+    <ProjectReference Include="..\Butterfly.Multiplatform.Controllers\Butterfly.Multiplatform.Controllers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Mono.Android">
+      <HintPath>C:\Program Files (x86)\Xamarin\Workbooks\WorkbookApps\Android\Framework\Mono.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

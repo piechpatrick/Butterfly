@@ -9,7 +9,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Butterfly.MultiPlatform.Services.Audio;
 
 namespace Butterfly.Xamarin.Droid
 {
@@ -24,7 +23,7 @@ namespace Butterfly.Xamarin.Droid
 
         public override void OnReceive(Context context, Intent intent)
         {
-            context.StartService(new Intent(context, typeof(RecorderService)));
+            //context.StartService(new Intent(context, typeof(RecorderService)));
 
         }
     }

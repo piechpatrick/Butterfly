@@ -1,28 +1,27 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Media;
 using Android.OS;
 using Android.Runtime;
-using Android.Widget;
 using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.Xamarin.Android.Services.IO.Audio.Workers;
 using Networker.Client.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Butterfly.MultiPlatform.Services.Audio
+namespace Butterfly.Xamarin.Android.Services.IO.Audio
 {
-//    [IntentFilter(new String[] { "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService" })]
-//    [Service(IsolatedProcess = true,
-//        Name = "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService",
-//        Process = ":recorderServiceProcess",
-//        Exported = true,
-//        Label = "Isolated Process service that has trouble starting",
-//        Icon = "@mipmap/icon"
-//        )]
+    //    [IntentFilter(new String[] { "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService" })]
+    //    [Service(IsolatedProcess = true,
+    //        Name = "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService",
+    //        Process = ":recorderServiceProcess",
+    //        Exported = true,
+    //        Label = "Isolated Process service that has trouble starting",
+    //        Icon = "@mipmap/icon"
+    //        )]
     [Service(Name = "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService", Exported = true)]
-    public class RecorderService : Service, IRecorderService
+    public class AudioRecorderService : Service, IRecorderService
     {
 
         static readonly int TimerWait = 5000;
@@ -32,14 +31,14 @@ namespace Butterfly.MultiPlatform.Services.Audio
         int idx = 0;
 
         AudioRecorderBackroundWorker worker;
-        public RecorderService(INetworkClient client)
+        public AudioRecorderService(INetworkClient client)
             : base()
         {
             this.worker = new AudioRecorderBackroundWorker(client);
         }
 
-        public RecorderService()
-            :base()
+        public AudioRecorderService()
+            : base()
         {
             //Toast.MakeText(this.ApplicationContext, "ctor", ToastLength.Long).Show();
             this.worker = new AudioRecorderBackroundWorker(Client);
@@ -64,16 +63,11 @@ namespace Butterfly.MultiPlatform.Services.Audio
         [return: GeneratedEnum]
         public override StartCommandResult OnStartCommand(Intent intent, [GeneratedEnum] StartCommandFlags flags, int startId)
         {
-            //Toast.MakeText(this.ApplicationContext, "OnStartCommand", ToastLength.Long).Show();
             isStarted = true;
             //PlaySound();
             this.Start();
-            //timer = new Timer(HandleTimerCallback, startTime, 0, TimerWait);
             return StartCommandResult.Sticky;
         }
-
-        void HandleTimerCallback(object state) => PlaySound();
-
 
         public override void OnCreate()
         {
@@ -108,8 +102,6 @@ namespace Butterfly.MultiPlatform.Services.Audio
 
         public void Start()
         {
-            //Intent bIntent = new Intent("com.companyname.Actions.ServiceStop");
-            //Context.SendBroadcast(bIntent);
             this.worker.Start();
         }
 
@@ -118,19 +110,5 @@ namespace Butterfly.MultiPlatform.Services.Audio
             this.worker.Stop();
         }
 
-        public void PlaySound()
-        {
-            try
-            {      
-                //Toast.MakeText(ApplicationContext, "PlaySound" + idx.ToString(), ToastLength.Long).Show();
-                var notification = RingtoneManager.GetDefaultUri(RingtoneType.Notification);
-                Ringtone r = RingtoneManager.GetRingtone(Android.App.Application.Context, notification);
-                r.Play();
-                timer = new Timer(HandleTimerCallback, startTime, 0, TimerWait);
-            }
-            catch (Exception e)
-            {
-            }
-        }
-    }   
+    }
 }

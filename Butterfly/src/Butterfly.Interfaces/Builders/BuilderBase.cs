@@ -30,12 +30,14 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
         public BuilderBase()
         {
             this.options = Activator.CreateInstance<TBuilderOptions>();
-            serviceCollection = this.GetServiceCollection() ?? new ServiceCollection();
+            serviceCollection = this.GetServiceCollection();
         }
 
         public IServiceCollection GetServiceCollection()
         {
-            return serviceCollection;
+            if (this.serviceCollection == null)
+                this.serviceCollection = new ServiceCollection();
+            return this.serviceCollection;
         }
 
         public TBuilder SetServiceCollection(IServiceCollection serviceCollectionn, Func<IServiceProvider> serviceProviderFactory = null)

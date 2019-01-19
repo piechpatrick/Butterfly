@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Butterfly.Xamarin.Core.Builders
 {
-    public interface IButterflyClientOptions : IBuilderOptions
+    public interface IButterflyMobileClientBuilderOptions : IBuilderOptions
     {
+        
     }
 }

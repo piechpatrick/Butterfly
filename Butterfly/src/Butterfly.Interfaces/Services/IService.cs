@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Butterfly.Xamarin.Core
+namespace Butterfly.MultiPlatform.Interfaces.Services
 {
-    public interface IButterflyClient
+    public interface IService
     {
     }
 }

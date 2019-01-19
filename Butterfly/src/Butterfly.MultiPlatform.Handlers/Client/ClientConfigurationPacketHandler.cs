@@ -1,8 +1,8 @@
 ﻿using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.MultiPlatform.Interfaces.Controllers;
 using Butterfly.MultiPlatform.Packets.Audio;
 using Butterfly.MultiPlatform.Packets.Configuration;
 using Butterfly.MultiPlatform.Senders;
-using Butterfly.MultiPlatform.Services.Audio;
 using Networker.Client.Abstractions;
 using Networker.Common;
 using Networker.Common.Abstractions;
@@ -17,11 +17,17 @@ namespace Butterfly.MultiPlatform.Handlers.Client
     {
         private readonly INetworkClient client;
         private readonly IRecorderService recorderService;
-        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, INetworkClient client)
+        private readonly IServiceController serviceController;
+
+        public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, 
+            INetworkClient client,
+            IServiceController serviceController,
+            IRecorderService recorderService)
             : base(packetSerialiser)
         {
             this.client = client;
-            //this.recorderService = new RecorderService(this.client);
+            this.serviceController = serviceController;
+            this.recorderService = recorderService;
         }
 
         public override async Task Process(ClientConfigurationPacket packet, ISender sender)

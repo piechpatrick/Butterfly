@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Butterfly.Xamarin.Core.Options
+namespace Butterfly.Xamarin.Android.Core.Client
 {
-    public class AndroidButterflyClientOptions : IButterflyClientOptions
+    public class AndroidClientOptions : IButterflyMobileClientBuilderOptions
     {
         public bool Active { get; set; }
     }

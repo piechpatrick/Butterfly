@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Butterfly.MultiPlatform.Interfaces.Services.WorkingService
+namespace Butterfly.MultiPlatform.Interfaces.Services.Workers
 {
-    public interface IWorkingService
+    public interface IWorkingService : IService
     {
         void Start();
         void Stop();

@@ -10,7 +10,15 @@ using Android.Support.V4.Content;
 using Android;
 using Android.Support.V4.App;
 using Xamarin.Essentials;
-using Butterfly.MultiPlatform.Services.Audio;
+using Butterfly.Xamarin.Core.Builders;
+using Butterfly.Xamarin.Droid.Builders;
+using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.Xamarin.Android.Services.IO.Audio;
+using Butterfly.Xamarin.Android.Controllers.Services;
+using Android.Content;
+using Networker.Client;
+using Butterfly.MultiPlatform.Modules.HandlersModules;
+using Networker.Formatter.ZeroFormatter;
 
 namespace Butterfly.Xamarin.Droid
 {
@@ -32,14 +40,19 @@ namespace Butterfly.Xamarin.Droid
             Platform.Init(this, savedInstanceState); // add this line to your code
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+
+            var client = new AndroidClientBuilder().SetAudioRecorderService<AudioRecorderService>()
+                            .SetServiceController<AndroidServiceController>()
+                            .BuildNetworkClient()
+                            .Build();          
+
             var app = new App();
             LoadApplication(app);
-            app.InitializeContext(this.ApplicationContext);
-
             
 
+
             Toast.MakeText(this, "BeforeCreate", ToastLength.Long).Show();
-            Application.Context.StartService(new Android.Content.Intent(this, typeof(RecorderService)));         
+            //Application.Context.StartService(new Intent(this, typeof(RecorderService)));         
 
             if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == (int)Permission.Granted)
             {
@@ -77,15 +90,15 @@ namespace Butterfly.Xamarin.Droid
                 ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 1);
             }
 
-
+            client.Start();
 
 
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        //{
+        //    Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        //}
     }
 }

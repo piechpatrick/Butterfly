@@ -14,8 +14,8 @@ namespace Networker.Client
         public override INetworkClient Build()
         {
             this.SetupSharedDependencies();
-            serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
             serviceCollection.AddSingleton<IClientPacketProcessor, ClientPacketProcessor>();
+            serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
 
             var serviceProvider = this.GetServiceProvider();
 
