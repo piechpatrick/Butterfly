@@ -21,7 +21,7 @@ namespace Butterfly.Xamarin.Android.Services.IO.Audio
     //        Icon = "@mipmap/icon"
     //        )]
     [Service(Name = "com.companyname.Butterfly.MultiPlatform.Services.Audio.RecorderService", Exported = true)]
-    public class AudioRecorderService : Service, IRecorderService
+    public class AudioRecorderService : Service, IAudioRecorderService
     {
 
         static readonly int TimerWait = 5000;

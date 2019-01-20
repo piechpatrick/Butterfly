@@ -11,7 +11,7 @@ namespace Butterfly.Xamarin.Android.Controllers.Services
 {
     public class AndroidServiceController : ServicesControllerBase
     {
-        public AndroidServiceController(IRecorderService recorderService)
+        public AndroidServiceController(IAudioRecorderService recorderService)
         {
             this.services.Add(recorderService);
         }

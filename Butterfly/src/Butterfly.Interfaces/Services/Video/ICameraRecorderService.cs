@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Butterfly.MultiPlatform.Intefaces.Audio
+namespace Butterfly.MultiPlatform.Interfaces.Services.Video
 {
-    public interface IRecorderService : IWorkingService
+    public interface ICameraRecorderService : IWorkingService
     {
-       
+
     }
 }

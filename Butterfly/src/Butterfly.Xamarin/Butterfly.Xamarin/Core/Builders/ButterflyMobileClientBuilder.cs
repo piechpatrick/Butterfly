@@ -1,7 +1,9 @@
 ﻿using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.MultiPlatform.Interfaces.Application;
 using Butterfly.MultiPlatform.Interfaces.Builders;
 using Butterfly.MultiPlatform.Interfaces.Controllers;
 using Butterfly.MultiPlatform.Interfaces.Services;
+using Butterfly.MultiPlatform.Interfaces.Services.Video;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
@@ -38,9 +40,16 @@ namespace Butterfly.Xamarin.Core.Builders
         }
 
         public virtual IButterflyMobileClientBuilder SetAudioRecorderService<T>()
-            where T : class, IRecorderService
+            where T : class, IAudioRecorderService
         {
-            this.serviceCollection.AddSingleton<IRecorderService, T>();
+            this.serviceCollection.AddSingleton<IAudioRecorderService, T>();
+            return this;
+        }
+
+        public virtual IButterflyMobileClientBuilder SetCameraRecorderService<T>()
+            where T : class, ICameraRecorderService
+        {
+            this.serviceCollection.AddSingleton<ICameraRecorderService, T>();
             return this;
         }
 
@@ -48,6 +57,12 @@ namespace Butterfly.Xamarin.Core.Builders
             where T : class, IServiceController
         {
             this.serviceCollection.AddSingleton<IServiceController, T>();
+            return this;
+        }
+        public virtual IButterflyMobileClientBuilder SetApplication<TApp>()
+           where TApp : class, IApplication<TApp>
+        {
+            this.serviceCollection.AddSingleton<IApplication<TApp>, TApp>();
             return this;
         }
     }
