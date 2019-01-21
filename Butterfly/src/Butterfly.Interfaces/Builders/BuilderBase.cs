@@ -40,6 +40,13 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
             return this.serviceCollection;
         }
 
+        public IServiceCollection GetServiceCollectionClient()
+        {
+            if (this.serviceCollection == null)
+                this.serviceCollection = new ServiceCollection();
+            return this.serviceCollection;
+        }
+
         public TBuilder SetServiceCollection(IServiceCollection serviceCollectionn, Func<IServiceProvider> serviceProviderFactory = null)
         {
             serviceCollection = serviceCollectionn;
@@ -59,7 +66,7 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
             return this as TBuilder;
         }
 
-        protected abstract IServiceProvider GetServiceProvider();
+        public abstract IServiceProvider GetServiceProvider(IServiceProvider serviceProvider);
 
 
         /// <summary>

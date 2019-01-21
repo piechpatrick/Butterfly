@@ -13,13 +13,15 @@ namespace Networker.Client
 
         public override INetworkClient Build()
         {
+            serviceCollection.AddSingleton<INetworkClientBuilder>(this);
             this.SetupSharedDependencies();
             serviceCollection.AddSingleton<IClientPacketProcessor, ClientPacketProcessor>();
             serviceCollection.AddSingleton<INetworkClient, NetworkClient>();
 
-            var serviceProvider = this.GetServiceProvider();
+            //var serviceProvider = this.GetServiceProvider();
 
-            return serviceProvider.GetService<INetworkClient>();
+            //return serviceProvider.GetService<INetworkClient>();
+            return null;
         }
 
         public INetworkClientBuilder SetPacketBufferPoolSize(int size)

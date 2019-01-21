@@ -11,7 +11,7 @@
         d:DataContext="{d:DesignInstance local:MainWindowViewModel, IsDesignTimeCreatable=True}"
         mvvm:ViewModelLocator.AutoWireViewModel="True">
     <Grid>
-        
-        
+        <Image Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged}" />
+
     </Grid>
 </Window>

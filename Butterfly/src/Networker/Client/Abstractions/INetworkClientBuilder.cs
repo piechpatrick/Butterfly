@@ -1,4 +1,5 @@
 ﻿using Networker.Common.Abstractions;
+using System;
 
 namespace Networker.Client.Abstractions
 {
@@ -10,5 +11,7 @@ namespace Networker.Client.Abstractions
         //Info
         INetworkClientBuilder SetPacketBufferPoolSize(int size);
         INetworkClientBuilder UseIp(string ip);
+
+        IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null);
     }
 }

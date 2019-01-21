@@ -15,6 +15,7 @@ using Butterfly.Xamarin.Core;
 using Butterfly.Xamarin.Core.Builders;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
+using Networker.Client.Abstractions;
 using Networker.Common.Abstractions;
 
 namespace Butterfly.Xamarin.Droid.Builders
@@ -29,13 +30,14 @@ namespace Butterfly.Xamarin.Droid.Builders
         public override IButterflyMobileClient Build()
         {        
             this.serviceCollection.AddSingleton<IButterflyMobileClient, AndroidClient>();
-            var handlers = GetServiceProvider().GetService<IPacketHandlers>();
             return this.GetServiceProvider().GetService<IButterflyMobileClient>();
         }
 
-        protected override IServiceProvider GetServiceProvider()
+        public override IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null)
         {
-            return this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
+            var builtServiceProvider =  serviceCollection.BuildServiceProvider();
+            var networkClientBuilder = builtServiceProvider.GetService<INetworkClientBuilder>();
+            return networkClientBuilder.GetServiceProvider(builtServiceProvider);           
         }
     }
 }

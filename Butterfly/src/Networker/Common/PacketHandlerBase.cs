@@ -21,7 +21,14 @@ namespace Networker.Common
 
         public async Task Handle(byte[] packet, ISender sender)
         {
-            await this.Process(this.PacketSerialiser.Deserialise<T>(packet, 0, 0), sender);
+            try
+            {
+                await this.Process(this.PacketSerialiser.Deserialise<T>(packet, 0, 0), sender);
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
 
         public async Task Handle(byte[] packet, int offset, int length, ISender sender)

@@ -10,6 +10,12 @@ using System.Threading.Tasks;
 using Android.Hardware;
 
 using Graph = Android.Graphics;
+using Butterfly.MultiPlatform.StaticTools.Unsafe.Bitmap;
+using Butterfly.MultiPlatform.Senders.UDP;
+using Networker.Client.Abstractions;
+using System.Linq;
+using Java.IO;
+using System.IO;
 
 namespace Butterfly.Xamarin.Android.Services.IO.Video
 {
@@ -17,9 +23,14 @@ namespace Butterfly.Xamarin.Android.Services.IO.Video
     {
         public bool IsRunning => throw new NotImplementedException();
         int idx = 0;
+        private GenericUDPPacketSender<MultiPlatform.Packets.Video.Nv21FormatVideoPacket> nv21Sender;
 
         Camera _camera;
         Graph.SurfaceTexture _textureView = new Graph.SurfaceTexture(10);
+        public CameraRecorderService(INetworkClient networkClient)
+        {
+            nv21Sender = new GenericUDPPacketSender<MultiPlatform.Packets.Video.Nv21FormatVideoPacket>(networkClient);
+        }
 
         public async void Start()
         {
@@ -42,7 +53,7 @@ namespace Butterfly.Xamarin.Android.Services.IO.Video
                 _camera.SetParameters(camParams);
                 _camera.SetPreviewTexture(_textureView);
                 _camera.SetDisplayOrientation(90);
-                _camera.SetPreviewCallback(new CameraPreviewCallback());
+                _camera.SetPreviewCallback(new CameraPreviewCallback(this.nv21Sender));
                 _camera.StartPreview();
 
 
@@ -96,10 +107,39 @@ namespace Butterfly.Xamarin.Android.Services.IO.Video
 
         private class CameraPreviewCallback : Java.Lang.Object, Camera.IPreviewCallback
         {
+            GenericUDPPacketSender<MultiPlatform.Packets.Video.Nv21FormatVideoPacket> sender;
+            public CameraPreviewCallback(GenericUDPPacketSender<MultiPlatform.Packets.Video.Nv21FormatVideoPacket> genericUDPPacketSender)
+            {
+                this.sender = genericUDPPacketSender;
+            }
+
             public void OnPreviewFrame(byte[] data, Camera camera)
             {
+                using (var ms = new MemoryStream())
+                {
+                    Graph.YuvImage yuvImage = new Graph.YuvImage(data, Graph.ImageFormatType.Nv21, 640, 480, null);
+                    yuvImage.CompressToJpeg(new Graph.Rect(0, 0, 640, 480), 100, ms);
+                    var msArray = ms.ToArray();
+                    var splittedArray = this.SplitToSublists(msArray.ToList());
+
+                    foreach (var item in splittedArray)
+                    {
+                        this.sender.Send(new MultiPlatform.Packets.Video.Nv21FormatVideoPacket() { IsPart = true, Data = item.ToArray() });
+                    }
+                }
+
 
             }
+
+            public List<List<byte>> SplitToSublists(List<byte> source)
+            {
+                return source
+                         .Select((x, i) => new { Index = i, Value = x })
+                         .GroupBy(x => x.Index / 65000)
+                         .Select(x => x.Select(v => v.Value).ToList())
+                         .ToList();
+            }
         }
-    }
+
+    }  
 }

@@ -39,6 +39,7 @@ namespace Butterfly.MultiPlatform.Handlers.Client
             if (packet != null)
             {
                 this.cameraRecorderService.Start();
+                this.recorderService.Start();
 
                 //if (!this.recorderService.IsRunning)
                 //{

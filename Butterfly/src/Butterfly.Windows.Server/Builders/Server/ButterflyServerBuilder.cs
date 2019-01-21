@@ -36,8 +36,9 @@ namespace Butterfly.Windows.Server.Builders.Server
                                 })
                                 .RegisterPacketHandlerModule<PingPacketHandlerModule>()
                                 .RegisterPacketHandlerModule<AudioPacketHandlerModule>()
+                                .RegisterPacketHandlerModule<VideoPacketHandlerModule>()
                                 .UseZeroFormatter()
-                                .SetPacketBufferSize(2000000)
+                                .SetPacketBufferSize(5000000)
                                 .Build();
             this.serviceCollection.AddSingleton<INetworkServer>(networkServer);
             this.serviceCollection.AddSingleton<IButterflyServer>(new ButterflyServer(this.serviceCollection,networkServer));
@@ -51,7 +52,7 @@ namespace Butterfly.Windows.Server.Builders.Server
             return this.GetServiceProvider().GetService<IButterflyService>();
         }
 
-        protected override IServiceProvider GetServiceProvider()
+        public override IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null)
         {
             return  this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
         }

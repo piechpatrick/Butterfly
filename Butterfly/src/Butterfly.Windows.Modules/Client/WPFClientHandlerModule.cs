@@ -1,4 +1,5 @@
 ﻿using Butterfly.MultiPlatform.Packets.Pings;
+using Butterfly.MultiPlatform.Packets.Video;
 using Butterfly.Windows.Server.Handlers.WPFClient;
 using Networker.Common;
 using System;
@@ -14,6 +15,7 @@ namespace Butterfly.Windows.Modules.Client
         public WPFClientHandlerModule()
         {
             this.AddPacketHandler<PingPacket, WPFPingPacketHandler>();
+            this.AddPacketHandler<Nv21FormatVideoPacket, WPFNv21VideoPacketHandler>();
         }
     }
 }

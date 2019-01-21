@@ -1,6 +1,8 @@
 ﻿using Butterfly.MultiPlatform.Interfaces.Builders;
 using Butterfly.Windows.Modules.Client;
+using Butterfly.Windows.Server.Handlers.WPFClient;
 using Butterfly.Windows.WPF.Client.Core.Client;
+using Butterfly.Windows.WPF.Client.Core.HandlerWrappers.Video;
 using Butterfly.Windows.WPF.Client.Core.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
@@ -27,20 +29,31 @@ namespace Butterfly.Windows.WPF.Client.Builders
         public override IButterflyWPFClient Build()
         {
             this.RegisterViewModels();
-            var networkClient = new NetworkClientBuilder().UseIp("87.206.204.123")
+            var networkClientBuilder = new NetworkClientBuilder();
+                            networkClientBuilder.UseIp("87.206.204.123")
                                                 .UseTcp(7894)
-                                                .UseUdp(7895, 7895)
+                                                //.UseUdp(7895, 7895)
                                                 .RegisterPacketHandlerModule<WPFClientHandlerModule>()
                                                 .UseZeroFormatter()
                                                 .SetPacketBufferSize(2000000)
                                                 .Build();
+            var serviceProvider = networkClientBuilder.GetServiceProvider();
+            var networkClient = serviceProvider.GetService<INetworkClient>();
+            var videoPacketHandler = serviceProvider.GetService<WPFNv21VideoPacketHandler>();
+
+
+            this.containerRegistry.RegisterInstance<WPFNv21VideoPacketHandler>(videoPacketHandler);
+            this.containerRegistry.RegisterType<INv21PacketHandlerWrapper, Nv21PacketHandlerWrapper>();
+            this.containerRegistry.Resolve<INv21PacketHandlerWrapper>();
+
+
             this.containerRegistry.RegisterInstance<INetworkClient>(networkClient);
             this.containerRegistry.RegisterInstance<IButterflyWPFClient>(new ButterflyWPFClient(networkClient));
 
             return containerRegistry.Resolve<IButterflyWPFClient>();
         }
 
-        protected override IServiceProvider GetServiceProvider()
+        public override IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null)
         {
             return this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
         }

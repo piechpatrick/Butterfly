@@ -95,9 +95,10 @@ namespace Networker.Common.Abstractions
             serviceCollection.AddLogging(loggingBuilder => loggingBuilder.AddConsole());
         }
 
-        protected override IServiceProvider GetServiceProvider()
+        public override IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null)
         {
-            var serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
+            if(serviceProvider == null)
+                serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
 
             PacketSerialiserProvider.PacketSerialiser = serviceProvider.GetService<IPacketSerialiser>();
 

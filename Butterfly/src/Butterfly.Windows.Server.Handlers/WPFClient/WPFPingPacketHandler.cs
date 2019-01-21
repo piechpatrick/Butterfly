@@ -12,7 +12,7 @@ namespace Butterfly.Windows.Server.Handlers.WPFClient
 {
     public class WPFPingPacketHandler : PacketHandlerBase<PingPacket>
     {
-        private readonly ILogger<WPFPingPacketHandler> logger;
+        private readonly ILogger<WPFPingPacketHandler> logger;       
         public WPFPingPacketHandler(ILogger<WPFPingPacketHandler> logger )
         {
             this.logger = logger;
@@ -20,7 +20,7 @@ namespace Butterfly.Windows.Server.Handlers.WPFClient
 
         public override Task Process(PingPacket packet, ISender sender)
         {
-            return null; 
+            return null;
         }
     }
 }

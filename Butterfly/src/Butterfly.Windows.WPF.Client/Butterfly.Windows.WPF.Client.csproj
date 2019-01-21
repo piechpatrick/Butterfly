@@ -96,6 +96,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -127,6 +128,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="ZeroFormatter, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZeroFormatter.1.6.4\lib\net45\ZeroFormatter.dll</HintPath>
+    </Reference>
+    <Reference Include="ZeroFormatter.Interfaces, Version=1.6.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZeroFormatter.Interfaces.1.6.4\lib\net45\ZeroFormatter.Interfaces.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -181,6 +188,10 @@
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
       <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj">
+      <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
+      <Name>Butterfly.MultiPlatform.Packets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
       <Project>{14e2b5b0-18e7-40ef-9d0d-4a4d585ec009}</Project>
       <Name>Butterfly.MultiPlatform.ViewModels</Name>
@@ -188,6 +199,10 @@
     <ProjectReference Include="..\Butterfly.Windows.Modules\Butterfly.Windows.Modules.csproj">
       <Project>{137CF6D2-745E-471A-B187-3FDCCA289251}</Project>
       <Name>Butterfly.Windows.Modules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
+      <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
+      <Name>Butterfly.Windows.Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Core\Butterfly.Windows.WPF.Client.Core.csproj">
       <Project>{e0802189-4d47-4bc5-89ba-a67c93e7cfe2}</Project>

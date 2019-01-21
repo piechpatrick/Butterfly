@@ -15,7 +15,8 @@ namespace Networker.Formatter.ZeroFormatter
 
         public T Deserialise<T>(byte[] packetBytes, int offset, int length)
         {
-            return ZeroFormatterSerializer.Deserialize<T>(packetBytes,offset);
+            var res = ZeroFormatterSerializer.Deserialize<T>(packetBytes,offset);
+            return res;
         }
 
         public byte[] Serialise<T>(T packet)

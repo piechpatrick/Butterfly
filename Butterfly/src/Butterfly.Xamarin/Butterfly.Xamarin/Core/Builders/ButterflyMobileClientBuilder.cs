@@ -19,11 +19,11 @@ namespace Butterfly.Xamarin.Core.Builders
          where TBuilderOptions : class, IButterflyMobileClientBuilderOptions
 
     {
+
         public ButterflyMobileClientBuilder()
             :base()
         {
-
-           
+                     
         }
 
         public virtual IButterflyMobileClientBuilder BuildNetworkClient()
@@ -31,10 +31,10 @@ namespace Butterfly.Xamarin.Core.Builders
             var builderNetwork = new NetworkClientBuilder().SetServiceCollection(this.GetServiceCollection());
             builderNetwork.UseIp("87.206.204.123")
                        .UseTcp(7894)
-                       .UseUdp(7895, 7895)
+                       .UseUdp(7895,7896)
                        .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
                        .UseZeroFormatter()
-                       .SetPacketBufferSize(2000000)
+                       .SetPacketBufferSize(5000000)
                        .Build();
             return this;
         }

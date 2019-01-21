@@ -112,6 +112,17 @@ namespace Networker.Server
             }
         }
 
+        public void SendTcpSpecificClient<T>(T packet,int index)
+        {
+            var connection = this.GetConnections()?.GetConnections()[0];
+            if(connection != null)
+            {
+                var serialisedPacket = this.packetSerialiser.Serialise(packet);
+
+                var result = connection.Socket.Send(serialisedPacket);
+            }
+        }
+
         public void Start()
         {
             this.TcpListener?.Listen();
