@@ -3,7 +3,6 @@ using Butterfly.Windows.Modules.Client;
 using Butterfly.Windows.Server.Handlers.WPFClient;
 using Butterfly.Windows.WPF.Client.Core.Client;
 using Butterfly.Windows.WPF.Client.Core.HandlerWrappers.Video;
-using Butterfly.Windows.WPF.Client.Core.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
 using Networker.Client.Abstractions;

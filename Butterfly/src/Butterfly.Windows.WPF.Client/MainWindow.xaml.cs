@@ -1,5 +1,4 @@
 ﻿using Butterfly.Windows.WPF.Client.Core.Client;
-using Butterfly.Windows.WPF.Client.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
