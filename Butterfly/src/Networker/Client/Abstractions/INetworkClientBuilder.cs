@@ -10,8 +10,6 @@ namespace Networker.Client.Abstractions
 
         //Info
         INetworkClientBuilder SetPacketBufferPoolSize(int size);
-        INetworkClientBuilder UseIp(string ip);
-
-        IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null);
+        INetworkClientBuilder UseIp(string ip);    
     }
 }

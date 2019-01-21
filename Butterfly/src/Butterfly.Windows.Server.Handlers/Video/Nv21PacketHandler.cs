@@ -23,7 +23,7 @@ namespace Butterfly.Windows.Server.Handlers.Video
             //{
             //    this.networkServer.SendTcpSpecificClient<Nv21FormatVideoPacket>(packet,0);
             //});
-            this.networkServer.SendTcpSpecificClient<Nv21FormatVideoPacket>(packet, 0);
+            //this.networkServer.Send<Nv21FormatVideoPacket>(packet, sender.);
             return null;
         }
     }

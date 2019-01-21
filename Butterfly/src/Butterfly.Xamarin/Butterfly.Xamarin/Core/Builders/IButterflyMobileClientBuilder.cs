@@ -2,10 +2,8 @@
 using Butterfly.MultiPlatform.Interfaces.Application;
 using Butterfly.MultiPlatform.Interfaces.Builders;
 using Butterfly.MultiPlatform.Interfaces.Controllers;
+using Butterfly.MultiPlatform.Interfaces.Services.Clients;
 using Butterfly.MultiPlatform.Interfaces.Services.Video;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Butterfly.Xamarin.Core.Builders
 {
@@ -13,6 +11,9 @@ namespace Butterfly.Xamarin.Core.Builders
     {
         IButterflyMobileClientBuilder SetServiceController<T>()
             where T : class, IServiceController;
+
+        IButterflyMobileClientBuilder SetConnectedClientInfoUpdaterService<T>()
+            where T : class, IConnectedClientInfoUpdaterService;
 
         IButterflyMobileClientBuilder SetAudioRecorderService<T>()
             where T : class, IAudioRecorderService;

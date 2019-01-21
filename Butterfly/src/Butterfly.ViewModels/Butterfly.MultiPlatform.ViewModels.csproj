@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Networker.ZeroFormatter\Networker.Formatter.ZeroFormatter.csproj" />
+    <ProjectReference Include="..\Networker\Networker.csproj" />
   </ItemGroup>
 
 </Project>

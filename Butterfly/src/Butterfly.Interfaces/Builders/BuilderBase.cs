@@ -24,6 +24,8 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
 
         protected Action<ILoggingBuilder> loggingBuilder;
 
+        protected IServiceProvider serviceProvider;
+
         /// <summary>
         /// BuilderBase
         /// </summary>
@@ -31,6 +33,7 @@ namespace Butterfly.MultiPlatform.Interfaces.Builders
         {
             this.options = Activator.CreateInstance<TBuilderOptions>();
             serviceCollection = this.GetServiceCollection();
+            serviceCollection.AddSingleton<TBuilderOptions>(this.options);
         }
 
         public IServiceCollection GetServiceCollection()

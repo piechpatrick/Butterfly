@@ -3,6 +3,7 @@ using Butterfly.MultiPlatform.Interfaces.Application;
 using Butterfly.MultiPlatform.Interfaces.Builders;
 using Butterfly.MultiPlatform.Interfaces.Controllers;
 using Butterfly.MultiPlatform.Interfaces.Services;
+using Butterfly.MultiPlatform.Interfaces.Services.Clients;
 using Butterfly.MultiPlatform.Interfaces.Services.Video;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,6 +44,13 @@ namespace Butterfly.Xamarin.Core.Builders
             where T : class, IAudioRecorderService
         {
             this.serviceCollection.AddSingleton<IAudioRecorderService, T>();
+            return this;
+        }
+
+        public virtual IButterflyMobileClientBuilder SetConnectedClientInfoUpdaterService<T>()
+            where T : class, IConnectedClientInfoUpdaterService
+        {
+            this.serviceCollection.AddSingleton<IConnectedClientInfoUpdaterService, T>();
             return this;
         }
 

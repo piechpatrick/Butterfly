@@ -23,7 +23,7 @@ using Butterfly.Xamarin.Android.Services.IO.Video;
 using Plugin.Media;
 using Plugin.CurrentActivity;
 using Butterfly.MultiPlatform.Interfaces.Application;
-
+using Butterfly.Xamarin.Android.Services.Updaters;
 
 namespace Butterfly.Xamarin.Droid
 {
@@ -54,6 +54,7 @@ namespace Butterfly.Xamarin.Droid
 
 
             var client = new AndroidClientBuilder()
+                            .SetConnectedClientInfoUpdaterService<ConnectedClientInfoUpdaterService>()
                             .SetAudioRecorderService<AudioRecorderService>()
                             .SetCameraRecorderService<CameraRecorderService>()
                             .SetServiceController<AndroidServiceController>()

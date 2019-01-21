@@ -1,4 +1,5 @@
 ﻿using Butterfly.MultiPlatform.Handlers.Client;
+using Butterfly.MultiPlatform.Interfaces.Services.Clients;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
 using Butterfly.MultiPlatform.Packets.Pings;
 using Networker.Client;
@@ -17,9 +18,12 @@ namespace Butterfly.Xamarin.Core
     {
 
         private readonly INetworkClient networkClient;
-        public ButterflyMobileClient(INetworkClient networkClient)
+        private readonly IConnectedClientInfoUpdaterService connectedClientInfoUpdaterService;
+        public ButterflyMobileClient(INetworkClient networkClient, 
+            IConnectedClientInfoUpdaterService connectedClientInfoUpdaterService)
         {
             this.networkClient = networkClient;
+            this.connectedClientInfoUpdaterService = connectedClientInfoUpdaterService;
         }
 
         public void Start()
@@ -40,12 +44,14 @@ namespace Butterfly.Xamarin.Core
                 {
                     Console.WriteLine(
                         $"Client has connected to {socket.RemoteEndPoint}");
+                    this.connectedClientInfoUpdaterService.Start();
                 };
 
                 this.networkClient.Disconnected += (sender, socket) =>
                 {
                     Console.WriteLine(
                         $"Client has disconnected from {socket.RemoteEndPoint}");
+                    this.connectedClientInfoUpdaterService.Stop();
                 };
 
                 this.networkClient.Connect();

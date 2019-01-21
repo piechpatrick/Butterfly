@@ -41,67 +41,78 @@ namespace Networker.Client
 
         public void Connect()
         {
-            if(this.options.TcpPort > 0 && this.tcpSocket == null)
+            try
             {
-                this.tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                this.tcpSocket.Connect(this.options.Ip, this.options.TcpPort);
-                this.Connected?.Invoke(this, this.tcpSocket);
+                if (this.options.TcpPort > 0 && this.tcpSocket == null)
+                {
+                    this.tcpSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    this.tcpSocket.Connect(this.options.Ip, this.options.TcpPort);
+                    this.Connected?.Invoke(this, this.tcpSocket);
 
-                Task.Factory.StartNew(() =>
-                                      {
-                                          while(this.isRunning)
+                    Task.Factory.StartNew(() =>
                                           {
-                                              if(this.tcpSocket.Poll(10, SelectMode.SelectWrite))
+                                              while (this.isRunning)
                                               {
-                                                  this.packetProcessor.Process(this.tcpSocket);
+                                                  if (this.tcpSocket.Poll(10, SelectMode.SelectWrite))
+                                                  {
+                                                      this.packetProcessor.Process(this.tcpSocket);
+                                                  }
+
+                                                  if (!this.tcpSocket.Connected)
+                                                  {
+                                                      this.Disconnected?.Invoke(this, this.tcpSocket);
+                                                      break;
+                                                  }
                                               }
 
-                                              if(!this.tcpSocket.Connected)
+                                              if (this.tcpSocket.Connected)
                                               {
+                                                  this.tcpSocket.Disconnect(false);
+                                                  this.tcpSocket.Close();
                                                   this.Disconnected?.Invoke(this, this.tcpSocket);
-                                                  break;
                                               }
-                                          }
 
-                                          if(this.tcpSocket.Connected)
+                                              this.tcpSocket = null;
+                                          });
+                }
+
+                if (this.options.UdpPort > 0 && this.udpClient == null)
+                {
+                    this.udpClient = new UdpClient(this.options.UdpPortLocal);
+                    var address = IPAddress.Parse(this.options.Ip);
+                    this.udpEndpoint = new IPEndPoint(address, this.options.UdpPort);
+
+                    Task.Factory.StartNew(() =>
                                           {
-                                              this.tcpSocket.Disconnect(false);
-                                              this.tcpSocket.Close();
-                                              this.Disconnected?.Invoke(this, this.tcpSocket);
-                                          }
+                                              this.logger.LogInformation($"Connecting to UDP at {this.options.Ip}:{this.options.UdpPort}");
 
-                                          this.tcpSocket = null;
-                                      });
+                                              while (this.isRunning)
+                                              {
+                                                  try
+                                                  {
+                                                      var data = this.udpClient.ReceiveAsync()
+                                                                     .GetAwaiter()
+                                                                     .GetResult();
+
+                                                      this.packetProcessor.Process(data);
+                                                      var res = this.ReadBySize(5000);
+                                                  }
+                                                  catch (Exception ex)
+                                                  {
+                                                      this.logger.Error(ex);
+                                                  }
+                                              }
+                                              this.udpClient = null;
+                                          });
+                }
             }
-
-            if(this.options.UdpPort > 0 && this.udpClient == null)
+            catch (Exception ex)
             {
-                this.udpClient = new UdpClient(this.options.UdpPortLocal);
-                var address = IPAddress.Parse(this.options.Ip);
-                this.udpEndpoint = new IPEndPoint(address, this.options.UdpPort);
-
-                Task.Factory.StartNew(() =>
-                                      {
-                                          this.logger.LogInformation($"Connecting to UDP at {this.options.Ip}:{this.options.UdpPort}");
-
-                                          while(this.isRunning)
-                                          {
-                                              try
-                                              {
-                                                  var data = this.udpClient.ReceiveAsync()
-                                                                 .GetAwaiter()
-                                                                 .GetResult();
-
-                                                  this.packetProcessor.Process(data);
-                                                  var res = this.ReadBySize(5000);
-                                              }
-                                              catch(Exception ex)
-                                              {
-                                                  this.logger.Error(ex);
-                                              }
-                                          }
-                                          this.udpClient = null;
-                                      });
+                while (this.Connected == null)
+                {
+                    Thread.Sleep(2000);
+                    this.Connect();
+                }          
             }
         }
 

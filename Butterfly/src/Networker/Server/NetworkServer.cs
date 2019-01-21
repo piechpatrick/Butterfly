@@ -112,9 +112,8 @@ namespace Networker.Server
             }
         }
 
-        public void SendTcpSpecificClient<T>(T packet,int index)
+        public void Send<T>(T packet,ITcpConnection connection)
         {
-            var connection = this.GetConnections()?.GetConnections()[0];
             if(connection != null)
             {
                 var serialisedPacket = this.packetSerialiser.Serialise(packet);

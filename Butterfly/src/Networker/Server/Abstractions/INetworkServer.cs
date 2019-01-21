@@ -13,6 +13,6 @@ namespace Networker.Server.Abstractions
         EventHandler<TcpConnectionDisconnectedEventArgs> ClientDisconnected { get; set; }
         void Broadcast<T>(T packet);
         void SendToAllTCP<T>(T packet);
-        void SendTcpSpecificClient<T>(T packet, int index);
+        void Send<T>(T packet, ITcpConnection tcpConnection);
     }
 }

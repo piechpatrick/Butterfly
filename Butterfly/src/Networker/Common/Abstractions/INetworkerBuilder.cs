@@ -31,5 +31,7 @@ namespace Networker.Common.Abstractions
 
         //Info
         TBuilder SetPacketBufferSize(int size);
+
+        IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null);
     }
 }

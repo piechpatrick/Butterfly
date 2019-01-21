@@ -4,14 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Butterfly.Windows.WPF.Client"
+        xmlns:maps="clr-namespace:Butterfly.Windows.WPF.Client.Controls.Maps"
         xmlns:viewModels="clr-namespace:Butterfly.Windows.WPF.Client.ViewModels;assembly=Butterfly.Windows.WPF.Client.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" 
         xmlns:mvvm="http://prismlibrary.com/"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel, IsDesignTimeCreatable=True}"
-        mvvm:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <Image Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged}" />
-
+        mvvm:ViewModelLocator.AutoWireViewModel="True"
+        WindowState="Maximized">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="150" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition MinWidth="150" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" >
+            <Image Source="{Binding ImageSource, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5" ResizeDirection="Columns" />
+        <Grid Grid.Column="2">
+            <maps:BrowserMapControl  />
+        </Grid>
     </Grid>
 </Window>

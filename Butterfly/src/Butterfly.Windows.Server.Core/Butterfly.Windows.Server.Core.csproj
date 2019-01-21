@@ -94,6 +94,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectedClients\ConnectedClients.cs" />
+    <Compile Include="ConnectedClients\IConnectedClients.cs" />
+    <Compile Include="HandlerWrappers\ConnectedClientInfoHandlerWrapper.cs" />
     <Compile Include="Server\ButterflyServer.cs" />
     <Compile Include="Server\IButterflyServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

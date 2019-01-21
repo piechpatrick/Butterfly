@@ -18,8 +18,8 @@ namespace Networker.Server
 
         public override INetworkServer Build()
         {
+            serviceCollection.AddSingleton<INetworkServerBuilder>(this);
             this.SetupSharedDependencies();
-
             serviceCollection.AddSingleton<ITcpConnections, TcpConnections>();
             serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
             serviceCollection.AddSingleton<IServerInformation, ServerInformation>();
@@ -37,10 +37,10 @@ namespace Networker.Server
                 serviceCollection
                     .AddSingleton<IUdpSocketListenerFactory, DefaultUdpSocketListenerFactory>();
 
+            serviceCollection.AddSingleton<INetworkServerBuilder>(this);
 
-            var serviceProvider = this.GetServiceProvider();
-
-            return serviceProvider.GetService<INetworkServer>();
+            //return serviceProvider.GetService<INetworkServer>();
+            return null;
         }
 
         public INetworkServerBuilder SetMaximumConnections(int maxConnections)

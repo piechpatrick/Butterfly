@@ -140,7 +140,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Controls\Maps\BrowserMapControl.xaml.cs">
+      <DependentUpon>BrowserMapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Maps\BrowserMapControlViewModel.cs" />
+    <Page Include="Controls\Maps\BrowserMapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -204,6 +211,10 @@
     <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
       <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
       <Name>Butterfly.Windows.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.ViewModels\Butterfly.Windows.ViewModels.csproj">
+      <Project>{707dcc31-8d55-4373-8224-dcc994a96202}</Project>
+      <Name>Butterfly.Windows.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Core\Butterfly.Windows.WPF.Client.Core.csproj">
       <Project>{e0802189-4d47-4bc5-89ba-a67c93e7cfe2}</Project>
