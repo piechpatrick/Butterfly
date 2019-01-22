@@ -54,7 +54,8 @@ namespace Butterfly.Windows.WPF.Client
         {
             this.MenuItems = new ObservableCollection<MenuItem>()
             {
-                new MenuItem("Homepage",new Home())
+                new MenuItem("Homepage",new Home()),
+                new MenuItem("Urządzenia", new ConnectedClientsView())
             };
         }
     }

@@ -35,17 +35,6 @@ namespace Butterfly.Windows.WPF.Client
         {
             InitializeComponent();
 
-            //Task.Factory.StartNew(() =>
-            //{
-            //    Thread.Sleep(2500);
-            //}).ContinueWith(t =>
-            //{
-                
-            //    MainSnackbar.MessageQueue.Enqueue("test");
-            //}, TaskScheduler.FromCurrentSynchronizationContext());
-
-            //DataContext = new MainWindowViewModel(MainSnackbar.MessageQueue);
-
             Snackbar = this.MainSnackbar;
 
             networkClient.Connected += (sender, socket) =>

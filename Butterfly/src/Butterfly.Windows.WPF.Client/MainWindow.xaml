@@ -5,7 +5,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Material Design in XAML" Height="800" Width="1100"
+        Title="Butterfly Client"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -18,7 +18,7 @@
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel, IsDesignTimeCreatable=True}"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        WindowState="Maximized">
+        WindowState="Maximized" Icon="Resources\butterfly.png">
     <Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy"></CommandBinding>
     </Window.CommandBindings>
@@ -76,7 +76,7 @@
                                 <Button Content="Goodbye" Click="MenuPopupButton_OnClick"/>
                             </StackPanel>
                         </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Butterfly v1.0 beta</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Butterfly Client</TextBlock>
                     </DockPanel>
                 </materialDesign:ColorZone>
                 <Grid>
