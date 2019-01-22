@@ -38,6 +38,15 @@
     <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
@@ -85,6 +94,12 @@
     </Reference>
     <Reference Include="Prism.Wpf, Version=7.1.0.431, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.7.1.0.431\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.1.0.12\lib\net45\ShowMeTheXAML.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML.AvalonEdit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.1.0.12\lib\net45\ShowMeTheXAML.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -140,11 +155,46 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ConnectedClientLists\ClientsListViewControl.xaml.cs">
+      <DependentUpon>ClientsListViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ConnectedClientLists\ClientsListViewControlViewModel.cs" />
+    <Compile Include="Controls\Dialogs\SampleMessageDialog.xaml.cs">
+      <DependentUpon>SampleMessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainViews\ConnectedClientsView.xaml.cs">
+      <DependentUpon>ConnectedClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainViews\ConnectedClientsViewModel.cs" />
+    <Compile Include="Controls\MainViews\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Maps\BrowserMapControl.xaml.cs">
       <DependentUpon>BrowserMapControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Maps\BrowserMapControlViewModel.cs" />
+    <Compile Include="Controllers\SnackbarController.cs" />
+    <Page Include="Controls\ConnectedClientLists\ClientsListViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dialogs\SampleMessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainViews\ConnectedClientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MainViews\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Maps\BrowserMapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Icons\DevicesIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,6 +208,10 @@
     </Compile>
     <Compile Include="Builders\ButterflyWPFClientBuilder.cs" />
     <Compile Include="Builders\IButterflyWPFClientBuilder.cs" />
+    <Compile Include="Extensions\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Icons\DevicesIcon.xaml.cs">
+      <DependentUpon>DevicesIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -165,6 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="MenuItems\MenuItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -196,6 +251,10 @@
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
       <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Modules\Butterfly.MultiPlatform.Modules.csproj">
+      <Project>{794D5C4D-2D16-44BE-B464-DE9F463DDEA7}</Project>
+      <Name>Butterfly.MultiPlatform.Modules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj">
       <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
       <Name>Butterfly.MultiPlatform.Packets</Name>
@@ -216,6 +275,10 @@
       <Project>{707dcc31-8d55-4373-8224-dcc994a96202}</Project>
       <Name>Butterfly.Windows.ViewModels</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Abstractions\Butterfly.Windows.WPF.Client.Abstractions.csproj">
+      <Project>{46996C5E-3C23-4A60-9300-6439CB0003EA}</Project>
+      <Name>Butterfly.Windows.WPF.Client.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Core\Butterfly.Windows.WPF.Client.Core.csproj">
       <Project>{e0802189-4d47-4bc5-89ba-a67c93e7cfe2}</Project>
       <Name>Butterfly.Windows.WPF.Client.Core</Name>
@@ -229,5 +292,6 @@
       <Name>Networker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

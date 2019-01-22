@@ -6,11 +6,9 @@ using ZeroFormatter;
 
 namespace Butterfly.MultiPlatform.ViewModels
 {
-    
     public interface IConnectedClientViewModel
     {
         string Name { get; }
-
         bool IsAdmin { get; set; }
     }
 }

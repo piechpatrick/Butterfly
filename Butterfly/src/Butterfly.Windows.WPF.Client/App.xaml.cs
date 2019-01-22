@@ -1,8 +1,12 @@
-﻿using Butterfly.Windows.WPF.Client.Builders;
+﻿using Butterfly.Windows.WPF.Client.Abstractions.Snackbar;
+using Butterfly.Windows.WPF.Client.Builders;
+using Butterfly.Windows.WPF.Client.Controllers;
 using Butterfly.Windows.WPF.Client.Core.Client;
+using MaterialDesignThemes.Wpf;
 using Networker.Client;
 using Networker.Client.Abstractions;
 using Prism.Ioc;
+using Prism.Regions;
 using Prism.Unity;
 using System;
 using System.Collections.Generic;
@@ -22,9 +26,16 @@ namespace Butterfly.Windows.WPF.Client
     {
         protected override Window CreateShell()
         {
-            var builder = new ButterflyWPFClientBuilder(Container.GetContainer());
+            var container = Container.GetContainer();
+            var builder = new ButterflyWPFClientBuilder(container);
+
             var client = builder.Build();
             return Container.Resolve<MainWindow>();
+        }
+
+        protected override void ConfigureDefaultRegionBehaviors(IRegionBehaviorFactory regionBehaviors)
+        {
+            base.ConfigureDefaultRegionBehaviors(regionBehaviors);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -34,8 +45,7 @@ namespace Butterfly.Windows.WPF.Client
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
-
+            containerRegistry.RegisterSingleton<ISnackbarController, SnackbarController>();
         }
     }
 }

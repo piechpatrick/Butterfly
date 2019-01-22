@@ -140,6 +140,10 @@
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
       <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Modules\Butterfly.MultiPlatform.Modules.csproj">
+      <Project>{794D5C4D-2D16-44BE-B464-DE9F463DDEA7}</Project>
+      <Name>Butterfly.MultiPlatform.Modules</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.Maps\Butterfly.Windows.Maps.csproj">
       <Project>{B7D57AFD-E5DD-4737-8AB6-E4F5916DC358}</Project>
       <Name>Butterfly.Windows.Maps</Name>

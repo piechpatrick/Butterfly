@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ZeroFormatter" Version="1.6.4" />
+    <PackageReference Include="ZeroFormatter.Interfaces" Version="1.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Handlers\Butterfly.MultiPlatform.Handlers.csproj" />
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj" />

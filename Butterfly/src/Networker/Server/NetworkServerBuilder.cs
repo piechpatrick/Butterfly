@@ -64,5 +64,12 @@ namespace Networker.Server
             serviceCollection.AddSingleton<IUdpSocketListenerFactory, T>();
             return this;
         }
+
+        public INetworkServerBuilder RegiserUnionsModule<T>()
+            where T : class
+        {
+            serviceCollection.AddSingleton<T>(Activator.CreateInstance<T>());
+            return this;
+        }
     }
 }

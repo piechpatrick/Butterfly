@@ -1,4 +1,5 @@
 ﻿using Butterfly.MultiPlatform.Interfaces.Builders;
+using Butterfly.MultiPlatform.Modules.Unions;
 using Butterfly.Windows.Modules.Client;
 using Butterfly.Windows.Server.Handlers.WPFClient;
 using Butterfly.Windows.WPF.Client.Core.Client;
@@ -32,6 +33,7 @@ namespace Butterfly.Windows.WPF.Client.Builders
                             networkClientBuilder.UseIp("87.206.204.123")
                                                 .UseTcp(7894)
                                                 //.UseUdp(7895, 7895)
+                                                .RegiserUnionsModule<DefaultDynamicUnionsModule>()
                                                 .RegisterPacketHandlerModule<WPFClientHandlerModule>()
                                                 .UseZeroFormatter()
                                                 .SetPacketBufferSize(2000000)

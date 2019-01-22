@@ -6,6 +6,7 @@ using Butterfly.MultiPlatform.Interfaces.Services;
 using Butterfly.MultiPlatform.Interfaces.Services.Clients;
 using Butterfly.MultiPlatform.Interfaces.Services.Video;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
+using Butterfly.MultiPlatform.Modules.Unions;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
 using Networker.Formatter.ZeroFormatter;
@@ -33,6 +34,7 @@ namespace Butterfly.Xamarin.Core.Builders
             builderNetwork.UseIp("87.206.204.123")
                        .UseTcp(7894)
                        .UseUdp(7895,7896)
+                       .RegiserUnionsModule<DefaultDynamicUnionsModule>()
                        .RegisterPacketHandlerModule<DefaultPacketHandlerModule>()
                        .UseZeroFormatter()
                        .SetPacketBufferSize(5000000)

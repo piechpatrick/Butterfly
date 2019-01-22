@@ -12,6 +12,7 @@ using System;
 using Butterfly.Windows.Server.Core.ConnectedClients;
 using Butterfly.Windows.Modules.Server;
 using Butterfly.Windows.Server.Core.HandlerWrappers;
+using Butterfly.MultiPlatform.Modules.Unions;
 
 namespace Butterfly.Windows.Server.Builders.Server
 {
@@ -39,6 +40,7 @@ namespace Butterfly.Windows.Server.Builders.Server
                                     loggingBuilder.SetMinimumLevel(
                                         LogLevel.Debug);
                                 })
+                                .RegiserUnionsModule<DefaultDynamicUnionsModule>()
                                 .RegisterPacketHandlerModule<PingPacketHandlerModule>()
                                 .RegisterPacketHandlerModule<AudioPacketHandlerModule>()
                                 .RegisterPacketHandlerModule<VideoPacketHandlerModule>()
@@ -54,6 +56,10 @@ namespace Butterfly.Windows.Server.Builders.Server
             this.serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
             serviceProvider = this.GetServiceProvider();
             serverBuilder.GetServiceProvider(serviceProvider);
+
+
+
+
 
             return serviceProvider.GetService<IButterflyServer>();
         }

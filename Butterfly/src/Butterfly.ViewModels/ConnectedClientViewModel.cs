@@ -10,18 +10,17 @@ namespace Butterfly.MultiPlatform.ViewModels
     [ZeroFormattable]
     public class ConnectedClientViewModel : IConnectedClientViewModel
     {
-
         public ConnectedClientViewModel()
         {
-
+            
         }
-
         [Index(0)]
         public virtual string Name { get; set; }
 
         [Index(1)]
         public virtual string MachineName { get; set; }
-        [Index(3)]
+        [Index(2)]
         public virtual bool IsAdmin { get; set; }
+
     }
 }

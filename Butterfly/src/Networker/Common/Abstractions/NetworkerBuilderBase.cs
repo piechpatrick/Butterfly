@@ -119,5 +119,11 @@ namespace Networker.Common.Abstractions
 
             return serviceProvider;
         }
+
+        public TBuilder RegiserUnionsModule<T>() where T : class
+        {
+            serviceCollection.AddSingleton<T>(Activator.CreateInstance<T>());
+            return this as TBuilder;
+        }
     }
 }

@@ -18,6 +18,9 @@ namespace Networker.Common.Abstractions
         TBuilder RegisterPacketHandlerModule<T>()
             where T : IPacketHandlerModule;
 
+        TBuilder RegiserUnionsModule<T>()
+            where T : class;
+
         //Logging
         TBuilder SetLogLevel(LogLevel logLevel);
 

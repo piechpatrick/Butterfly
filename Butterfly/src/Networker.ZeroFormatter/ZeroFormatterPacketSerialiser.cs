@@ -41,7 +41,7 @@ namespace Networker.Formatter.ZeroFormatter
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("serialize");
+                throw new ArgumentException("serialize");                
             }
         }
 

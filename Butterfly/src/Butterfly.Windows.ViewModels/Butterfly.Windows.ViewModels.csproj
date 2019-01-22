@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseViewModel.cs" />
+    <Compile Include="Base\SelectableViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +77,10 @@
     <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
       <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
       <Name>Butterfly.Windows.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Abstractions\Butterfly.Windows.WPF.Client.Abstractions.csproj">
+      <Project>{46996C5E-3C23-4A60-9300-6439CB0003EA}</Project>
+      <Name>Butterfly.Windows.WPF.Client.Abstractions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Core\Butterfly.Windows.WPF.Client.Core.csproj">
       <Project>{E0802189-4D47-4BC5-89BA-A67C93E7CFE2}</Project>

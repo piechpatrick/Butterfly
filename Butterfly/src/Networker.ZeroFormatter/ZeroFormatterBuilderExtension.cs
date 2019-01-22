@@ -22,5 +22,6 @@ namespace Networker.Formatter.ZeroFormatter
             serviceCollection.AddSingleton<IPacketSerialiser, ZeroFormatterPacketSerialiser>();
             return clientBuilder;
         }
+        
     }
 }
