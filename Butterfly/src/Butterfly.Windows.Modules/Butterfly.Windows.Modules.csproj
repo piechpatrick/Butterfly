@@ -55,6 +55,10 @@
     <Compile Include="Server\ConnectedClientHandlerModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Handlers\Butterfly.MultiPlatform.Handlers.csproj">
+      <Project>{C2DFDB67-5284-4E1A-89F0-B4D38EAB270F}</Project>
+      <Name>Butterfly.MultiPlatform.Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj">
       <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
       <Name>Butterfly.MultiPlatform.Packets</Name>

@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Butterfly.MultiPlatform.Common.Background.Workers;
 using Butterfly.MultiPlatform.Interfaces.Services.Clients;
+using Butterfly.Xamarin.Core;
 using Networker.Client.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Butterfly.Xamarin.Android.Services.Updaters
         public ConnectedClientInfoUpdaterService(INetworkClient client)
             :base()
         {
-            this.connectedClientInfoUpdaterBackgroundWorker = new ConnectedClientInfoUpdaterBackgroundWorker(client);
+            this.connectedClientInfoUpdaterBackgroundWorker = new ConnectedClientInfoUpdaterBackgroundWorker(
+                client);
         }
 
         public ConnectedClientInfoUpdaterService()
@@ -44,7 +46,7 @@ namespace Butterfly.Xamarin.Android.Services.Updaters
 
         public void Start()
         {
-            this.connectedClientInfoUpdaterBackgroundWorker.Start();
+            //this.connectedClientInfoUpdaterBackgroundWorker.Start();
         }
 
         public void Stop()

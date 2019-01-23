@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Butterfly.Windows.Server.Core.ConnectedClients
 {
-    public interface IConnectedClients : IEnumerable<IConnectedClientViewModelServerSide>
+    public interface IConnectedClients 
     {
         void Add(IConnectedClientViewModelServerSide connectedClientViewModel);
         void Remove(IConnectedClientViewModelServerSide connectedClientViewModel);
+        IEnumerable<IConnectedClientViewModelServerSide> GetAll();
     }
 }

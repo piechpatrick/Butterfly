@@ -1,4 +1,5 @@
-﻿using Butterfly.MultiPlatform.Packets.Video;
+﻿using Butterfly.MultiPlatform.Interfaces;
+using Butterfly.MultiPlatform.Packets.Video;
 using Networker.Common;
 using Networker.Common.Abstractions;
 using Networker.Server.Abstractions;
@@ -19,12 +20,11 @@ namespace Butterfly.Windows.Server.Handlers.Video
         }
         public override Task Process(Nv21FormatVideoPacket packet, ISender sender)
         {
-            //return Task.Factory.StartNew(() =>
-            //{
-            //    this.networkServer.SendTcpSpecificClient<Nv21FormatVideoPacket>(packet,0);
-            //});
+            return Task.Factory.StartNew(() =>
+            {
+                
+            });
             //this.networkServer.Send<Nv21FormatVideoPacket>(packet, sender.);
-            return null;
         }
     }
 }

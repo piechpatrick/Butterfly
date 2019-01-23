@@ -6,8 +6,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
-using Butterfly.Windows.Server.Core.HandlerWrappers;
 using Butterfly.Windows.Server.Handlers.Server;
+using Butterfly.MultiPlatform.ViewModels;
 
 namespace Butterfly.Server.Core.Server
 {
@@ -17,18 +17,15 @@ namespace Butterfly.Server.Core.Server
         private readonly INetworkServer networkServer;
         private readonly IConnectedClients connectedClients;
         private readonly ConnectedClientInfoHandler connectedClientInfoHandler;
-        private readonly IConnectedClientInfoHandlerWrapper connectedClientInfoHandlerWrapper;
 
         public ButterflyServer(
             INetworkServer networkServer,
             IConnectedClients connectedClients,
-            IConnectedClientInfoHandlerWrapper connectedClientInfoHandlerWrapper,
             ConnectedClientInfoHandler connectedClientInfoHandler)
         {
             this.networkServer = networkServer;
             this.connectedClients = connectedClients;
             this.connectedClientInfoHandler = connectedClientInfoHandler;
-            this.connectedClientInfoHandlerWrapper = connectedClientInfoHandlerWrapper;
         }
         public void Start()
         {
@@ -68,7 +65,7 @@ namespace Butterfly.Server.Core.Server
                 {
                     Console.WriteLine(
                         $"Client Disconnected - {eventArgs.Connection.Socket.RemoteEndPoint}");
-                    foreach (var client in this.connectedClients)
+                    foreach (var client in this.connectedClients.GetAll())
                     {
                         
                     }
@@ -78,24 +75,37 @@ namespace Butterfly.Server.Core.Server
                 {
                     while (true)
                     {
-                        
-                        var cfg = new ClientConfigurationPacket()
-                        {
-                            AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = can }
-                        };
-                        this.networkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
-                        can = !cfg.AudioSniffConfig.CanRecive;
-
-                        foreach (var item in this.connectedClients.Where(c => c.IsAdmin))
+                        try
                         {
 
+                            var cfg = new ClientConfigurationPacket()
+                            {
+                                AudioSniffConfig = new AudioSniffConfigurationPacket() { CanRecive = can }
+                            };
+                            this.networkServer.SendToAllTCP<ClientConfigurationPacket>(cfg);
+
+                            //can = !cfg.AudioSniffConfig.CanRecive;
+
+                            var admins = this.connectedClients.GetAll().Where(c => c.IsAdmin);
+                            foreach (var item in admins)
+                            {
+                                var connectedd = this.connectedClients.GetAll().Cast<ConnectedClientViewModel>().ToList();
+                                var packet = new ConnectedClientsPacket()
+                                {
+                                    ConnectedClients = new System.Collections.Generic.List<ConnectedClientInfoPacket>()
+                                };
+                                foreach (var connected in connectedd)
+                                    packet.ConnectedClients.Add(new ConnectedClientInfoPacket() { ConnectedClientViewModel = connected });
+
+                                networkServer.Send<ConnectedClientsPacket>(packet, item.Connection);
+                            }
+
+                            Thread.Sleep(10000);
                         }
-
-                        Thread.Sleep(10000);
+                        catch { continue; }
                     }
                 });
 
-                this.AttachHandlers();
 
                 run = true;
                 while (run)
@@ -112,11 +122,6 @@ namespace Butterfly.Server.Core.Server
         public void Stop()
         {
             
-        }
-
-        private void AttachHandlers()
-        {
-            this.connectedClientInfoHandlerWrapper.Attach(this.connectedClientInfoHandler);
         }
     }
 }

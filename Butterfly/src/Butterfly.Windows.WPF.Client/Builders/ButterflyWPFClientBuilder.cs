@@ -3,11 +3,11 @@ using Butterfly.MultiPlatform.Modules.Unions;
 using Butterfly.Windows.Modules.Client;
 using Butterfly.Windows.Server.Handlers.WPFClient;
 using Butterfly.Windows.WPF.Client.Core.Client;
-using Butterfly.Windows.WPF.Client.Core.HandlerWrappers.Video;
 using Microsoft.Extensions.DependencyInjection;
 using Networker.Client;
 using Networker.Client.Abstractions;
 using Networker.Formatter.ZeroFormatter;
+using Prism.Events;
 using Prism.Ioc;
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,10 @@ namespace Butterfly.Windows.WPF.Client.Builders
         {
             this.RegisterViewModels();
             var networkClientBuilder = new NetworkClientBuilder();
+            var services = networkClientBuilder.GetServiceCollection();
+
+            services.AddSingleton<IEventAggregator>(this.containerRegistry.Resolve<IEventAggregator>());
+
                             networkClientBuilder.UseIp("87.206.204.123")
                                                 .UseTcp(7894)
                                                 //.UseUdp(7895, 7895)
@@ -44,12 +48,9 @@ namespace Butterfly.Windows.WPF.Client.Builders
 
 
             this.containerRegistry.RegisterInstance<WPFNv21VideoPacketHandler>(videoPacketHandler);
-            this.containerRegistry.RegisterType<INv21PacketHandlerWrapper, Nv21PacketHandlerWrapper>();
-            this.containerRegistry.Resolve<INv21PacketHandlerWrapper>();
-
-
             this.containerRegistry.RegisterInstance<INetworkClient>(networkClient);
-            this.containerRegistry.RegisterInstance<IButterflyWPFClient>(new ButterflyWPFClient(networkClient));
+            this.containerRegistry.RegisterInstance<IButterflyWPFClient>(new ButterflyWPFClient(networkClient,
+                this.containerRegistry.Resolve<IEventAggregator>()));
 
             return containerRegistry.Resolve<IButterflyWPFClient>();
         }

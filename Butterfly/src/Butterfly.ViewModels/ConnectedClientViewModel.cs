@@ -18,9 +18,18 @@ namespace Butterfly.MultiPlatform.ViewModels
         public virtual string Name { get; set; }
 
         [Index(1)]
-        public virtual string MachineName { get; set; }
+        public virtual string Machine { get; set; }
         [Index(2)]
         public virtual bool IsAdmin { get; set; }
+        [Index(3)]
+        public virtual double Latitude { get; set; }
+        [Index(4)]
+        public virtual double Longitude { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name } {Machine}";
+        }
 
     }
 }

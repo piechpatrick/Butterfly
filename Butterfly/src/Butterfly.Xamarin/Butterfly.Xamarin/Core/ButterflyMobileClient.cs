@@ -1,11 +1,15 @@
-﻿using Butterfly.MultiPlatform.Handlers.Client;
+﻿using Android.Content;
+using Butterfly.MultiPlatform.Handlers.Client;
 using Butterfly.MultiPlatform.Interfaces.Services.Clients;
 using Butterfly.MultiPlatform.Modules.HandlersModules;
+using Butterfly.MultiPlatform.Packets.Configuration;
 using Butterfly.MultiPlatform.Packets.Pings;
+using Butterfly.MultiPlatform.ViewModels;
 using Networker.Client;
 using Networker.Client.Abstractions;
 using Networker.Formatter.ProtobufNet;
 using Networker.Formatter.ZeroFormatter;
+using Plugin.DeviceInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +28,15 @@ namespace Butterfly.Xamarin.Core
         {
             this.networkClient = networkClient;
             this.connectedClientInfoUpdaterService = connectedClientInfoUpdaterService;
+            this.ClientViewModel = new ConnectedClientViewModel()
+            {
+                IsAdmin = false,
+                Machine = CrossDeviceInfo.Current.Model,
+                Name = ".. android"
+            };
         }
+
+        public abstract void PublishSelfInfo();
 
         public void Start()
         {
@@ -35,6 +47,8 @@ namespace Butterfly.Xamarin.Core
         {
             //Handle Exceptions 
         }
+
+        public IConnectedClientViewModel ClientViewModel { get;  set; }
 
         private void TryConnect()
         {          
@@ -54,31 +68,24 @@ namespace Butterfly.Xamarin.Core
                     this.connectedClientInfoUpdaterService.Stop();
                 };
 
-                this.networkClient.Connect();
-
-                Task.Factory.StartNew(() =>
-                {
-                    while (true)
-                    {
-                        //client.Send(new PingPacket
-                        //{
-                        //    Text = "asdf"
-                        //});
-
-                        //this.networkClient.SendUdp(new PingPacket
-                        //{
-                        //    Text = "asdf"
-                        //});
-
-                        Thread.Sleep(5000);
-                    }
-                });
+                this.networkClient.Connect();           
             }
             catch (Exception e)
             {
                 Thread.Sleep(5000);
                 this.TryConnect();
             }
+        }
+
+        protected Context Context { get; private set; }
+        public void SetContext(object context)
+        {
+            this.Context = context as Context;
+        }
+
+        public object GetContext()
+        {
+            return this.Context;
         }
     }
 }

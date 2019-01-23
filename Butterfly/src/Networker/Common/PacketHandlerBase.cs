@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Networker.Common.Abstractions;
+using Butterfly.MultiPlatform.Interfaces.Mediators;
+using Butterfly.MultiPlatform.Interfaces;
 
 namespace Networker.Common
 {

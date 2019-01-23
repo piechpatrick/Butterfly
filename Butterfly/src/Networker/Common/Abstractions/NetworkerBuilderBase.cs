@@ -97,24 +97,31 @@ namespace Networker.Common.Abstractions
 
         public override IServiceProvider GetServiceProvider(IServiceProvider serviceProvider = null)
         {
-            if(serviceProvider == null)
-                serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
-
-            PacketSerialiserProvider.PacketSerialiser = serviceProvider.GetService<IPacketSerialiser>();
-
-            IPacketHandlers packetHandlers = serviceProvider.GetService<IPacketHandlers>();
-            foreach (var packetHandlerModule in this.modules)
+            try
             {
-                foreach (var packetHandler in packetHandlerModule.GetPacketHandlers())
+                if (serviceProvider == null)
+                    serviceProvider = this.serviceProviderFactory != null ? this.serviceProviderFactory.Invoke() : serviceCollection.BuildServiceProvider();
+
+                PacketSerialiserProvider.PacketSerialiser = serviceProvider.GetService<IPacketSerialiser>();
+
+                IPacketHandlers packetHandlers = serviceProvider.GetService<IPacketHandlers>();
+                foreach (var packetHandlerModule in this.modules)
                 {
-                    packetHandlers.Add(PacketSerialiserProvider.PacketSerialiser.CanReadName ? packetHandler.Key.Name : "Default",
-                        (IPacketHandler)serviceProvider.GetService(packetHandler.Value));
+                    foreach (var packetHandler in packetHandlerModule.GetPacketHandlers())
+                    {
+                        packetHandlers.Add(PacketSerialiserProvider.PacketSerialiser.CanReadName ? packetHandler.Key.Name : "Default",
+                            (IPacketHandler)serviceProvider.GetService(packetHandler.Value));
+                    }
+                }
+
+                if (!PacketSerialiserProvider.PacketSerialiser.CanReadName && packetHandlers.GetPacketHandlers().Count > 1)
+                {
+                    throw new Exception("A PacketSerialiser which cannot identify a packet can only support up to one packet type");
                 }
             }
-
-            if (!PacketSerialiserProvider.PacketSerialiser.CanReadName && packetHandlers.GetPacketHandlers().Count > 1)
+            catch(Exception ex)
             {
-                throw new Exception("A PacketSerialiser which cannot identify a packet can only support up to one packet type");
+
             }
 
             return serviceProvider;

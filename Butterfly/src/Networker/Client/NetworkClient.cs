@@ -156,14 +156,21 @@ namespace Networker.Client
 
         public void Send<T>(T packet)
         {
-            if(this.tcpSocket == null)
+            try
             {
-                throw new Exception("TCP client has not been initialised");
+                if (this.tcpSocket == null)
+                {
+                    throw new Exception("TCP client has not been initialised");
+                }
+
+                var serialisedPacket = this.packetSerialiser.Serialise(packet);
+
+                var result = this.tcpSocket.Send(serialisedPacket);
             }
-
-            var serialisedPacket = this.packetSerialiser.Serialise(packet);
-
-            var result = this.tcpSocket.Send(serialisedPacket);
+            catch(Exception ex)
+            {
+                logger.Error(ex);
+            }
         }
 
         public void SendUdp<T>(T packet)

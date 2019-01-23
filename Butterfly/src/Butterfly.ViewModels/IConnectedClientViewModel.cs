@@ -8,7 +8,12 @@ namespace Butterfly.MultiPlatform.ViewModels
 {
     public interface IConnectedClientViewModel
     {
-        string Name { get; }
+        string Name { get; set; }
         bool IsAdmin { get; set; }
+        string Machine { get; set; }
+
+        double Longitude { get; set; }
+
+        double Latitude { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Butterfly.MultiPlatform.Packets.Configuration;
+﻿using Butterfly.MultiPlatform.Handlers.Client;
+using Butterfly.MultiPlatform.Packets.Configuration;
 using Butterfly.Windows.Server.Handlers.Server;
 using Networker.Common;
 using System;
@@ -14,6 +15,7 @@ namespace Butterfly.Windows.Modules.Server
         public ConnectedClientHandlerModule()
         {
             this.AddPacketHandler<ConnectedClientInfoPacket, ConnectedClientInfoHandler>();
+            this.AddPacketHandler<ConnectedClientsPacket, ConnectedClientsPacketHandler>();
         }
     }
 }

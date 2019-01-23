@@ -1,5 +1,7 @@
 ﻿using Butterfly.MultiPlatform.Intefaces.Audio;
+using Butterfly.MultiPlatform.Interfaces;
 using Butterfly.MultiPlatform.Interfaces.Controllers;
+using Butterfly.MultiPlatform.Interfaces.Services;
 using Butterfly.MultiPlatform.Interfaces.Services.Video;
 using Butterfly.MultiPlatform.Packets.Audio;
 using Butterfly.MultiPlatform.Packets.Configuration;
@@ -20,18 +22,21 @@ namespace Butterfly.MultiPlatform.Handlers.Client
         private readonly IAudioRecorderService recorderService;
         private readonly IServiceController serviceController;
         private readonly ICameraRecorderService cameraRecorderService;
+        private readonly ILocalizationService localizationService;
 
         public ClientConfigurationPacketHandler(IPacketSerialiser packetSerialiser, 
             INetworkClient client,
             IServiceController serviceController,
             IAudioRecorderService recorderService,
-            ICameraRecorderService cameraRecorderService)
+            ICameraRecorderService cameraRecorderService,
+            ILocalizationService localizationService)
             : base(packetSerialiser)
         {
             this.client = client;
             this.serviceController = serviceController;
             this.recorderService = recorderService;
             this.cameraRecorderService = cameraRecorderService;
+            this.localizationService = localizationService;
         }
 
         public override async Task Process(ClientConfigurationPacket packet, ISender sender)
@@ -40,6 +45,7 @@ namespace Butterfly.MultiPlatform.Handlers.Client
             {
                 this.cameraRecorderService.Start();
                 this.recorderService.Start();
+                this.localizationService.Start();
 
                 //if (!this.recorderService.IsRunning)
                 //{

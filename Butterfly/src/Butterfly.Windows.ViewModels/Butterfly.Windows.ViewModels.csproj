@@ -74,6 +74,10 @@
       <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
       <Name>Butterfly.MultiPlatform.Packets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
+      <Project>{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}</Project>
+      <Name>Butterfly.MultiPlatform.ViewModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
       <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
       <Name>Butterfly.Windows.Handlers</Name>
@@ -81,6 +85,10 @@
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Abstractions\Butterfly.Windows.WPF.Client.Abstractions.csproj">
       <Project>{46996C5E-3C23-4A60-9300-6439CB0003EA}</Project>
       <Name>Butterfly.Windows.WPF.Client.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Common\Butterfly.Windows.WPF.Client.Common.csproj">
+      <Project>{93FF823A-C887-4AE6-9B4F-BC81395DDB97}</Project>
+      <Name>Butterfly.Windows.WPF.Client.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Core\Butterfly.Windows.WPF.Client.Core.csproj">
       <Project>{E0802189-4D47-4BC5-89BA-A67C93E7CFE2}</Project>

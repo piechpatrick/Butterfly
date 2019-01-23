@@ -54,7 +54,7 @@
                              ItemsSource="{Binding MenuItems}"
                              PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp">
                         <ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:DemoItem">
+                            <DataTemplate >
                                 <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
                             </DataTemplate>
                         </ListBox.ItemTemplate>

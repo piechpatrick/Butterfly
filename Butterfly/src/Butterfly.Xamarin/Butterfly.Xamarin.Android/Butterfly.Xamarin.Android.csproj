@@ -70,7 +70,7 @@
       <Version>4.5.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.0.0</Version>
+      <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
@@ -78,12 +78,17 @@
     <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Location">
+      <Version>60.1142.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootCompletedIntentReceiver .cs" />
     <Compile Include="BroadcastReceiverTest.cs" />
     <Compile Include="Builders\AndroidClientBuilder.cs" />
     <Compile Include="Builders\AndroidClientBuilderOptions.cs" />
+    <Compile Include="Localization\GeolocalizationBackgroundWorker.cs" />
+    <Compile Include="Localization\GeolocalizationService.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +128,10 @@
       <Project>{3708CF06-714B-40C4-BA4F-FD6A97C170FC}</Project>
       <Name>Butterfly.MultiPlatform.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj">
+      <Project>{10380352-D23E-4969-B731-DFFADD577B2B}</Project>
+      <Name>Butterfly.MultiPlatform.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Butterfly.Multiplatform.Controllers\Butterfly.Multiplatform.Controllers.csproj">
       <Project>{AE0F610E-659D-4F81-A9AD-E969C5B6356B}</Project>
       <Name>Butterfly.Multiplatform.Controllers</Name>
@@ -131,9 +140,21 @@
       <Project>{794D5C4D-2D16-44BE-B464-DE9F463DDEA7}</Project>
       <Name>Butterfly.MultiPlatform.Modules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj">
+      <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
+      <Name>Butterfly.MultiPlatform.Packets</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Butterfly.MultiPlatform.Senders\Butterfly.MultiPlatform.Senders.csproj">
+      <Project>{3CBDE1C8-66AE-4CDE-BE9F-56B46332B079}</Project>
+      <Name>Butterfly.MultiPlatform.Senders</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Butterfly.MultiPlatform.Services\Butterfly.MultiPlatform.Services.csproj">
       <Project>{be9e5faf-a1fd-4809-a4e4-b1809cb3bd8a}</Project>
       <Name>Butterfly.MultiPlatform.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
+      <Project>{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}</Project>
+      <Name>Butterfly.MultiPlatform.ViewModels</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Butterfly.Xamarin.Android.Controllers\Butterfly.Xamarin.Android.Controllers.csproj">
       <Project>{53CB83B5-482C-4A30-8C3B-118A2D951380}</Project>

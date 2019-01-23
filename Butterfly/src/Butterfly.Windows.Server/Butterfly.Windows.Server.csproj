@@ -156,6 +156,10 @@
       <Project>{12a00ddf-c15a-4f3c-8dff-194cc713c8c8}</Project>
       <Name>Butterfly.Windows.Server.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
+      <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
+      <Name>Butterfly.Windows.Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.Services\Butterfly.Windows.Services.csproj">
       <Project>{F6B8BB3C-81F8-4920-A3E2-1787A25E3336}</Project>
       <Name>Butterfly.Windows.Services</Name>

@@ -11,7 +11,7 @@ namespace Butterfly.MultiPlatform.Common.Background.Workers
     /// </summary>
     public abstract class BackgroundWorkingThreadBase : IBackgroundThreadWorker
     {
-        private bool isRunning;
+        protected bool isRunning;
         private Thread workingThread;
         private int interval = 60000;
         private ThreadPriority threadPriority = ThreadPriority.BelowNormal;

@@ -103,10 +103,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\ConnectedClientInfoHandler.cs" />
     <Compile Include="Video\Nv21PacketHandler.cs" />
+    <Compile Include="WPFClient\ConnectedClientsPacketHandler.cs" />
     <Compile Include="WPFClient\WPFNv21VideoPacketHandler.cs" />
     <Compile Include="WPFClient\WPFPingPacketHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Butterfly.Interfaces\Butterfly.MultiPlatform.Interfaces.csproj">
+      <Project>{3708cf06-714b-40c4-ba4f-fd6a97c170fc}</Project>
+      <Name>Butterfly.MultiPlatform.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.MultiPlatform.Common\Butterfly.MultiPlatform.Common.csproj">
       <Project>{10380352-D23E-4969-B731-DFFADD577B2B}</Project>
       <Name>Butterfly.MultiPlatform.Common</Name>
@@ -118,6 +123,10 @@
     <ProjectReference Include="..\Butterfly.Windows.Services\Butterfly.Windows.Services.csproj">
       <Project>{f6b8bb3c-81f8-4920-a3e2-1787a25e3336}</Project>
       <Name>Butterfly.Windows.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Common\Butterfly.Windows.WPF.Client.Common.csproj">
+      <Project>{93FF823A-C887-4AE6-9B4F-BC81395DDB97}</Project>
+      <Name>Butterfly.Windows.WPF.Client.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Networker\Networker.csproj">
       <Project>{dbaefb66-9fab-491b-a65a-6586a509a6c4}</Project>

@@ -110,8 +110,7 @@
     <Compile Include="Client\ButterflyWPFClient.cs" />
     <Compile Include="Client\ButterflyWPFClientOptions.cs" />
     <Compile Include="Client\IButterflyWPFClient.cs" />
-    <Compile Include="Events\VideoFrameEvent.cs" />
-    <Compile Include="HandlerWrappers\Video\Nv21PacketHandlerWrapper.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +122,17 @@
       <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
       <Name>Butterfly.MultiPlatform.Packets</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Butterfly.ViewModels\Butterfly.MultiPlatform.ViewModels.csproj">
+      <Project>{14E2B5B0-18E7-40EF-9D0D-4A4D585EC009}</Project>
+      <Name>Butterfly.MultiPlatform.ViewModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Butterfly.Windows.Server.Handlers\Butterfly.Windows.Handlers.csproj">
       <Project>{CDFE628E-F284-4874-811B-C469345766C0}</Project>
       <Name>Butterfly.Windows.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Butterfly.Windows.WPF.Client.Common\Butterfly.Windows.WPF.Client.Common.csproj">
+      <Project>{93FF823A-C887-4AE6-9B4F-BC81395DDB97}</Project>
+      <Name>Butterfly.Windows.WPF.Client.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Networker\Networker.csproj">
       <Project>{DBAEFB66-9FAB-491B-A65A-6586A509A6C4}</Project>
@@ -134,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

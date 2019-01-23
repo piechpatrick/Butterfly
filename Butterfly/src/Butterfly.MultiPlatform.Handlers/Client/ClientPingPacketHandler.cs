@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Butterfly.MultiPlatform.Interfaces;
 using Butterfly.MultiPlatform.Packets.Pings;
 using Networker.Common;
 using Networker.Common.Abstractions;

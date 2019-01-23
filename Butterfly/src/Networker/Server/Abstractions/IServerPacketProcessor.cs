@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using Butterfly.MultiPlatform.Interfaces;
 using Networker.Common.Abstractions;
 
 namespace Networker.Server.Abstractions

@@ -22,19 +22,14 @@ namespace Butterfly.Windows.Server.Core.ConnectedClients
             this.connectedClientViewModels.Add(connectedClientViewModel);
         }
 
-        public IEnumerator<IConnectedClientViewModelServerSide> GetEnumerator()
-        {
-            return this.connectedClientViewModels.GetEnumerator();
-        }
-
         public void Remove(IConnectedClientViewModelServerSide connectedClientViewModel)
         {
             this.connectedClientViewModels.Remove(connectedClientViewModel);
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerable<IConnectedClientViewModelServerSide> GetAll()
         {
-            return this.connectedClientViewModels.GetEnumerator();
+            return this.connectedClientViewModels;
         }
     }
 }

@@ -11,9 +11,11 @@ namespace Butterfly.Xamarin.Android.Controllers.Services
 {
     public class AndroidServiceController : ServicesControllerBase
     {
-        public AndroidServiceController(IAudioRecorderService recorderService)
+        public AndroidServiceController(IAudioRecorderService recorderService,
+            ILocalizationService localizationService)
         {
             this.services.Add(recorderService);
+            this.services.Add(localizationService);
         }
         public override void Start(IService service)
         {

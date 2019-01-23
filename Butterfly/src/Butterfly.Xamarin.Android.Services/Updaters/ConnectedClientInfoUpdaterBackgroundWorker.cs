@@ -3,7 +3,9 @@ using Butterfly.MultiPlatform.Packets.Configuration;
 using Butterfly.MultiPlatform.Senders;
 using Butterfly.MultiPlatform.ViewModels;
 using Butterfly.MultiPlatform.ViewModels.Identities;
+using Butterfly.Xamarin.Core;
 using Networker.Client.Abstractions;
+using Plugin.DeviceInfo;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,10 +16,12 @@ namespace Butterfly.Xamarin.Android.Services.Updaters
     internal class ConnectedClientInfoUpdaterBackgroundWorker : BackgroundWorkingThreadBase
     {
         private GenericTCPPacketSender<ConnectedClientInfoPacket> genericTCPPacketSender;
-        public ConnectedClientInfoUpdaterBackgroundWorker(INetworkClient client)
+        private readonly INetworkClient networkClient;
+        public ConnectedClientInfoUpdaterBackgroundWorker(INetworkClient networkClient)
             : base(5000, ThreadPriority.AboveNormal)
         {
-            this.genericTCPPacketSender = new GenericTCPPacketSender<ConnectedClientInfoPacket>(client);
+            this.networkClient = networkClient;
+            this.genericTCPPacketSender = new GenericTCPPacketSender<ConnectedClientInfoPacket>(networkClient);
         }
         protected override void OnError(Thread thread, Exception exception)
         {
@@ -36,14 +40,19 @@ namespace Butterfly.Xamarin.Android.Services.Updaters
 
         protected override void Work()
         {
-            var packet = new ConnectedClientInfoPacket()
+            this.networkClient.Send(this.GetPacket());
+        }
+
+        private ConnectedClientInfoPacket GetPacket()
+        {
+            return new ConnectedClientInfoPacket()
             {
                 ConnectedClientViewModel = new ConnectedClientViewModel()
                 {
-                    Name = "Roman"
+                    
                 }
             };
-            this.genericTCPPacketSender.Send(packet);
+
         }
     }
 }

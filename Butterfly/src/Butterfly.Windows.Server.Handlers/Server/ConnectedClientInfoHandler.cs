@@ -1,4 +1,7 @@
-﻿using Butterfly.MultiPlatform.Packets.Configuration;
+﻿using Butterfly.MultiPlatform.Interfaces;
+using Butterfly.MultiPlatform.Interfaces.Mediators;
+using Butterfly.MultiPlatform.Packets;
+using Butterfly.MultiPlatform.Packets.Configuration;
 using Networker.Common;
 using Networker.Common.Abstractions;
 using System;
@@ -11,37 +14,44 @@ namespace Butterfly.Windows.Server.Handlers.Server
 {
     public class ConnectedClientInfoHandler : PacketHandlerBase<ConnectedClientInfoPacket>
     {
-        public ConnectedClientInfoHandler()
+        private IConnectedClientInfoPacketHandlerMediator connectedClientInfoPacketHandlerMediator;
+        public ConnectedClientInfoHandler(IConnectedClientInfoPacketHandlerMediator connectedClientInfoPacketHandlerMediator)
         {
-
+            this.connectedClientInfoPacketHandlerMediator = connectedClientInfoPacketHandlerMediator;
         }
         public override Task Process(ConnectedClientInfoPacket packet, ISender sender)
         {
             return Task.Factory.StartNew(() =>
             {
-                this.OnFrameGot(packet, sender);
+                new PacketHandlerAdapter(this.connectedClientInfoPacketHandlerMediator,sender).Send(packet);
             });
         }
-
-        protected virtual void OnFrameGot(ConnectedClientInfoPacket e, ISender sender)
-        {
-            EventHandler<ConnectedClientInfoEvetArgs> handler = Event;
-            if (handler != null)
-            {
-                handler(this, new ConnectedClientInfoEvetArgs() { ClientInfo = e, Sender = sender });
-            }
-        }
-
-        public event EventHandler<ConnectedClientInfoEvetArgs> Event;
     }
 
-    public class ConnectedClientInfoEvetArgs : EventArgs
+    public class PacketHandlerAdapter
+        : IMediatable<ConnectedClientInfoPacket>
     {
-        public ConnectedClientInfoPacket ClientInfo { get; set; }
-        public ISender Sender { get; set; }
-        public ConnectedClientInfoEvetArgs()
-        {
+        private readonly IConnectedClientInfoPacketHandlerMediator connectedClientInfoPacketHandlerMediator;
 
+        public ISender Sender { get; set; }
+        public PacketHandlerAdapter(IConnectedClientInfoPacketHandlerMediator connectedClientInfoPacketHandlerMediator, ISender sender)
+        {
+            this.connectedClientInfoPacketHandlerMediator = connectedClientInfoPacketHandlerMediator;
+            this.Sender = sender;
+        }
+
+        public void Send(ConnectedClientInfoPacket message)
+        {
+            this.connectedClientInfoPacketHandlerMediator.Send(message, this);
         }
     }
+
+    public interface IConnectedClientInfoPacketHandlerMediator : IMediator<ConnectedClientInfoPacket>
+    {
+
+    }
+
+  
+
+
 }

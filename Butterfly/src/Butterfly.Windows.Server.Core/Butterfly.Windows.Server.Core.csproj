@@ -96,10 +96,11 @@
   <ItemGroup>
     <Compile Include="ConnectedClients\ConnectedClients.cs" />
     <Compile Include="ConnectedClients\IConnectedClients.cs" />
-    <Compile Include="HandlerWrappers\ConnectedClientInfoHandlerWrapper.cs" />
+    <Compile Include="Mediators\ConnectedClientInfoPacketHandlerMediator.cs" />
     <Compile Include="Server\ButterflyServer.cs" />
     <Compile Include="Server\IButterflyServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ConnectedUsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
-﻿using Butterfly.MultiPlatform.Packets.Video;
+﻿using Butterfly.MultiPlatform.Interfaces;
+using Butterfly.MultiPlatform.Packets.Video;
 using Networker.Common;
 using Networker.Common.Abstractions;
 using Prism.Events;
@@ -21,19 +22,8 @@ namespace Butterfly.Windows.Server.Handlers.WPFClient
         {
             return Task.Factory.StartNew(() =>
             {
-                OnFrameGot(packet);
+                
             });
         }
-
-        protected virtual void OnFrameGot(Nv21FormatVideoPacket e)
-        {
-            EventHandler<Nv21FormatVideoPacket> handler = Event;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
-        public event EventHandler<Nv21FormatVideoPacket> Event;
     }
 }

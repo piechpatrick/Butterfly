@@ -24,6 +24,11 @@ using Plugin.Media;
 using Plugin.CurrentActivity;
 using Butterfly.MultiPlatform.Interfaces.Application;
 using Butterfly.Xamarin.Android.Services.Updaters;
+using Butterfly.Xamarin.Permissions;
+using Android.Gms.Common.Apis;
+using static Android.Gms.Common.Apis.GoogleApiClient;
+using Android.Gms.Common;
+using Android.Gms.Location;
 
 namespace Butterfly.Xamarin.Droid
 {
@@ -54,70 +59,22 @@ namespace Butterfly.Xamarin.Droid
 
 
             var client = new AndroidClientBuilder()
-                            .SetConnectedClientInfoUpdaterService<ConnectedClientInfoUpdaterService>()
-                            .SetAudioRecorderService<AudioRecorderService>()
-                            .SetCameraRecorderService<CameraRecorderService>()
-                            .SetServiceController<AndroidServiceController>()
-                            .BuildNetworkClient()
-                            .Build();       
-                      
+                            .Build();
+
+            client.SetContext(this.Application.ApplicationContext);
+            
             var app = new App();
             LoadApplication(app);
 
             await CrossMedia.Current.Initialize();
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-
-            Toast.MakeText(this, "BeforeCreate", ToastLength.Long).Show();
             //Application.Context.StartService(new Intent(this, typeof(RecorderService)));         
 
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.RecordAudio) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the camera.
-            }
-            else
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.RecordAudio }, 1);
-            }
+            await CrossPermissionChecker.CheckAllPermissions();
 
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the camera.
-            }
-            else
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessCoarseLocation }, 1);
-            }
-
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the camera.
-            }
-            else
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 1);
-            }
-
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReceiveBootCompleted) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the camera.
-            }
-            else
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessFineLocation }, 1);
-            }
-
-            if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) == (int)Permission.Granted)
-            {
-                // We have permission, go ahead and use the camera.
-            }
-            else
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.Camera }, 1);
-            }
-
-            client.Start();
+           client.Start();
 
         }     
 
-    }
+    }    
 }

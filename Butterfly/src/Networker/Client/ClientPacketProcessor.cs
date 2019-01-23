@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Text;
 using Butterfly.MultiPlatform.Common.ObjectPool;
+using Butterfly.MultiPlatform.Interfaces;
 using Microsoft.Extensions.Logging;
 using Networker.Client.Abstractions;
 using Networker.Common;

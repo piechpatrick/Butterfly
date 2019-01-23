@@ -11,8 +11,9 @@ using Networker.Formatter.ZeroFormatter;
 using System;
 using Butterfly.Windows.Server.Core.ConnectedClients;
 using Butterfly.Windows.Modules.Server;
-using Butterfly.Windows.Server.Core.HandlerWrappers;
 using Butterfly.MultiPlatform.Modules.Unions;
+using Butterfly.Windows.Server.Handlers.Server;
+using Butterfly.Windows.Server.Core.Mediators;
 
 namespace Butterfly.Windows.Server.Builders.Server
 {
@@ -27,14 +28,14 @@ namespace Butterfly.Windows.Server.Builders.Server
         {
             this.serviceCollection.AddSingleton<IButterflyService, ButterflyService>();
             this.serviceCollection.AddSingleton<IButterflyServerBuilder>(this);
-
-            ///network server instance
-            var serverBuilder = new Networker.Server.NetworkServerBuilder().SetServiceCollection(this.GetServiceCollection());
+            ///net
+            var serverBuilder = new NetworkServerBuilder()
+                .SetServiceCollection(this.GetServiceCollection());
             serverBuilder
                     .UseTcp(7894)
                     .UseUdp(7895)
                     .UseUdpSocketListener<DefaultUdpSocketListenerFactory>()
-                                .SetMaximumConnections(100)
+                                .SetMaximumConnections(1000)
                                 .ConfigureLogging(loggingBuilder =>
                                 {
                                     loggingBuilder.SetMinimumLevel(
@@ -46,21 +47,16 @@ namespace Butterfly.Windows.Server.Builders.Server
                                 .RegisterPacketHandlerModule<VideoPacketHandlerModule>()
                                 .RegisterPacketHandlerModule<ConnectedClientHandlerModule>()
                                 .UseZeroFormatter()
-                                .SetPacketBufferSize(5000000)
+                                .SetPacketBufferSize(50000)
                                 .Build();
-
-
-            this.serviceCollection.AddSingleton<IConnectedClients,ConnectedClients>();
-            this.serviceCollection.AddSingleton<IConnectedClientInfoHandlerWrapper, ConnectedClientInfoHandlerWrapper>();
+            this.serviceCollection.AddSingleton<IConnectedClients, ConnectedClients>();
             this.serviceCollection.AddSingleton<IButterflyServer, ButterflyServer>();
             this.serviceCollection.AddSingleton<INetworkServer, NetworkServer>();
+            this.serviceCollection.AddSingleton<IConnectedClientInfoPacketHandlerMediator, ConnectedClientInfoPacketHandlerMediator>();
+            //root
             serviceProvider = this.GetServiceProvider();
+            //net
             serverBuilder.GetServiceProvider(serviceProvider);
-
-
-
-
-
             return serviceProvider.GetService<IButterflyServer>();
         }
 

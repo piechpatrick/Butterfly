@@ -99,7 +99,8 @@ namespace Networker.Server
 
         public void SendToAllTCP<T>(T packet)
         {
-            foreach (var connection in this.GetConnections()?.GetConnections())
+            var connected = this.GetConnections().GetConnections();
+            foreach (var connection in connected)
             {
                 if (connection.Socket == null)
                 {

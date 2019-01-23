@@ -3,8 +3,6 @@ using Butterfly.Windows.Server.Handlers.WPFClient;
 using Butterfly.Windows.WPF.Client.Abstractions.Snackbar;
 using Butterfly.Windows.WPF.Client.Controls.MainViews;
 using Butterfly.Windows.WPF.Client.Core.Client;
-using Butterfly.Windows.WPF.Client.Core.Events;
-using Butterfly.Windows.WPF.Client.Core.HandlerWrappers.Video;
 using Butterfly.Windows.WPF.Client.MenuItems;
 using Butterfly.Windows.WPF.Client.ViewModels;
 using Networker.Client.Abstractions;
@@ -34,12 +32,10 @@ namespace Butterfly.Windows.WPF.Client
 
         }
         public MainWindowViewModel(IButterflyWPFClient networkClient, 
-            WPFNv21VideoPacketHandler nv21PacketHandler, 
-            INv21PacketHandlerWrapper nv21PacketHandlerWrapper,
             IEventAggregator eventAggregator,
             IRegionManager regionManager,
             ISnackbarController snackbarController)
-            :base(networkClient,nv21PacketHandler,nv21PacketHandlerWrapper,eventAggregator,regionManager,snackbarController)
+            :base(networkClient,eventAggregator,regionManager,snackbarController)
         {
             this.SetupMenuItems();   
         }

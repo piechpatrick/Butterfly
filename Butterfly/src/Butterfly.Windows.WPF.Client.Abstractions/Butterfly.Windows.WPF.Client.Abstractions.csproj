@@ -44,5 +44,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Snackbar\ISnackbarController.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Butterfly.MultiPlatform.Packets\Butterfly.MultiPlatform.Packets.csproj">
+      <Project>{C848122E-BD0C-4991-BD5F-1A5F16303F8D}</Project>
+      <Name>Butterfly.MultiPlatform.Packets</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

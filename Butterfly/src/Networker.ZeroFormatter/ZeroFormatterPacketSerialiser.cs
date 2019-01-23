@@ -28,7 +28,7 @@ namespace Networker.Formatter.ZeroFormatter
                     using (var binaryWriter = new BinaryWriter(memoryStream))
                     {
                         var nameBytes = Encoding.ASCII.GetBytes(typeof(T).Name);
-                        var serialised = ZeroFormatterSerializer.Serialize(packet);
+                        var serialised = ZeroFormatterSerializer.Serialize<T>(packet);
                         binaryWriter.Write(nameBytes.Length);
                         binaryWriter.Write(serialised.Length);
                         binaryWriter.Write(nameBytes);

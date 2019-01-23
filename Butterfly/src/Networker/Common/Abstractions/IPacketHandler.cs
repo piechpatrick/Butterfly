@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Butterfly.MultiPlatform.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace Networker.Common.Abstractions
