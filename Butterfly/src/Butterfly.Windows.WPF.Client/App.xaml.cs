@@ -2,6 +2,7 @@
 using Butterfly.Windows.WPF.Client.Builders;
 using Butterfly.Windows.WPF.Client.Controllers;
 using Butterfly.Windows.WPF.Client.Core.Client;
+using CommonServiceLocator;
 using MaterialDesignThemes.Wpf;
 using Networker.Client;
 using Networker.Client.Abstractions;
@@ -16,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Unity;
+using Unity.Lifetime;
 
 namespace Butterfly.Windows.WPF.Client
 {
@@ -29,6 +31,8 @@ namespace Butterfly.Windows.WPF.Client
             var container = Container.GetContainer();
             var builder = new ButterflyWPFClientBuilder(container);
 
+            var regionManager = container.Resolve<IRegionManager>();
+
             var client = builder.Build();
             return Container.Resolve<MainWindow>();
         }
@@ -38,6 +42,7 @@ namespace Butterfly.Windows.WPF.Client
             base.ConfigureDefaultRegionBehaviors(regionBehaviors);
         }
 
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -45,6 +50,7 @@ namespace Butterfly.Windows.WPF.Client
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            ServiceLocator.SetLocatorProvider(() => new UnityServiceLocatorAdapter(this.Container.GetContainer()));
             containerRegistry.RegisterSingleton<ISnackbarController, SnackbarController>();
         }
     }

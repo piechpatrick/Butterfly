@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace Butterfly.Windows.WPF.Client.Controls.MainViews
 {
@@ -23,6 +12,16 @@ namespace Butterfly.Windows.WPF.Client.Controls.MainViews
         public ConnectedClientsView()
         {
             InitializeComponent();
+            var dataContext = this.DataContext as ConnectedClientsViewModel;
+            dataContext.PropertyChanged += DataContext_PropertyChanged;
+        }
+
+        private void DataContext_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "LocationUrl")
+            {
+                BrowserMap.Source = new System.Uri((this.DataContext as ConnectedClientsViewModel).LocationUrl);
+            }
         }
     }
 }

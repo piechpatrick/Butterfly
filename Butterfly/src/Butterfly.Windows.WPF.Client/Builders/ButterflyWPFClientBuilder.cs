@@ -48,9 +48,9 @@ namespace Butterfly.Windows.WPF.Client.Builders
 
 
             this.containerRegistry.RegisterInstance<WPFNv21VideoPacketHandler>(videoPacketHandler);
-            this.containerRegistry.RegisterInstance<INetworkClient>(networkClient);
+            this.containerRegistry.RegisterInstance<INetworkClient>(networkClient);       
             this.containerRegistry.RegisterInstance<IButterflyWPFClient>(new ButterflyWPFClient(networkClient,
-                this.containerRegistry.Resolve<IEventAggregator>()));
+            this.containerRegistry.Resolve<IEventAggregator>()));
 
             return containerRegistry.Resolve<IButterflyWPFClient>();
         }

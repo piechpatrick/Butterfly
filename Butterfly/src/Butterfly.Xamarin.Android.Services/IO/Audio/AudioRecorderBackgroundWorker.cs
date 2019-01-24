@@ -56,7 +56,7 @@ namespace Butterfly.Xamarin.Android.Services.IO.Audio.Workers
             if (audioSize > 0)
             {
                 pcmSender.Send(new MultiPlatform.Packets.Audio.PCMPacket() { Data = buffor });
-                Thread.Sleep(1);
+                Thread.Sleep(20);
             }
         }
     }

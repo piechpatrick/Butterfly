@@ -10,7 +10,6 @@
              d:DataContext="{d:DesignInstance local:ConnectedClientsViewModel, IsDesignTimeCreatable=True}"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:icons="clr-namespace:Butterfly.Windows.WPF.Client.Icons"
-             xmlns:gmap="clr-namespace:Butterfly.Windows.WPF.Client.Maps.Controls"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -27,7 +26,8 @@
             <ColumnDefinition MinWidth="150"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Grid.Row="1" >
-            <ListView Name="ConnectedClientsListView" ItemsSource="{Binding ConnectedClientViewModels}">
+            <ListView Name="ConnectedClientsListView" ItemsSource="{Binding ConnectedClientViewModels}" 
+                      SelectedItem="{Binding SelectedClientViewModel,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel LastChildFill="False" >
@@ -40,8 +40,8 @@
         </Grid>
         <GridSplitter Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Width="5" ResizeDirection="Columns" />
         <Grid Grid.Column="2" Grid.Row="1">
-            <!--<ContentControl DataContext="{Binding ElementName=ConnectedClientsListView,Path=SelectedItem}" />-->
-            <gmap:GMapControl/>
+            <!--<ContentControl prism:RegionManager.RegionName="GMapRegion" />-->
+            <WebBrowser Name="BrowserMap" />
         </Grid>
     </Grid>
 </UserControl>

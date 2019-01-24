@@ -24,7 +24,6 @@ namespace Butterfly.Windows.Server.Handlers.Video
             {
                 
             });
-            //this.networkServer.Send<Nv21FormatVideoPacket>(packet, sender.);
         }
     }
 }

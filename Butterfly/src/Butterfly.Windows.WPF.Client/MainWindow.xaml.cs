@@ -3,6 +3,7 @@ using Butterfly.Windows.WPF.Client.Controls.Dialogs;
 using Butterfly.Windows.WPF.Client.Core.Client;
 using MaterialDesignThemes.Wpf;
 using Networker.Client.Abstractions;
+using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,7 +32,8 @@ namespace Butterfly.Windows.WPF.Client
         public static Snackbar Snackbar;
         public MainWindow(IButterflyWPFClient wpfClient, 
             ISnackbarController snackbarController, 
-            INetworkClient networkClient)
+            INetworkClient networkClient,
+            IRegionManager regionManager)
         {
             InitializeComponent();
 
